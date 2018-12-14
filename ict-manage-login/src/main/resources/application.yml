@@ -12,7 +12,7 @@ eureka:
 #database source
 spring:
   application:
-    name: ict-manage-login
+    name: ict-manage-loginandregister
   ##数据库连接信息
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/ictdb?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull
