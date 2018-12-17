@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.ict.manage.permission.dao.ExamQuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.permission.pojo.ExamQuestion" >
+    <constructor >
+      <idArg column="exam_question_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="technology_test_idarr" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    exam_question_id, technology_test_idarr
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.permission.pojo.ExamQuestionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from exam_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from exam_question
+    where exam_question_id = #{examQuestionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from exam_question
+    where exam_question_id = #{examQuestionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.permission.pojo.ExamQuestionExample" >
+    delete from exam_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dhcc.ict.manage.permission.pojo.ExamQuestion" >
+    insert into exam_question (exam_question_id, technology_test_idarr
+      )
+    values (#{examQuestionId,jdbcType=INTEGER}, #{technologyTestIdarr,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.permission.pojo.ExamQuestion" >
+    insert into exam_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examQuestionId != null" >
+        exam_question_id,
+      </if>
+      <if test="technologyTestIdarr != null" >
+        technology_test_idarr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examQuestionId != null" >
+        #{examQuestionId,jdbcType=INTEGER},
+      </if>
+      <if test="technologyTestIdarr != null" >
+        #{technologyTestIdarr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.permission.pojo.ExamQuestionExample" resultType="java.lang.Integer" >
+    select count(*) from exam_question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update exam_question
+    <set >
+      <if test="record.examQuestionId != null" >
+        exam_question_id = #{record.examQuestionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.technologyTestIdarr != null" >
+        technology_test_idarr = #{record.technologyTestIdarr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update exam_question
+    set exam_question_id = #{record.examQuestionId,jdbcType=INTEGER},
+      technology_test_idarr = #{record.technologyTestIdarr,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.permission.pojo.ExamQuestion" >
+    update exam_question
+    <set >
+      <if test="technologyTestIdarr != null" >
+        technology_test_idarr = #{technologyTestIdarr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where exam_question_id = #{examQuestionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.permission.pojo.ExamQuestion" >
+    update exam_question
+    set technology_test_idarr = #{technologyTestIdarr,jdbcType=VARCHAR}
+    where exam_question_id = #{examQuestionId,jdbcType=INTEGER}
+  </update>
+</mapper>

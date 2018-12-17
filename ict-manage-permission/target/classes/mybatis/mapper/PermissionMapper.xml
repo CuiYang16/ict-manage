@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.ict.manage.permission.dao.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.permission.pojo.Permission" >
+    <constructor >
+      <idArg column="permissions_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="permissions_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    permissions_id, permissions_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.permission.pojo.PermissionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from permission
+    where permissions_id = #{permissionsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from permission
+    where permissions_id = #{permissionsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.permission.pojo.PermissionExample" >
+    delete from permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dhcc.ict.manage.permission.pojo.Permission" >
+    insert into permission (permissions_id, permissions_name)
+    values (#{permissionsId,jdbcType=INTEGER}, #{permissionsName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.permission.pojo.Permission" >
+    insert into permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="permissionsId != null" >
+        permissions_id,
+      </if>
+      <if test="permissionsName != null" >
+        permissions_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="permissionsId != null" >
+        #{permissionsId,jdbcType=INTEGER},
+      </if>
+      <if test="permissionsName != null" >
+        #{permissionsName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.permission.pojo.PermissionExample" resultType="java.lang.Integer" >
+    select count(*) from permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update permission
+    <set >
+      <if test="record.permissionsId != null" >
+        permissions_id = #{record.permissionsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.permissionsName != null" >
+        permissions_name = #{record.permissionsName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update permission
+    set permissions_id = #{record.permissionsId,jdbcType=INTEGER},
+      permissions_name = #{record.permissionsName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.permission.pojo.Permission" >
+    update permission
+    <set >
+      <if test="permissionsName != null" >
+        permissions_name = #{permissionsName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where permissions_id = #{permissionsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.permission.pojo.Permission" >
+    update permission
+    set permissions_name = #{permissionsName,jdbcType=VARCHAR}
+    where permissions_id = #{permissionsId,jdbcType=INTEGER}
+  </update>
+</mapper>
