@@ -8,10 +8,10 @@
   </parent>
 
   <groupId>com.dhcc</groupId>
-  <artifactId>ict-manage-loginandregister</artifactId>
+  <artifactId>ict-manage-loginandregiste</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>ict-manage-loginandregister</name>
+  <name>ict-manage-loginandregiste</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
