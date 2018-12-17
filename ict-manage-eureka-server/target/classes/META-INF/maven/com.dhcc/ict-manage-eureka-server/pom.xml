@@ -8,10 +8,10 @@
   </parent>
 
   <groupId>com.dhcc</groupId>
-  <artifactId>ict-manage-loginandregiste</artifactId>
+  <artifactId>ict-manage-eureka-server</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>ict-manage-loginandregiste</name>
+  <name>ict-manage-eureka-server</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
