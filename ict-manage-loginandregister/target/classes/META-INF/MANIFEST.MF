@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: ict-manage-login
+Implementation-Title: ict-manage-loginandregister
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: Cy
 Implementation-Vendor-Id: com.dhcc

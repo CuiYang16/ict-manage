@@ -8,10 +8,10 @@
   </parent>
 
   <groupId>com.dhcc</groupId>
-  <artifactId>ict-manage-register</artifactId>
+  <artifactId>ict-manage-permission</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>ict-manage-register</name>
+  <name>ict-manage-permission</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
