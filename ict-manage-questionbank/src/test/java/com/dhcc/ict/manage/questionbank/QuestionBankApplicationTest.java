@@ -1,4 +1,4 @@
-package org.ict.manage.questionbank;
+package com.dhcc.ict.manage.questionbank;
 
 import static org.junit.Assert.assertTrue;
 

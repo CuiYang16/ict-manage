@@ -1,4 +1,4 @@
-package org.ict.manage.questionbank;
+package com.dhcc.ict.manage.questionbank;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
