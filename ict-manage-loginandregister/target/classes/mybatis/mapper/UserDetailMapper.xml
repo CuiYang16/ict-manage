@@ -750,4 +750,19 @@
       group_id = #{groupId,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  <!--管理员添加 -->
+    <resultMap type="com.dhcc.ict.manage.loginandregister.pojo.UserDetail" id="UserDetail">
+  <id property="userId" column="user_id" />
+		<result property="userName" column="user_name" />
+		<result property="userPwd" column="user_pwd" />
+		<result property="accountNumber" column="account_number" />
+		<result property="telephone" column="telephone" />
+  </resultMap>
+  <select id="search" resultMap="UserDetail">
+  select * from user_detail as u where
+  u.user_name=#{userName} and u.user_pwd=#{userPwd}
+  </select>
+  <insert id="adduser">
+	INSERT INTO user_detail(user_name,user_pwd,account_number,telephone) VALUES(#{userName},#{userName},#{accountNumber},#{telephone})
+	</insert>
 </mapper>

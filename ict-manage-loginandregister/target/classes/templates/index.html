@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>ICT能力资源管理</title>
+		<script src="js/jquery-1.9.1.js"></script>
+		<link rel="stylesheet" href="css/animate.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/login.css">
+	</head>
+	<body>
+		<section class="main">
+			<div class="index-bg"></div>
+			<div class="index-bg1"></div>
+			<main class="login clearfix">
+
+				<aside class="login-left animated fadeInLeft">
+					<h1>ICT能力资源管理及运营平台</h1>
+					<ul>
+						<li>提供简历的注册及管理</li>
+						<li>ICT能力信息评估及管理</li>
+						<li>
+							厂商产品、工具、方案管理，以及提供授权认证支持
+						</li>
+						<li>
+							提供岗位与机会的发布
+						</li>
+					</ul>
+				</aside>
+				<aside class="login-right animated fadeInRight">
+					<h1 class="title">ICT能力资源管理及运营平台</h1>
+
+					<form action="login" method="post" >
+						<label for="">用户名：<sub>*</sub></label><br>
+						<input type="text" name="userName" id=userName placeholder="用户名..."><br>
+						<label for="">密码：<sub>*</sub></label><br>
+						<input type="text" id=userPwd
+						name="password" placeholder="密码..."><br>
+						<fieldset class="find-back clearfix">
+							<input type="checkbox" checked value="true">记住我
+							<span>找回密码</span>
+						</fieldset>
+						<input type="submit" class="register-btn login-btn" id="login-btn"value="登录">
+						
+					</form>
+					<p class="reg-text">还没有账号？注册</p>
+				</aside>
+				<aside class="register-right animated fadeInRight">
+					<h1 class="title">ICT能力资源管理及运营平台</h1>
+					<form action="" method="post" class="register-form">
+						<fieldset>
+							<label>姓名：<sub>*</sub></label><br />
+							<input type="text" value="" placeholder="姓名..."  class="non-null" />
+							<span class="glyphicon glyphicon-remove-sign remove input-icon"></span>
+							<span class="glyphicon glyphicon-ok-sign ok-sign input-icon"></span>
+						</fieldset>
+						<fieldset>
+							
+							<label>账号：<sub>*</sub></label><br />
+							<input type="text" placeholder="账号..."  class="non-null" />
+							<span class="glyphicon glyphicon-remove-sign remove input-icon"></span>
+							<span class="glyphicon glyphicon-ok-sign ok-sign input-icon"></span>
+						</fieldset>
+						<fieldset>
+							<label>密码：<sub>*</sub></label><br />
+							<input type="password" placeholder="密码..."  class="non-null" />
+							<span class="glyphicon glyphicon-remove-sign remove input-icon"></span>
+							<span class="glyphicon glyphicon-ok-sign ok-sign input-icon"></span>
+						</fieldset>
+						<fieldset>
+							<label>手机：<sub>*</sub></label><br />
+							<input type="text" placeholder="手机..." class="phone-num" />
+							<span class="glyphicon glyphicon-remove-sign remove input-icon"></span>
+							<span class="glyphicon glyphicon-ok-sign ok-sign input-icon"></span>
+						</fieldset>
+
+						<input type="submit" class="register-btn" value="注册">
+					</form>
+					<p class="reg-text">已有账号？登录</p>
+				</aside>
+			</main>
+		</section>
+
+
+		<script src="js/index.js"></script>
+	</body>
+</html>

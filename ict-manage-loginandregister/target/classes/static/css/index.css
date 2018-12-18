@@ -1,0 +1,409 @@
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+}
+.main{
+	position: relative;
+	overflow: hidden;
+}
+.icon {
+   width: 1em; height: 1em;
+   vertical-align: -0.15em;
+   fill: currentColor;
+   overflow: hidden;
+}
+/* 背景图片 */
+.index-bg{
+	width: 100%;
+	height: 100%;
+	background: url(../img/login_background.jpg);
+	background-size: 100% 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+.index-bg1{
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,.5);
+	background-size: 100% 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+/* 中间内容和按钮 */
+.index-con{
+	display: block;
+	position: relative;
+	text-align: center;
+	height: 100%;
+	width:100%;
+	margin: 50px auto;
+	z-index: 2;
+}
+h1{
+	color: #fff;
+}
+.index-btn{
+	margin-top: 170px;
+	color: #fff;	
+}
+.register-btn{
+	display: inline-block;
+	padding: 17px 50px 15px 50px;
+	font-size: 27px;
+	line-height: 1.3rem;
+	border-radius: 6px;
+	background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.register-btn:hover,.reg-btn:hover{
+	cursor: pointer;
+	background-color: #125690;
+}
+.login-btn{
+	display: inline-block;
+	padding: 17px 50px 15px 50px;
+	font-size: 27px;
+	line-height: 1.3rem;
+	border-radius: 6px;
+	background-color: #5cb85c;
+    border-color: #4cae4c;
+	margin-left: 30px;
+}
+.login-btn:hover{
+	cursor: pointer;
+	background-color: #339133;
+}
+
+/* 注册页面 */
+.register{
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	width: 870px;
+	background: #FFFFFF;
+	height: 100%;
+	z-index: 2;
+	display: none;
+}
+
+/* 头部 */
+.register-top{
+	width: 870px;
+	padding:15px;
+	border-bottom: 1px solid #e5e5e5;
+	font-size: 18px;
+	height: 56px;
+}
+.reg-left{
+	float: left;
+}
+.reg-right{
+	float: right;
+	cursor: pointer;
+	
+}
+/* 底部 */
+.reg-bottm{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 1062px;
+	padding:15px;
+	border-top: 1px solid #e5e5e5;
+	font-size: 18px;
+	text-align:center;
+	height: 56px;
+}
+.btn{
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+.reg-btn{
+	color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+	
+}
+.reg-cancel{
+	color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.reg-cancel:hover{
+	cursor: pointer;
+	background-color:#ccc ;
+}
+/* 中间内容 */
+.register-con{
+	width: 100%;
+	height: calc(100% - 112px);
+	padding: 20px;
+	overflow: auto;
+
+}
+.reg-con-left{
+	width: 67%;
+	float: left;
+}
+.reg-con-right{
+	width: 33%;
+	padding: 0 15px;
+	float:right;
+}
+/* 基本信息部分 */
+.info>p,.reg-con-right p{
+	margin-bottom: 20px ;
+    border-left: 4px solid #337ab7;
+    padding-left: 5px;
+    height: 13px;
+    line-height: 13px;
+    font-size: 15px;
+    font-weight: bold;
+}
+.info>ul,.info>ol{
+	display: flex;
+	flex-wrap: wrap;
+}
+.info li{
+	
+	width: 33.3%;
+	margin-bottom: 10px;
+	position: relative;
+	padding: 0 2.5%;
+	
+}
+.info label,.reg-con-right label{
+	font-weight: 400;
+}
+.info input{
+	display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding-right: 35px;
+}
+sub{
+	color: red;
+}
+.input-icon{
+	display: block;
+	position: absolute;
+	right: 33px;
+	bottom: 5px;
+	padding-top: 34px;
+}
+.remove{
+	color: #f96868;
+	display: none;
+}
+.ok-sign{
+	color: #46be8a;
+	display: none;
+}
+.info .radio{
+    display: inline-block;
+    height: 14px;
+    margin: 12px 2px 6px 0;
+    width: 25%;
+
+}
+/* 工作经历 */
+.work-experience-add{
+	color:#337ab7;
+	margin-left: 5px;
+}
+.work-experience-add:hover{
+	cursor: pointer;
+	text-decoration: underline;
+	color: #125690;
+}
+.experience{
+	margin-top: 10px;
+}
+.experience>p{
+	margin-bottom: 36px;
+}
+.experience>.file{
+	border: none;
+	font-size: 12px;
+	color: #337ab7;
+	padding-left: 30px;
+	cursor: pointer;
+}
+/* 联系方式 */
+
+.reg-con-right input,.experience-con input,.project-con input,.certificate input{
+
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.reg-con-right>.contact input{
+    width: 100%;
+}
+.reg-con-right li{
+	margin-bottom: 10px;
+}
+/* 教育信息 */
+.education,.apply{
+	margin-top: 20px;
+}
+.education>div{
+	position: relative;
+	margin-top: 10px;
+}
+.education .input-icon{
+	right:15px;
+}
+.education>ol{
+	display: flex;
+	margin-top: 10px;
+}
+.education>ol>li{
+	flex: 1;
+}
+.education>ol>li:nth-of-type(1){
+	margin-right: 30px;
+}
+/* 求职信息 */
+.apply>ol{
+	display: flex;
+	flex-wrap: wrap;
+}
+.apply>ol>li{
+	width: 45%;
+}
+.apply>ol>li:nth-of-type(2n){
+	margin-left: 10%;
+}
+.apply input{
+	width: 100%;
+}
+.apply .radio{
+	height: 14px;
+	width: 50%;
+	display: inline-block;
+}
+.apply textarea,.project-con textarea{
+    padding: 6px 12px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+/* 右边弹出 */
+.pop{	
+	position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+	height: 100%;
+	z-index: 5;
+	display: none;
+}
+/* 新增工作经历 */
+.experience-add{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 35%;
+	height: 100%;
+	background: #fff;
+    box-shadow: -4px 0px 11px 0px rgba(0,0,0,.14);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border: 1px solid #ddd;
+
+}
+.experience-add>.register-top,.experience-add>.reg-bottm{
+	width: 379px;
+}
+.reg-right{
+	color: #ccc;
+}
+.experience-con,.certificate{
+	padding: 0 15px;
+	display: none;
+	margin-top: 10px;
+}
+.experience-con label,.project-con label,.certificate label{
+	font-weight: 400;
+}
+.experience-con>ol,.project-con>ol,.certificate>ul{
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 10px;
+}
+.experience-con li,.project-con>ol>li,.certificate>ul>li{
+	width: 45%;
+	position: relative;
+}
+.experience-con li:nth-of-type(1){
+	margin-right: 30px;
+}
+.experience-con input,.project-con input,.certificate input{
+	width: 100%;
+}
+.reg-cancel{
+	outline: none;
+}
+/* 新增项目经验 */
+.project-con{
+	padding: 10px 15px 20px;
+	height: calc(100% - 112px);
+	overflow: auto;
+	display: none;
+}
+.project-con>ol>li:nth-of-type(2n),.certificate>ul>li:nth-of-type(2){
+	margin-left: 30px;
+}
+.project-con>ol>li{
+	margin-bottom: 10px;
+}
+.project-con .input-icon,.certificate .input-icon{
+	right: 20px;
+}
+/* 新增证书 */
+
+.certificate select{
+	width: 100%;
+	height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.certificate .select-down{
+    display: block;
+    position: absolute;
+    right: 7px;
+    top: 34px;
+    background: #fff;
+}
+.paperclip{
+	position: relative;
+}
+.paperclip-icon{
+	display: block;
+    position: absolute;
+    left: 15px;
+    top: 34px;
+    color:  #337ab7;
+}
