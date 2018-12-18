@@ -34,5 +34,5 @@ public interface TechnologyChooseOneMapper {
 
 	// 管理员添加
 	List<TechnologyChooseOne> selectByLimit(@Param("startValue") int startValue, @Param("countValue") int countValue,
-			@Param("testType") String testType);
+			@Param("testType") int testType);
 }
