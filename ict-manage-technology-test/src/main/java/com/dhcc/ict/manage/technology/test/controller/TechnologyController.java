@@ -13,9 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.dhcc.ict.manage.technology.test.pojo.ExamQuestion;
 import com.dhcc.ict.manage.technology.test.pojo.ExamRecord;
 import com.dhcc.ict.manage.technology.test.pojo.ExamRule;
+import com.dhcc.ict.manage.technology.test.pojo.ExamSubmitDetail;
 import com.dhcc.ict.manage.technology.test.pojo.InterviewRecord;
 import com.dhcc.ict.manage.technology.test.pojo.TechnologyType;
 import com.dhcc.ict.manage.technology.test.pojo.UserDetail;
@@ -73,7 +77,26 @@ public class TechnologyController {
 				System.out.println("technoloyController.java（保存试卷）");
 				e.printStackTrace();
 			}
+			// 更新考试记录表
 			technologyService.updateExamRecord(examRecord, userDetail.getUserId());
 		}
 	}
+
+	// 判卷（JSON.parseObject(JSON_OBJ_STR, new TypeReference<Student>() {});）
+	public void giveGrade(String userSubmitDetail) {
+		JSONObject submitObject = JSONObject.parseObject(userSubmitDetail);
+		String chooseone = submitObject.getString("chooseone");
+		List<ExamSubmitDetail> submitChooseOne = JSON.parseObject(chooseone,
+				new TypeReference<List<ExamSubmitDetail>>() {
+				});
+		String choosemuch = submitObject.getString("choosemuch");
+		List<ExamSubmitDetail> submitChooseMuch = JSON.parseObject(choosemuch,
+				new TypeReference<List<ExamSubmitDetail>>() {
+				});
+		String judge = submitObject.getString("judge");
+		List<ExamSubmitDetail> submitJudge = JSON.parseObject(judge, new TypeReference<List<ExamSubmitDetail>>() {
+		});
+
+	}
+
 }
