@@ -281,7 +281,7 @@
   <select id="selectByLimit" resultMap="BaseResultMap">
   select 
     <include refid="Base_Column_List" />
-    from technology_choose_one where technology_type_id=#{testType,jdbcType=VARCHAR} limit #{startValue},#{countValue}
+    from technology_choose_one where technology_type_id=#{testType} limit #{startValue},#{countValue}
   </select>
 </mapper>
 
