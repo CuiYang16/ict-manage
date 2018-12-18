@@ -164,73 +164,213 @@ public class ExamQuestionExample {
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrIsNull() {
-            addCriterion("technology_test_idarr is null");
+        public Criteria andTechnologyOneIsNull() {
+            addCriterion("technology_one is null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrIsNotNull() {
-            addCriterion("technology_test_idarr is not null");
+        public Criteria andTechnologyOneIsNotNull() {
+            addCriterion("technology_one is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrEqualTo(String value) {
-            addCriterion("technology_test_idarr =", value, "technologyTestIdarr");
+        public Criteria andTechnologyOneEqualTo(String value) {
+            addCriterion("technology_one =", value, "technologyOne");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrNotEqualTo(String value) {
-            addCriterion("technology_test_idarr <>", value, "technologyTestIdarr");
+        public Criteria andTechnologyOneNotEqualTo(String value) {
+            addCriterion("technology_one <>", value, "technologyOne");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrGreaterThan(String value) {
-            addCriterion("technology_test_idarr >", value, "technologyTestIdarr");
+        public Criteria andTechnologyOneGreaterThan(String value) {
+            addCriterion("technology_one >", value, "technologyOne");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrGreaterThanOrEqualTo(String value) {
-            addCriterion("technology_test_idarr >=", value, "technologyTestIdarr");
+        public Criteria andTechnologyOneGreaterThanOrEqualTo(String value) {
+            addCriterion("technology_one >=", value, "technologyOne");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrLessThan(String value) {
-            addCriterion("technology_test_idarr <", value, "technologyTestIdarr");
+        public Criteria andTechnologyOneLessThan(String value) {
+            addCriterion("technology_one <", value, "technologyOne");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrLessThanOrEqualTo(String value) {
-            addCriterion("technology_test_idarr <=", value, "technologyTestIdarr");
+        public Criteria andTechnologyOneLessThanOrEqualTo(String value) {
+            addCriterion("technology_one <=", value, "technologyOne");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrLike(String value) {
-            addCriterion("technology_test_idarr like", value, "technologyTestIdarr");
+        public Criteria andTechnologyOneLike(String value) {
+            addCriterion("technology_one like", value, "technologyOne");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrNotLike(String value) {
-            addCriterion("technology_test_idarr not like", value, "technologyTestIdarr");
+        public Criteria andTechnologyOneNotLike(String value) {
+            addCriterion("technology_one not like", value, "technologyOne");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrIn(List<String> values) {
-            addCriterion("technology_test_idarr in", values, "technologyTestIdarr");
+        public Criteria andTechnologyOneIn(List<String> values) {
+            addCriterion("technology_one in", values, "technologyOne");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrNotIn(List<String> values) {
-            addCriterion("technology_test_idarr not in", values, "technologyTestIdarr");
+        public Criteria andTechnologyOneNotIn(List<String> values) {
+            addCriterion("technology_one not in", values, "technologyOne");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrBetween(String value1, String value2) {
-            addCriterion("technology_test_idarr between", value1, value2, "technologyTestIdarr");
+        public Criteria andTechnologyOneBetween(String value1, String value2) {
+            addCriterion("technology_one between", value1, value2, "technologyOne");
             return (Criteria) this;
         }
 
-        public Criteria andTechnologyTestIdarrNotBetween(String value1, String value2) {
-            addCriterion("technology_test_idarr not between", value1, value2, "technologyTestIdarr");
+        public Criteria andTechnologyOneNotBetween(String value1, String value2) {
+            addCriterion("technology_one not between", value1, value2, "technologyOne");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchIsNull() {
+            addCriterion("technology_much is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchIsNotNull() {
+            addCriterion("technology_much is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchEqualTo(String value) {
+            addCriterion("technology_much =", value, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchNotEqualTo(String value) {
+            addCriterion("technology_much <>", value, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchGreaterThan(String value) {
+            addCriterion("technology_much >", value, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchGreaterThanOrEqualTo(String value) {
+            addCriterion("technology_much >=", value, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchLessThan(String value) {
+            addCriterion("technology_much <", value, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchLessThanOrEqualTo(String value) {
+            addCriterion("technology_much <=", value, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchLike(String value) {
+            addCriterion("technology_much like", value, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchNotLike(String value) {
+            addCriterion("technology_much not like", value, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchIn(List<String> values) {
+            addCriterion("technology_much in", values, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchNotIn(List<String> values) {
+            addCriterion("technology_much not in", values, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchBetween(String value1, String value2) {
+            addCriterion("technology_much between", value1, value2, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyMuchNotBetween(String value1, String value2) {
+            addCriterion("technology_much not between", value1, value2, "technologyMuch");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageIsNull() {
+            addCriterion("technology_juage is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageIsNotNull() {
+            addCriterion("technology_juage is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageEqualTo(String value) {
+            addCriterion("technology_juage =", value, "technologyJuage");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageNotEqualTo(String value) {
+            addCriterion("technology_juage <>", value, "technologyJuage");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageGreaterThan(String value) {
+            addCriterion("technology_juage >", value, "technologyJuage");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageGreaterThanOrEqualTo(String value) {
+            addCriterion("technology_juage >=", value, "technologyJuage");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageLessThan(String value) {
+            addCriterion("technology_juage <", value, "technologyJuage");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageLessThanOrEqualTo(String value) {
+            addCriterion("technology_juage <=", value, "technologyJuage");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageLike(String value) {
+            addCriterion("technology_juage like", value, "technologyJuage");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageNotLike(String value) {
+            addCriterion("technology_juage not like", value, "technologyJuage");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageIn(List<String> values) {
+            addCriterion("technology_juage in", values, "technologyJuage");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageNotIn(List<String> values) {
+            addCriterion("technology_juage not in", values, "technologyJuage");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageBetween(String value1, String value2) {
+            addCriterion("technology_juage between", value1, value2, "technologyJuage");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyJuageNotBetween(String value1, String value2) {
+            addCriterion("technology_juage not between", value1, value2, "technologyJuage");
             return (Criteria) this;
         }
     }

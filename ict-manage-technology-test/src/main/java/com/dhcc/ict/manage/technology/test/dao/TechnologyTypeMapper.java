@@ -1,31 +1,33 @@
 package com.dhcc.ict.manage.technology.test.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.dhcc.ict.manage.technology.test.pojo.TechnologyType;
 import com.dhcc.ict.manage.technology.test.pojo.TechnologyTypeExample;
 
 public interface TechnologyTypeMapper {
-    int countByExample(TechnologyTypeExample example);
+	int countByExample(TechnologyTypeExample example);
 
-    int deleteByExample(TechnologyTypeExample example);
+	int deleteByExample(TechnologyTypeExample example);
 
-    int deleteByPrimaryKey(Integer technologyTypeId);
+	int deleteByPrimaryKey(Integer technologyTypeId);
 
-    int insert(TechnologyType record);
+	int insert(TechnologyType record);
 
-    int insertSelective(TechnologyType record);
+	int insertSelective(TechnologyType record);
 
-    List<TechnologyType> selectByExample(TechnologyTypeExample example);
+	List<TechnologyType> selectByExample(TechnologyTypeExample example);
 
-    TechnologyType selectByPrimaryKey(Integer technologyTypeId);
+	TechnologyType selectByPrimaryKey(Integer technologyTypeId);
 
-    int updateByExampleSelective(@Param("record") TechnologyType record, @Param("example") TechnologyTypeExample example);
+	int updateByExampleSelective(@Param("record") TechnologyType record,
+			@Param("example") TechnologyTypeExample example);
 
-    int updateByExample(@Param("record") TechnologyType record, @Param("example") TechnologyTypeExample example);
+	int updateByExample(@Param("record") TechnologyType record, @Param("example") TechnologyTypeExample example);
 
-    int updateByPrimaryKeySelective(TechnologyType record);
+	int updateByPrimaryKeySelective(TechnologyType record);
 
-    int updateByPrimaryKey(TechnologyType record);
+	int updateByPrimaryKey(TechnologyType record);
 }

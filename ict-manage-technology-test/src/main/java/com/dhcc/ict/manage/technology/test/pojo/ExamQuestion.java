@@ -12,11 +12,23 @@ public class ExamQuestion {
     /**
      * 实体编号数组
      */
-    private String technologyTestIdarr;
+    private String technologyOne;
 
-    public ExamQuestion(Integer examQuestionId, String technologyTestIdarr) {
+    /**
+     * 
+     */
+    private String technologyMuch;
+
+    /**
+     * 
+     */
+    private String technologyJuage;
+
+    public ExamQuestion(Integer examQuestionId, String technologyOne, String technologyMuch, String technologyJuage) {
         this.examQuestionId = examQuestionId;
-        this.technologyTestIdarr = technologyTestIdarr;
+        this.technologyOne = technologyOne;
+        this.technologyMuch = technologyMuch;
+        this.technologyJuage = technologyJuage;
     }
 
     public ExamQuestion() {
@@ -31,12 +43,28 @@ public class ExamQuestion {
         this.examQuestionId = examQuestionId;
     }
 
-    public String getTechnologyTestIdarr() {
-        return technologyTestIdarr;
+    public String getTechnologyOne() {
+        return technologyOne;
     }
 
-    public void setTechnologyTestIdarr(String technologyTestIdarr) {
-        this.technologyTestIdarr = technologyTestIdarr == null ? null : technologyTestIdarr.trim();
+    public void setTechnologyOne(String technologyOne) {
+        this.technologyOne = technologyOne == null ? null : technologyOne.trim();
+    }
+
+    public String getTechnologyMuch() {
+        return technologyMuch;
+    }
+
+    public void setTechnologyMuch(String technologyMuch) {
+        this.technologyMuch = technologyMuch == null ? null : technologyMuch.trim();
+    }
+
+    public String getTechnologyJuage() {
+        return technologyJuage;
+    }
+
+    public void setTechnologyJuage(String technologyJuage) {
+        this.technologyJuage = technologyJuage == null ? null : technologyJuage.trim();
     }
 
     @Override

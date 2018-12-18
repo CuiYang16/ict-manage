@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.ict.manage.technology.test.dao.TechnologyChooseMuchMapper" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuch" >
+    <constructor >
+      <idArg column="choose_much_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="choose_much_detail" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_much_answer1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_much_answer2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_much_answer3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_much_answer4" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_much_answer5" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_much_true_answer" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_much_complexity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="technology_type_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    choose_much_id, choose_much_detail, choose_much_answer1, choose_much_answer2, choose_much_answer3, 
+    choose_much_answer4, choose_much_answer5, choose_much_true_answer, choose_much_complexity, 
+    technology_type_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuchExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from technology_choose_much
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from technology_choose_much
+    where choose_much_id = #{chooseMuchId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from technology_choose_much
+    where choose_much_id = #{chooseMuchId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuchExample" >
+    delete from technology_choose_much
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuch" >
+    insert into technology_choose_much (choose_much_id, choose_much_detail, choose_much_answer1, 
+      choose_much_answer2, choose_much_answer3, choose_much_answer4, 
+      choose_much_answer5, choose_much_true_answer, 
+      choose_much_complexity, technology_type_id)
+    values (#{chooseMuchId,jdbcType=INTEGER}, #{chooseMuchDetail,jdbcType=VARCHAR}, #{chooseMuchAnswer1,jdbcType=VARCHAR}, 
+      #{chooseMuchAnswer2,jdbcType=VARCHAR}, #{chooseMuchAnswer3,jdbcType=VARCHAR}, #{chooseMuchAnswer4,jdbcType=VARCHAR}, 
+      #{chooseMuchAnswer5,jdbcType=VARCHAR}, #{chooseMuchTrueAnswer,jdbcType=VARCHAR}, 
+      #{chooseMuchComplexity,jdbcType=VARCHAR}, #{technologyTypeId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuch" >
+    insert into technology_choose_much
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chooseMuchId != null" >
+        choose_much_id,
+      </if>
+      <if test="chooseMuchDetail != null" >
+        choose_much_detail,
+      </if>
+      <if test="chooseMuchAnswer1 != null" >
+        choose_much_answer1,
+      </if>
+      <if test="chooseMuchAnswer2 != null" >
+        choose_much_answer2,
+      </if>
+      <if test="chooseMuchAnswer3 != null" >
+        choose_much_answer3,
+      </if>
+      <if test="chooseMuchAnswer4 != null" >
+        choose_much_answer4,
+      </if>
+      <if test="chooseMuchAnswer5 != null" >
+        choose_much_answer5,
+      </if>
+      <if test="chooseMuchTrueAnswer != null" >
+        choose_much_true_answer,
+      </if>
+      <if test="chooseMuchComplexity != null" >
+        choose_much_complexity,
+      </if>
+      <if test="technologyTypeId != null" >
+        technology_type_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chooseMuchId != null" >
+        #{chooseMuchId,jdbcType=INTEGER},
+      </if>
+      <if test="chooseMuchDetail != null" >
+        #{chooseMuchDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchAnswer1 != null" >
+        #{chooseMuchAnswer1,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchAnswer2 != null" >
+        #{chooseMuchAnswer2,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchAnswer3 != null" >
+        #{chooseMuchAnswer3,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchAnswer4 != null" >
+        #{chooseMuchAnswer4,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchAnswer5 != null" >
+        #{chooseMuchAnswer5,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchTrueAnswer != null" >
+        #{chooseMuchTrueAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchComplexity != null" >
+        #{chooseMuchComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyTypeId != null" >
+        #{technologyTypeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuchExample" resultType="java.lang.Integer" >
+    select count(*) from technology_choose_much
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update technology_choose_much
+    <set >
+      <if test="record.chooseMuchId != null" >
+        choose_much_id = #{record.chooseMuchId,jdbcType=INTEGER},
+      </if>
+      <if test="record.chooseMuchDetail != null" >
+        choose_much_detail = #{record.chooseMuchDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseMuchAnswer1 != null" >
+        choose_much_answer1 = #{record.chooseMuchAnswer1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseMuchAnswer2 != null" >
+        choose_much_answer2 = #{record.chooseMuchAnswer2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseMuchAnswer3 != null" >
+        choose_much_answer3 = #{record.chooseMuchAnswer3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseMuchAnswer4 != null" >
+        choose_much_answer4 = #{record.chooseMuchAnswer4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseMuchAnswer5 != null" >
+        choose_much_answer5 = #{record.chooseMuchAnswer5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseMuchTrueAnswer != null" >
+        choose_much_true_answer = #{record.chooseMuchTrueAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseMuchComplexity != null" >
+        choose_much_complexity = #{record.chooseMuchComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technologyTypeId != null" >
+        technology_type_id = #{record.technologyTypeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update technology_choose_much
+    set choose_much_id = #{record.chooseMuchId,jdbcType=INTEGER},
+      choose_much_detail = #{record.chooseMuchDetail,jdbcType=VARCHAR},
+      choose_much_answer1 = #{record.chooseMuchAnswer1,jdbcType=VARCHAR},
+      choose_much_answer2 = #{record.chooseMuchAnswer2,jdbcType=VARCHAR},
+      choose_much_answer3 = #{record.chooseMuchAnswer3,jdbcType=VARCHAR},
+      choose_much_answer4 = #{record.chooseMuchAnswer4,jdbcType=VARCHAR},
+      choose_much_answer5 = #{record.chooseMuchAnswer5,jdbcType=VARCHAR},
+      choose_much_true_answer = #{record.chooseMuchTrueAnswer,jdbcType=VARCHAR},
+      choose_much_complexity = #{record.chooseMuchComplexity,jdbcType=VARCHAR},
+      technology_type_id = #{record.technologyTypeId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuch" >
+    update technology_choose_much
+    <set >
+      <if test="chooseMuchDetail != null" >
+        choose_much_detail = #{chooseMuchDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchAnswer1 != null" >
+        choose_much_answer1 = #{chooseMuchAnswer1,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchAnswer2 != null" >
+        choose_much_answer2 = #{chooseMuchAnswer2,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchAnswer3 != null" >
+        choose_much_answer3 = #{chooseMuchAnswer3,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchAnswer4 != null" >
+        choose_much_answer4 = #{chooseMuchAnswer4,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchAnswer5 != null" >
+        choose_much_answer5 = #{chooseMuchAnswer5,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchTrueAnswer != null" >
+        choose_much_true_answer = #{chooseMuchTrueAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseMuchComplexity != null" >
+        choose_much_complexity = #{chooseMuchComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyTypeId != null" >
+        technology_type_id = #{technologyTypeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where choose_much_id = #{chooseMuchId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuch" >
+    update technology_choose_much
+    set choose_much_detail = #{chooseMuchDetail,jdbcType=VARCHAR},
+      choose_much_answer1 = #{chooseMuchAnswer1,jdbcType=VARCHAR},
+      choose_much_answer2 = #{chooseMuchAnswer2,jdbcType=VARCHAR},
+      choose_much_answer3 = #{chooseMuchAnswer3,jdbcType=VARCHAR},
+      choose_much_answer4 = #{chooseMuchAnswer4,jdbcType=VARCHAR},
+      choose_much_answer5 = #{chooseMuchAnswer5,jdbcType=VARCHAR},
+      choose_much_true_answer = #{chooseMuchTrueAnswer,jdbcType=VARCHAR},
+      choose_much_complexity = #{chooseMuchComplexity,jdbcType=VARCHAR},
+      technology_type_id = #{technologyTypeId,jdbcType=INTEGER}
+    where choose_much_id = #{chooseMuchId,jdbcType=INTEGER}
+  </update>
+  
+  <!--g管理员添加  -->
+  <select id="selectByLimitMuch" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from technology_choose_much where technology_type_id=#{testType,jdbcType=VARCHAR} limit #{startValue},#{countValue}
+  </select>
+</mapper>
+

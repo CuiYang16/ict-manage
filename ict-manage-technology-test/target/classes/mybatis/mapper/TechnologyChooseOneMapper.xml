@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.ict.manage.technology.test.dao.TechnologyChooseOneMapper" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOne" >
+    <constructor >
+      <idArg column="choose_one_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="choose_one_detail" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_one_answer1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_one_answer2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_one_answer3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_one_answer4" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_one_true_answer" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="choose_one_complexity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="technology_type_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    choose_one_id, choose_one_detail, choose_one_answer1, choose_one_answer2, choose_one_answer3, 
+    choose_one_answer4, choose_one_true_answer, choose_one_complexity, technology_type_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOneExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from technology_choose_one
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from technology_choose_one
+    where choose_one_id = #{chooseOneId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from technology_choose_one
+    where choose_one_id = #{chooseOneId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOneExample" >
+    delete from technology_choose_one
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOne" >
+    insert into technology_choose_one (choose_one_id, choose_one_detail, choose_one_answer1, 
+      choose_one_answer2, choose_one_answer3, choose_one_answer4, 
+      choose_one_true_answer, choose_one_complexity, 
+      technology_type_id)
+    values (#{chooseOneId,jdbcType=INTEGER}, #{chooseOneDetail,jdbcType=VARCHAR}, #{chooseOneAnswer1,jdbcType=VARCHAR}, 
+      #{chooseOneAnswer2,jdbcType=VARCHAR}, #{chooseOneAnswer3,jdbcType=VARCHAR}, #{chooseOneAnswer4,jdbcType=VARCHAR}, 
+      #{chooseOneTrueAnswer,jdbcType=VARCHAR}, #{chooseOneComplexity,jdbcType=VARCHAR}, 
+      #{technologyTypeId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOne" >
+    insert into technology_choose_one
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chooseOneId != null" >
+        choose_one_id,
+      </if>
+      <if test="chooseOneDetail != null" >
+        choose_one_detail,
+      </if>
+      <if test="chooseOneAnswer1 != null" >
+        choose_one_answer1,
+      </if>
+      <if test="chooseOneAnswer2 != null" >
+        choose_one_answer2,
+      </if>
+      <if test="chooseOneAnswer3 != null" >
+        choose_one_answer3,
+      </if>
+      <if test="chooseOneAnswer4 != null" >
+        choose_one_answer4,
+      </if>
+      <if test="chooseOneTrueAnswer != null" >
+        choose_one_true_answer,
+      </if>
+      <if test="chooseOneComplexity != null" >
+        choose_one_complexity,
+      </if>
+      <if test="technologyTypeId != null" >
+        technology_type_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chooseOneId != null" >
+        #{chooseOneId,jdbcType=INTEGER},
+      </if>
+      <if test="chooseOneDetail != null" >
+        #{chooseOneDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneAnswer1 != null" >
+        #{chooseOneAnswer1,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneAnswer2 != null" >
+        #{chooseOneAnswer2,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneAnswer3 != null" >
+        #{chooseOneAnswer3,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneAnswer4 != null" >
+        #{chooseOneAnswer4,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneTrueAnswer != null" >
+        #{chooseOneTrueAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneComplexity != null" >
+        #{chooseOneComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyTypeId != null" >
+        #{technologyTypeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOneExample" resultType="java.lang.Integer" >
+    select count(*) from technology_choose_one
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update technology_choose_one
+    <set >
+      <if test="record.chooseOneId != null" >
+        choose_one_id = #{record.chooseOneId,jdbcType=INTEGER},
+      </if>
+      <if test="record.chooseOneDetail != null" >
+        choose_one_detail = #{record.chooseOneDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseOneAnswer1 != null" >
+        choose_one_answer1 = #{record.chooseOneAnswer1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseOneAnswer2 != null" >
+        choose_one_answer2 = #{record.chooseOneAnswer2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseOneAnswer3 != null" >
+        choose_one_answer3 = #{record.chooseOneAnswer3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseOneAnswer4 != null" >
+        choose_one_answer4 = #{record.chooseOneAnswer4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseOneTrueAnswer != null" >
+        choose_one_true_answer = #{record.chooseOneTrueAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chooseOneComplexity != null" >
+        choose_one_complexity = #{record.chooseOneComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technologyTypeId != null" >
+        technology_type_id = #{record.technologyTypeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update technology_choose_one
+    set choose_one_id = #{record.chooseOneId,jdbcType=INTEGER},
+      choose_one_detail = #{record.chooseOneDetail,jdbcType=VARCHAR},
+      choose_one_answer1 = #{record.chooseOneAnswer1,jdbcType=VARCHAR},
+      choose_one_answer2 = #{record.chooseOneAnswer2,jdbcType=VARCHAR},
+      choose_one_answer3 = #{record.chooseOneAnswer3,jdbcType=VARCHAR},
+      choose_one_answer4 = #{record.chooseOneAnswer4,jdbcType=VARCHAR},
+      choose_one_true_answer = #{record.chooseOneTrueAnswer,jdbcType=VARCHAR},
+      choose_one_complexity = #{record.chooseOneComplexity,jdbcType=VARCHAR},
+      technology_type_id = #{record.technologyTypeId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOne" >
+    update technology_choose_one
+    <set >
+      <if test="chooseOneDetail != null" >
+        choose_one_detail = #{chooseOneDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneAnswer1 != null" >
+        choose_one_answer1 = #{chooseOneAnswer1,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneAnswer2 != null" >
+        choose_one_answer2 = #{chooseOneAnswer2,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneAnswer3 != null" >
+        choose_one_answer3 = #{chooseOneAnswer3,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneAnswer4 != null" >
+        choose_one_answer4 = #{chooseOneAnswer4,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneTrueAnswer != null" >
+        choose_one_true_answer = #{chooseOneTrueAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="chooseOneComplexity != null" >
+        choose_one_complexity = #{chooseOneComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyTypeId != null" >
+        technology_type_id = #{technologyTypeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where choose_one_id = #{chooseOneId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOne" >
+    update technology_choose_one
+    set choose_one_detail = #{chooseOneDetail,jdbcType=VARCHAR},
+      choose_one_answer1 = #{chooseOneAnswer1,jdbcType=VARCHAR},
+      choose_one_answer2 = #{chooseOneAnswer2,jdbcType=VARCHAR},
+      choose_one_answer3 = #{chooseOneAnswer3,jdbcType=VARCHAR},
+      choose_one_answer4 = #{chooseOneAnswer4,jdbcType=VARCHAR},
+      choose_one_true_answer = #{chooseOneTrueAnswer,jdbcType=VARCHAR},
+      choose_one_complexity = #{chooseOneComplexity,jdbcType=VARCHAR},
+      technology_type_id = #{technologyTypeId,jdbcType=INTEGER}
+    where choose_one_id = #{chooseOneId,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 管理员添加 -->
+  <!-- 抽取单选题 -->
+  <select id="selectByLimit" resultMap="BaseResultMap">
+  select 
+    <include refid="Base_Column_List" />
+    from technology_choose_one where technology_type_id=#{testType,jdbcType=VARCHAR} limit #{startValue},#{countValue}
+  </select>
+</mapper>
+

@@ -32,7 +32,7 @@ public class ExamRule {
     /**
      * 判断题数
      */
-    private Integer chooseJurgeCount;
+    private Integer jurgeCount;
 
     /**
      * 考试时间
@@ -44,13 +44,13 @@ public class ExamRule {
      */
     private Integer interviewerId;
 
-    public ExamRule(Integer examRuleId, String examRuleName, Integer totalCount, Integer chooseOneCount, Integer chooseMuchCount, Integer chooseJurgeCount, Integer examTime, Integer interviewerId) {
+    public ExamRule(Integer examRuleId, String examRuleName, Integer totalCount, Integer chooseOneCount, Integer chooseMuchCount, Integer jurgeCount, Integer examTime, Integer interviewerId) {
         this.examRuleId = examRuleId;
         this.examRuleName = examRuleName;
         this.totalCount = totalCount;
         this.chooseOneCount = chooseOneCount;
         this.chooseMuchCount = chooseMuchCount;
-        this.chooseJurgeCount = chooseJurgeCount;
+        this.jurgeCount = jurgeCount;
         this.examTime = examTime;
         this.interviewerId = interviewerId;
     }
@@ -99,12 +99,12 @@ public class ExamRule {
         this.chooseMuchCount = chooseMuchCount;
     }
 
-    public Integer getChooseJurgeCount() {
-        return chooseJurgeCount;
+    public Integer getJurgeCount() {
+        return jurgeCount;
     }
 
-    public void setChooseJurgeCount(Integer chooseJurgeCount) {
-        this.chooseJurgeCount = chooseJurgeCount;
+    public void setJurgeCount(Integer jurgeCount) {
+        this.jurgeCount = jurgeCount;
     }
 
     public Integer getExamTime() {

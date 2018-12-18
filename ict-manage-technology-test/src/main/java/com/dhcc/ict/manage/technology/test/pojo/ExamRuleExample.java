@@ -414,63 +414,63 @@ public class ExamRuleExample {
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountIsNull() {
-            addCriterion("choose_jurge_count is null");
+        public Criteria andJurgeCountIsNull() {
+            addCriterion("jurge_count is null");
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountIsNotNull() {
-            addCriterion("choose_jurge_count is not null");
+        public Criteria andJurgeCountIsNotNull() {
+            addCriterion("jurge_count is not null");
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountEqualTo(Integer value) {
-            addCriterion("choose_jurge_count =", value, "chooseJurgeCount");
+        public Criteria andJurgeCountEqualTo(Integer value) {
+            addCriterion("jurge_count =", value, "jurgeCount");
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountNotEqualTo(Integer value) {
-            addCriterion("choose_jurge_count <>", value, "chooseJurgeCount");
+        public Criteria andJurgeCountNotEqualTo(Integer value) {
+            addCriterion("jurge_count <>", value, "jurgeCount");
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountGreaterThan(Integer value) {
-            addCriterion("choose_jurge_count >", value, "chooseJurgeCount");
+        public Criteria andJurgeCountGreaterThan(Integer value) {
+            addCriterion("jurge_count >", value, "jurgeCount");
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("choose_jurge_count >=", value, "chooseJurgeCount");
+        public Criteria andJurgeCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("jurge_count >=", value, "jurgeCount");
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountLessThan(Integer value) {
-            addCriterion("choose_jurge_count <", value, "chooseJurgeCount");
+        public Criteria andJurgeCountLessThan(Integer value) {
+            addCriterion("jurge_count <", value, "jurgeCount");
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountLessThanOrEqualTo(Integer value) {
-            addCriterion("choose_jurge_count <=", value, "chooseJurgeCount");
+        public Criteria andJurgeCountLessThanOrEqualTo(Integer value) {
+            addCriterion("jurge_count <=", value, "jurgeCount");
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountIn(List<Integer> values) {
-            addCriterion("choose_jurge_count in", values, "chooseJurgeCount");
+        public Criteria andJurgeCountIn(List<Integer> values) {
+            addCriterion("jurge_count in", values, "jurgeCount");
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountNotIn(List<Integer> values) {
-            addCriterion("choose_jurge_count not in", values, "chooseJurgeCount");
+        public Criteria andJurgeCountNotIn(List<Integer> values) {
+            addCriterion("jurge_count not in", values, "jurgeCount");
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountBetween(Integer value1, Integer value2) {
-            addCriterion("choose_jurge_count between", value1, value2, "chooseJurgeCount");
+        public Criteria andJurgeCountBetween(Integer value1, Integer value2) {
+            addCriterion("jurge_count between", value1, value2, "jurgeCount");
             return (Criteria) this;
         }
 
-        public Criteria andChooseJurgeCountNotBetween(Integer value1, Integer value2) {
-            addCriterion("choose_jurge_count not between", value1, value2, "chooseJurgeCount");
+        public Criteria andJurgeCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("jurge_count not between", value1, value2, "jurgeCount");
             return (Criteria) this;
         }
 
