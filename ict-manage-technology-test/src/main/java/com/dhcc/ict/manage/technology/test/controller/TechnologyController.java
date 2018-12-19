@@ -28,8 +28,8 @@ import com.dhcc.ict.manage.technology.test.service.TechnologyService;
 @Controller
 public class TechnologyController {
 
-	private ExamQuestion examQuestion;
-	private UserDetail userDetail;
+	private ExamQuestion examQuestion = null;
+	private UserDetail userDetail = null;
 
 	@Autowired
 	private TechnologyService technologyService;
