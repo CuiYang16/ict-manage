@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dhcc.ict.manage.technology.test.dao.TechnologyChooseOneMapper" >
-  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOne" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseOne" >
     <constructor >
       <idArg column="choose_one_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="choose_one_detail" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -76,7 +76,7 @@
     choose_one_id, choose_one_detail, choose_one_answer1, choose_one_answer2, choose_one_answer3, 
     choose_one_answer4, choose_one_true_answer, choose_one_complexity, technology_type_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOneExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseOneExample" >
     select
     <if test="distinct" >
       distinct
@@ -100,13 +100,13 @@
     delete from technology_choose_one
     where choose_one_id = #{chooseOneId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOneExample" >
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseOneExample" >
     delete from technology_choose_one
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOne" >
+  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseOne" >
     insert into technology_choose_one (choose_one_id, choose_one_detail, choose_one_answer1, 
       choose_one_answer2, choose_one_answer3, choose_one_answer4, 
       choose_one_true_answer, choose_one_complexity, 
@@ -116,7 +116,7 @@
       #{chooseOneTrueAnswer,jdbcType=VARCHAR}, #{chooseOneComplexity,jdbcType=VARCHAR}, 
       #{technologyTypeId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOne" >
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseOne" >
     insert into technology_choose_one
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="chooseOneId != null" >
@@ -177,7 +177,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOneExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseOneExample" resultType="java.lang.Integer" >
     select count(*) from technology_choose_one
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -233,7 +233,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOne" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseOne" >
     update technology_choose_one
     <set >
       <if test="chooseOneDetail != null" >
@@ -263,7 +263,7 @@
     </set>
     where choose_one_id = #{chooseOneId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseOne" >
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseOne" >
     update technology_choose_one
     set choose_one_detail = #{chooseOneDetail,jdbcType=VARCHAR},
       choose_one_answer1 = #{chooseOneAnswer1,jdbcType=VARCHAR},
@@ -275,13 +275,4 @@
       technology_type_id = #{technologyTypeId,jdbcType=INTEGER}
     where choose_one_id = #{chooseOneId,jdbcType=INTEGER}
   </update>
-  
-  <!-- 管理员添加 -->
-  <!-- 抽取单选题 -->
-  <select id="selectByLimit" resultMap="BaseResultMap">
-  select 
-    <include refid="Base_Column_List" />
-    from technology_choose_one where technology_type_id=#{testType} limit #{startValue},#{countValue}
-  </select>
 </mapper>
-

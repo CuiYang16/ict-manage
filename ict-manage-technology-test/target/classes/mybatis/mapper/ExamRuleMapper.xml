@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dhcc.ict.manage.technology.test.dao.ExamRuleMapper" >
-  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.permission.pojo.ExamRule" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.technology.test.pojo.ExamRule" >
     <constructor >
       <idArg column="exam_rule_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="exam_rule_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -75,7 +75,7 @@
     exam_rule_id, exam_rule_name, total_count, choose_one_count, choose_much_count, jurge_count, 
     exam_time, interviewer_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.permission.pojo.ExamRuleExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRuleExample" >
     select
     <if test="distinct" >
       distinct
@@ -99,13 +99,13 @@
     delete from exam_rule
     where exam_rule_id = #{examRuleId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.permission.pojo.ExamRuleExample" >
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRuleExample" >
     delete from exam_rule
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dhcc.ict.manage.permission.pojo.ExamRule" >
+  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRule" >
     insert into exam_rule (exam_rule_id, exam_rule_name, total_count, 
       choose_one_count, choose_much_count, jurge_count, 
       exam_time, interviewer_id)
@@ -113,7 +113,7 @@
       #{chooseOneCount,jdbcType=INTEGER}, #{chooseMuchCount,jdbcType=INTEGER}, #{jurgeCount,jdbcType=INTEGER}, 
       #{examTime,jdbcType=INTEGER}, #{interviewerId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.permission.pojo.ExamRule" >
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRule" >
     insert into exam_rule
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="examRuleId != null" >
@@ -168,7 +168,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.dhcc.ict.manage.permission.pojo.ExamRuleExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRuleExample" resultType="java.lang.Integer" >
     select count(*) from exam_rule
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -220,7 +220,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.permission.pojo.ExamRule" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRule" >
     update exam_rule
     <set >
       <if test="examRuleName != null" >
@@ -247,7 +247,7 @@
     </set>
     where exam_rule_id = #{examRuleId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.permission.pojo.ExamRule" >
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRule" >
     update exam_rule
     set exam_rule_name = #{examRuleName,jdbcType=VARCHAR},
       total_count = #{totalCount,jdbcType=INTEGER},

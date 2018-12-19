@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dhcc.ict.manage.technology.test.dao.TechnologyJudgeMapper" >
-  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.permission.pojo.TechnologyJudge" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.technology.test.pojo.TechnologyJudge" >
     <constructor >
       <idArg column="technology_judge_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="technology_judge_detail" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -72,7 +72,7 @@
     technology_judge_id, technology_judge_detail, technology_judge_true_answer, technology_judge_complexity, 
     technology_type_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyJudgeExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyJudgeExample" >
     select
     <if test="distinct" >
       distinct
@@ -96,13 +96,13 @@
     delete from technology_judge
     where technology_judge_id = #{technologyJudgeId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyJudgeExample" >
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyJudgeExample" >
     delete from technology_judge
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyJudge" >
+  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyJudge" >
     insert into technology_judge (technology_judge_id, technology_judge_detail, 
       technology_judge_true_answer, technology_judge_complexity, 
       technology_type_id)
@@ -110,7 +110,7 @@
       #{technologyJudgeTrueAnswer,jdbcType=VARCHAR}, #{technologyJudgeComplexity,jdbcType=VARCHAR}, 
       #{technologyTypeId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyJudge" >
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyJudge" >
     insert into technology_judge
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="technologyJudgeId != null" >
@@ -147,7 +147,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyJudgeExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyJudgeExample" resultType="java.lang.Integer" >
     select count(*) from technology_judge
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -187,7 +187,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyJudge" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyJudge" >
     update technology_judge
     <set >
       <if test="technologyJudgeDetail != null" >
@@ -205,7 +205,7 @@
     </set>
     where technology_judge_id = #{technologyJudgeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyJudge" >
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyJudge" >
     update technology_judge
     set technology_judge_detail = #{technologyJudgeDetail,jdbcType=VARCHAR},
       technology_judge_true_answer = #{technologyJudgeTrueAnswer,jdbcType=VARCHAR},
@@ -213,13 +213,4 @@
       technology_type_id = #{technologyTypeId,jdbcType=INTEGER}
     where technology_judge_id = #{technologyJudgeId,jdbcType=INTEGER}
   </update>
-  
-  <!--管理员添加  -->
-  
-  <select id="selectByLimitJudge" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from technology_judge where technology_type_id=#{testType,jdbcType=VARCHAR} limit #{startValue},#{countValue}
-  </select>
 </mapper>
-
