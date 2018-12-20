@@ -15,7 +15,6 @@ public class UserDetailService {
 
 	public UserDetail search(String userName, String userPwd) {
 		UserDetail user = userDetailMapper.search(userName, userPwd);
-		System.out.println(userName + userPwd);
 		return user;
 
 	}

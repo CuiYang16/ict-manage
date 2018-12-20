@@ -111,7 +111,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRecord" >
+  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRecord"  useGeneratedKeys="true" keyProperty="examRecordId" keyColumn="exam_record_id">
     insert into exam_record (exam_record_id, exam_starttime, exam_endtime, 
       exam_reality_time, choose_one_score, choose_much_score, 
       choose_jurge, total_score, user_answer, 

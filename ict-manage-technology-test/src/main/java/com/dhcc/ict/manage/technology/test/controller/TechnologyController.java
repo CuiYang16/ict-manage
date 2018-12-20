@@ -24,6 +24,7 @@ import com.dhcc.ict.manage.technology.test.service.TechnologyService;
 import com.dhcc.ict.manage.technology.test.util.DateUtil;
 
 @Controller
+@RequestMapping("/tectest")
 public class TechnologyController {
 	HttpSession session = null;
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -45,7 +46,7 @@ public class TechnologyController {
 		// 获取当前用户信息
 		UserDetail userDetail = (UserDetail) session.getAttribute("localUser");
 		// 获取用户对应面试记录
-		InterviewRecord interviewRecord = technologyService.getInterviewRecord(userDetail.getUserId());
+		InterviewRecord interviewRecord = technologyService.getInterviewRecord(1);// userDetail.getUserId();
 		if (interviewRecord != null) {
 			ExamRule examRule = technologyService.getExamRule(interviewRecord.getInterviewerId());
 			ExamQuestion examQuestion = technologyService.getTestList(examRule, testType);
@@ -54,7 +55,7 @@ public class TechnologyController {
 			// 插入考试记录(考试类别，用户id)
 			ExamRecord examRecord = new ExamRecord();
 			examRecord.setTechnologyTypeId(testType);
-			examRecord.setUserId(userDetail.getUserId());
+			examRecord.setUserId(1);// userDetail.getUserId();
 			session.setAttribute("userExamRecord", examRecord);
 			return examQuestion;
 		}
@@ -109,4 +110,8 @@ public class TechnologyController {
 		return examRecord;
 	}
 
+	@RequestMapping("/tttt")
+	public String tt() {
+		return "index";
+	}
 }

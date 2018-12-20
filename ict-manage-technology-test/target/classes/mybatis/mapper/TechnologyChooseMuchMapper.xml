@@ -291,4 +291,13 @@
       technology_type_id = #{technologyTypeId,jdbcType=INTEGER}
     where choose_much_id = #{chooseMuchId,jdbcType=INTEGER}
   </update>
+  
+ <!--  管理员添加 -->
+  <select id="selectByLimitMuch" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from technology_choose_much
+     where technology_type_id = #{testType,jdbcType=INTEGER} limit #{startValue,jdbcType=INTEGER},#{countValue,jdbcType=INTEGER}
+  </select>
 </mapper>
+
