@@ -18,6 +18,34 @@
 			}
 
 		});
+		
+		//获取全选的id
+		var oall = document.getElementById("all");
+		//获取单个复选框的id
+		var oid = document.getElementsByName("id");
+		//点击复选框   全部选中
+		$("#all").click(function(){
+			for(var i = 0; i<oid.length;i++){
+				oid[i].checked = oall.checked;
+				
+			}
+		}); 
+		
+		//点击复选框
+		for( var i = 0; i < oid.length;i++){
+			oid[i].onclick = function(){
+				//判断是否全部选中，遍历集合
+				for(var j = 0; j<oid.length; j++){
+					if(oid[j].checked == false){
+						oall.checked = false;
+						break;
+					}else{
+						oall.checked = true;
+					}
+				}
+			};
+		} 
+	
 	});
 
 	
@@ -25,32 +53,96 @@
 		var strone = "";//用于拼接的字符串
 		var onelength = onedata.length;
 		for (var i = 0; i < onelength; i++) {
-			
-			strone = "<tr><td>" + onedata[i].technologyChooseOne.chooseOneDetail+ "</td><td>"
+			strone = "<tr><td>"+"<input width='50' name='id' type='checkbox' value='"+onedata[i].technologyChooseOne.chooseOneId+"'></input> </td><td>" 
+			        +[i+1]+"</td><td>"
+			        + onedata[i].technologyChooseOne.chooseOneDetail+ "</td><td>"
 					+ onedata[i].technologyChooseOne.chooseOneAnswer1 + "</td><td>"
 					+ onedata[i].technologyChooseOne.chooseOneAnswer2 + "</td><td>"
 					+ onedata[i].technologyChooseOne.chooseOneAnswer3 + "</td><td>"
 					+ onedata[i].technologyChooseOne.chooseOneAnswer4 + "</td><td>"
 					+ onedata[i].technologyChooseOne.chooseOneTrueAnswer + "</td><td>"
 					+ onedata[i].technologyChooseOne.chooseOneComplexity + "</td><td>"
-					+ onedata[i].technologyTypeName + "</td><td>"
-					+ onedata[i] + "</td><tr>";
-
+					+ onedata[i].technologyTypeName + "</td><td >"
+					+"<button onclick='onedelete("+onedata[i].technologyChooseOne.chooseOneId+") '>删除</button></td><tr>";
 			//追加到table中
 			$("#tabone").append(strone);
-
+			$("#ts").html(onelength);
+			//<th width="25"><input type="checkbox" id="all" value="">批量删除</th>
 		}
+	}
+	//单个删除
+	function onedelete(oneid){
+		var r = confirm("是否删除？");
+		if(r==true){
+			var chooseOneId = oneid;
+			$.get("/show/onedelete?chooseOneId="+chooseOneId,function(data){
+				if(data=="ok"){
+					alert("删除成功！");
+					//删除成功，刷新页面信息
+					location.reload();
+				}else{
+					alert("删除失败！!");
+				}
+			});
+			return true;
+		}else{
+			return false;
+		}
+	}//
+	
+	/*封面图-批量删除*/
 
+	function del(){
+		var r=confirm("是否确认删除？");    
+		if(r==true){ 
+			//确认删除
+			var ids="";
+			var n=0;
+			for(var i=0;i<oid.length;i++){
+				if(oid[i].checked==true){//选中为true
+					var id=oid[i].value;
+					if(n==0){
+						ids+="ids="+id;
+					}else{
+						ids+="&ids="+id;
+					}
+					n++;
+				}			
+			}
+		    //上面会拼接出一个名为ids的数组ids=1&ids=2&ids=3&ids=4……
+		    $.get("/show/onedeleteall",ids,function(data){
+				 if(data=="ok"){
+					alert("删除成功!");
+					//删除成功后，调用action方法刷新页面信息
+					location.reload();
+					$("input[name=id]").removeAttr("checked");
+				}else{
+					alert("请选中行!");
+				} 
+			});
+			return true; 
+		}else{ 
+			//不删除
+			return false;    
+		} 
 	}
 </script>
 
 
 </head>
 <body>
+	<div>
+		<span class="l"><a href="javascript:;" onclick="del()"
+			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
+			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
+			id="ts">0</strong> 条
+		</span>
+	</div>
 
-
-	 <table id="tabone" >
+	<table id="tabone">
 		<tr>
+		    <th><input type="checkbox" id="all" value=""></th>
+		    <th>题号</th>
 			<th>题目内容</th>
 			<th>答案A</th>
 			<th>答案B</th>
@@ -60,12 +152,11 @@
 			<th>难易程度</th>
 			<th>类别</th>
 			<th>删除</th>
+			
 		</tr>
-
 		<tr>
 			<td></td>
 		</tr>
-
-	</table> 
+	</table>
 </body>
 </html>

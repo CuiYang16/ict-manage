@@ -63,7 +63,7 @@ public class QuestionbankController {
 		return "leadingexcelsssss";
 	}
 	
-	//导入多选题
+	//导入判断题
 		@RequestMapping(value="/importJudgeExcel",method=RequestMethod.POST)
 		public String importJudgeExcel(MultipartFile upfile) throws Exception{
 			if (upfile.isEmpty()) {

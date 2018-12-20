@@ -1,5 +1,6 @@
 package com.dhcc.ict.manage.questionbank.dao;
 
+import com.dhcc.ict.manage.questionbank.pojo.QuestionBankMuch;
 import com.dhcc.ict.manage.questionbank.pojo.TechnologyChooseMuch;
 import com.dhcc.ict.manage.questionbank.pojo.TechnologyChooseMuchExample;
 import java.util.List;
@@ -31,4 +32,6 @@ public interface TechnologyChooseMuchMapper {
     int updateByPrimaryKey(TechnologyChooseMuch record);
     // 添加多选题
 	void insertChooseMuch(List list);
+    //查询多选和类别
+	List<QuestionBankMuch> selectMuchTechnology();
 }

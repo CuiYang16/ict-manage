@@ -221,5 +221,24 @@
             #{item}
         </foreach>
 </insert>
+
+   <!-- 多表查询多选择题 -->
+	<select id="selectJudgeTechnology" resultMap="ResultMap">
+		select o.*
+		,t.technology_type_name
+		from
+		technology_judge o, technology_type t
+		where
+		o.technology_type_id = t.technology_type_id
+	</select>
+	<resultMap id="ResultMap"
+		type="com.dhcc.ict.manage.questionbank.pojo.QuestionBankJudge">
+
+		<result column="technology_type_name" jdbcType="VARCHAR"
+			javaType="java.lang.String" property="technologyTypeName" />
+		<association property="technologyJudge"
+			javaType="com.dhcc.ict.manage.questionbank.pojo.TechnologyJudge" resultMap="BaseResultMap">
+			</association>
+	</resultMap>
  
 </mapper>

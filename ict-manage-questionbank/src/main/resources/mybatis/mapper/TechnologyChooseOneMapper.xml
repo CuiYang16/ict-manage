@@ -426,6 +426,8 @@
 		resultType="com.dhcc.ict.manage.questionbank.pojo.TechnologyChooseOne">
 		select * from technology_choose_one
 	</select>
+	
+	<!-- 多表查询选择题 -->
 	<select id="selectOneTechnology" resultMap="ResultMap">
 		select o.*
 		,t.technology_type_name
@@ -434,4 +436,15 @@
 		where
 		o.technology_type_id = t.technology_type_id
 	</select>
+	
+	<!-- 批量或全选删除单选表数据 -->
+	<delete id="qusetionOneDeleteAll">
+		delete from technology_choose_one  where choose_one_id in
+		<foreach collection="array" item="ids" open="(" separator=","
+			close=")">
+			#{ids}
+		</foreach>
+	</delete>
+	
+	
 </mapper>

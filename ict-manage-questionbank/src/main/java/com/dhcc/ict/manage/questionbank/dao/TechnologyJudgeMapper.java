@@ -1,5 +1,6 @@
 package com.dhcc.ict.manage.questionbank.dao;
 
+import com.dhcc.ict.manage.questionbank.pojo.QuestionBankJudge;
 import com.dhcc.ict.manage.questionbank.pojo.TechnologyJudge;
 import com.dhcc.ict.manage.questionbank.pojo.TechnologyJudgeExample;
 import java.util.List;
@@ -32,4 +33,6 @@ public interface TechnologyJudgeMapper {
     
     //导入判断题
 	void insertChooseJudge(List list);
+    //查询判断和类别
+	List<QuestionBankJudge> selectJudgeTechnology();
 }

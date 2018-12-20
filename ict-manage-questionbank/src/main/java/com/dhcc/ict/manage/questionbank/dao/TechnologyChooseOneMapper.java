@@ -36,6 +36,10 @@ public interface TechnologyChooseOneMapper {
 	void insertChooseOne(List list);
     //通过扩展类查询单选题和类别 
 	List<QuestionBankOne> selectOneTechnology();
+    //
+	//Object deleteone(Integer chooseOneId);
+
+	void qusetionOneDeleteAll(Integer[] ids);
 	
 	
 	
