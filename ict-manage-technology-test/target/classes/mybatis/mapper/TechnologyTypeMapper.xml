@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dhcc.ict.manage.technology.test.dao.TechnologyTypeMapper" >
-  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.permission.pojo.TechnologyType" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.technology.test.pojo.TechnologyType" >
     <constructor >
       <idArg column="technology_type_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="technology_type_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -68,7 +68,7 @@
   <sql id="Base_Column_List" >
     technology_type_id, technology_type_name
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyTypeExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyTypeExample" >
     select
     <if test="distinct" >
       distinct
@@ -92,19 +92,19 @@
     delete from technology_type
     where technology_type_id = #{technologyTypeId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyTypeExample" >
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyTypeExample" >
     delete from technology_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyType" >
+  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyType" >
     insert into technology_type (technology_type_id, technology_type_name
       )
     values (#{technologyTypeId,jdbcType=INTEGER}, #{technologyTypeName,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyType" >
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyType" >
     insert into technology_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="technologyTypeId != null" >
@@ -123,7 +123,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyTypeExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyTypeExample" resultType="java.lang.Integer" >
     select count(*) from technology_type
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -151,7 +151,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyType" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyType" >
     update technology_type
     <set >
       <if test="technologyTypeName != null" >
@@ -160,7 +160,7 @@
     </set>
     where technology_type_id = #{technologyTypeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyType" >
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyType" >
     update technology_type
     set technology_type_name = #{technologyTypeName,jdbcType=VARCHAR}
     where technology_type_id = #{technologyTypeId,jdbcType=INTEGER}

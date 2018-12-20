@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dhcc.ict.manage.technology.test.dao.UserDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.permission.pojo.UserDetail" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.technology.test.pojo.UserDetail" >
     <constructor >
       <idArg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -111,7 +111,7 @@
     specialty, hobby, other_special, resume_attachment, register_time, perfec_information, 
     group_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.permission.pojo.UserDetailExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.technology.test.pojo.UserDetailExample" >
     select
     <if test="distinct" >
       distinct
@@ -135,13 +135,13 @@
     delete from user_detail
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.permission.pojo.UserDetailExample" >
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.UserDetailExample" >
     delete from user_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dhcc.ict.manage.permission.pojo.UserDetail" >
+  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.UserDetail" >
     insert into user_detail (user_id, user_name, user_pwd, 
       account_number, user_number, birthday, 
       sex, graduation_time, incumbency_state, 
@@ -171,7 +171,7 @@
       #{registerTime,jdbcType=TIMESTAMP}, #{perfecInformation,jdbcType=VARCHAR}, #{groupId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.permission.pojo.UserDetail" >
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.UserDetail" >
     insert into user_detail
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -412,7 +412,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.dhcc.ict.manage.permission.pojo.UserDetailExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.UserDetailExample" resultType="java.lang.Integer" >
     select count(*) from user_detail
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -588,7 +588,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.permission.pojo.UserDetail" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.UserDetail" >
     update user_detail
     <set >
       <if test="userName != null" >
@@ -708,7 +708,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.permission.pojo.UserDetail" >
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.technology.test.pojo.UserDetail" >
     update user_detail
     set user_name = #{userName,jdbcType=VARCHAR},
       user_pwd = #{userPwd,jdbcType=VARCHAR},

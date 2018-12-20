@@ -100,10 +100,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  
-  
-  <!-- 管理员修改useGeneratedKeys="true" keyProperty="id"获取插入数据id -->
-  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamQuestion" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamQuestion" >
     insert into exam_question (exam_question_id, technology_one, technology_much, 
       technology_juage)
     values (#{examQuestionId,jdbcType=INTEGER}, #{technologyOne,jdbcType=VARCHAR}, #{technologyMuch,jdbcType=VARCHAR}, 

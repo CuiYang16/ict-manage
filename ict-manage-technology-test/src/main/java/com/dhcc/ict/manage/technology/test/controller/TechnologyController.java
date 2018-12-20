@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.dhcc.ict.manage.technology.test.pojo.ExamQuestion;
 import com.dhcc.ict.manage.technology.test.pojo.ExamRecord;
 import com.dhcc.ict.manage.technology.test.pojo.ExamRule;
+import com.dhcc.ict.manage.technology.test.pojo.ExamSubmitDetail;
 import com.dhcc.ict.manage.technology.test.pojo.InterviewRecord;
 import com.dhcc.ict.manage.technology.test.pojo.TechnologyType;
 import com.dhcc.ict.manage.technology.test.pojo.UserDetail;
 import com.dhcc.ict.manage.technology.test.service.TechnologyService;
+import com.dhcc.ict.manage.technology.test.util.DateUtil;
 
 @Controller
 public class TechnologyController {
-
-	private ExamQuestion examQuestion;
-	private UserDetail userDetail;
-
+	HttpSession session = null;
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	@Autowired
 	private TechnologyService technologyService;
 
@@ -41,39 +41,72 @@ public class TechnologyController {
 	@ResponseBody
 	@RequestMapping("/gettestpaper")
 	public ExamQuestion getExamQuestion(HttpServletRequest request, int testType) {
-		HttpSession session = request.getSession();
+		session = request.getSession();
 		// 获取当前用户信息
-		userDetail = (UserDetail) session.getAttribute("localUser");
+		UserDetail userDetail = (UserDetail) session.getAttribute("localUser");
 		// 获取用户对应面试记录
 		InterviewRecord interviewRecord = technologyService.getInterviewRecord(userDetail.getUserId());
-		ExamRule examRule = technologyService.getExamRule(interviewRecord.getInterviewerId());
-		examQuestion = technologyService.getTestList(examRule, testType);
+		if (interviewRecord != null) {
+			ExamRule examRule = technologyService.getExamRule(interviewRecord.getInterviewerId());
+			ExamQuestion examQuestion = technologyService.getTestList(examRule, testType);
+			session.setAttribute("userExamQuestion", examQuestion);
 
-		// 插入考试记录
-		ExamRecord examRecord = new ExamRecord();
-		examRecord.setTechnologyTypeId(testType);
-		examRecord.setUserId(userDetail.getUserId());
-		technologyService.insertExamRecord(examRecord);
-		return examQuestion;
+			// 插入考试记录(考试类别，用户id)
+			ExamRecord examRecord = new ExamRecord();
+			examRecord.setTechnologyTypeId(testType);
+			examRecord.setUserId(userDetail.getUserId());
+			session.setAttribute("userExamRecord", examRecord);
+			return examQuestion;
+		}
+		return null;
 	}
 
 	// 保存试卷
 	@RequestMapping("/insert")
-	public void insertExamQuestion() {
+	public void insertExamQuestion(HttpServletRequest request) {
+		session = request.getSession();
 		// 保存试卷
-		Integer examQuestionId = technologyService.insertExamQuestion(examQuestion);
-		// 更新考试记录信息
+		Integer examQuestionId = technologyService
+				.insertExamQuestion((ExamQuestion) session.getAttribute("userExamQuestion"));
+		// 更新考试记录信息(试卷id，开始时间)
 		if (examQuestionId != null) {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			ExamRecord examRecord = new ExamRecord();
-			examRecord.setExamQuestionId(examQuestionId);
+
+			ExamRecord examRecord = (ExamRecord) session.getAttribute("userExamRecord");
+
 			try {
+				examRecord.setExamQuestionId(examQuestionId);
 				examRecord.setExamStarttime(dateFormat.parse(dateFormat.format(new Date())));
 			} catch (ParseException e) {
 				System.out.println("technoloyController.java（保存试卷）");
 				e.printStackTrace();
 			}
-			technologyService.updateExamRecord(examRecord, userDetail.getUserId());
+			session.setAttribute("userExamRecord", examRecord);
 		}
 	}
+
+	// 判卷（JSON.parseObject(JSON_OBJ_STR, new TypeReference<Student>() {});）
+	@ResponseBody
+	@RequestMapping("/getGrade")
+	public ExamRecord giveGrade(HttpServletRequest request, String userSubmitDetail) {
+		session = request.getSession();
+		List<List<ExamSubmitDetail>> examList = technologyService.getExamRecord(userSubmitDetail);
+
+		// 保存考试记录（结束时间，考试实际时间，考生答案）
+		ExamRecord examRecord = technologyService.getGrade(examList,
+				(ExamQuestion) session.getAttribute("userExamQuestion"));
+		try {
+			examRecord.setExamEndtime(dateFormat.parse(dateFormat.format(new Date())));
+			examRecord.setUserAnswer(userSubmitDetail);
+			Integer diff = DateUtil.diff(examRecord.getExamStarttime(), examRecord.getExamEndtime(), "minute");
+			examRecord.setExamRealityTime(diff);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// 保存考试记录
+		technologyService.insertExamRecord(examRecord);
+		return examRecord;
+	}
+
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dhcc.ict.manage.technology.test.dao.TechnologyChooseMuchMapper" >
-  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuch" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseMuch" >
     <constructor >
       <idArg column="choose_much_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="choose_much_detail" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -78,7 +78,7 @@
     choose_much_answer4, choose_much_answer5, choose_much_true_answer, choose_much_complexity, 
     technology_type_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuchExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseMuchExample" >
     select
     <if test="distinct" >
       distinct
@@ -102,13 +102,13 @@
     delete from technology_choose_much
     where choose_much_id = #{chooseMuchId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuchExample" >
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseMuchExample" >
     delete from technology_choose_much
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuch" >
+  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseMuch" >
     insert into technology_choose_much (choose_much_id, choose_much_detail, choose_much_answer1, 
       choose_much_answer2, choose_much_answer3, choose_much_answer4, 
       choose_much_answer5, choose_much_true_answer, 
@@ -118,7 +118,7 @@
       #{chooseMuchAnswer5,jdbcType=VARCHAR}, #{chooseMuchTrueAnswer,jdbcType=VARCHAR}, 
       #{chooseMuchComplexity,jdbcType=VARCHAR}, #{technologyTypeId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuch" >
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseMuch" >
     insert into technology_choose_much
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="chooseMuchId != null" >
@@ -185,7 +185,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuchExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseMuchExample" resultType="java.lang.Integer" >
     select count(*) from technology_choose_much
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -245,7 +245,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuch" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseMuch" >
     update technology_choose_much
     <set >
       <if test="chooseMuchDetail != null" >
@@ -278,7 +278,7 @@
     </set>
     where choose_much_id = #{chooseMuchId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.permission.pojo.TechnologyChooseMuch" >
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseMuch" >
     update technology_choose_much
     set choose_much_detail = #{chooseMuchDetail,jdbcType=VARCHAR},
       choose_much_answer1 = #{chooseMuchAnswer1,jdbcType=VARCHAR},
@@ -291,12 +291,4 @@
       technology_type_id = #{technologyTypeId,jdbcType=INTEGER}
     where choose_much_id = #{chooseMuchId,jdbcType=INTEGER}
   </update>
-  
-  <!--g管理员添加  -->
-  <select id="selectByLimitMuch" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from technology_choose_much where technology_type_id=#{testType,jdbcType=VARCHAR} limit #{startValue},#{countValue}
-  </select>
 </mapper>
-
