@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="/js/jquery-3.3.1.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$.ajax({
+			url : "one",//请求地址
+			dataType : "json",//数据格式 
+			type : "post",//请求方式
+			//async : true,//是否异步请求
+			success : function(onedata) { //如何发送成功
+				showone(onedata);
+			console.log(onedata);
+			}
+
+		});
+	});
+
+	
+	function showone(onedata) {
+		var strone = "";//用于拼接的字符串
+		var onelength = onedata.length;
+		for (var i = 0; i < onelength; i++) {
+			
+			strone = "<tr><td>" + onedata[i].technologyChooseOne.chooseOneDetail+ "</td><td>"
+					+ onedata[i].technologyChooseOne.chooseOneAnswer1 + "</td><td>"
+					+ onedata[i].technologyChooseOne.chooseOneAnswer2 + "</td><td>"
+					+ onedata[i].technologyChooseOne.chooseOneAnswer3 + "</td><td>"
+					+ onedata[i].technologyChooseOne.chooseOneAnswer4 + "</td><td>"
+					+ onedata[i].technologyChooseOne.chooseOneTrueAnswer + "</td><td>"
+					+ onedata[i].technologyChooseOne.chooseOneComplexity + "</td><td>"
+					+ onedata[i].technologyTypeName + "</td></tr>";
+
+			//追加到table中
+			$("#tabone").append(strone);
+
+		}
+
+	}
+</script>
+
+
+</head>
+<body>
+
+
+	 <table id="tabone" >
+		<tr>
+			<th>题目内容</th>
+			<th>答案A</th>
+			<th>答案B</th>
+			<th>答案C</th>
+			<th>答案D</th>
+			<th>正确答案</th>
+			<th>难易程度</th>
+			<th>类别</th>
+		</tr>
+
+		<tr>
+			<td></td>
+		</tr>
+
+	</table> 
+</body>
+</html>

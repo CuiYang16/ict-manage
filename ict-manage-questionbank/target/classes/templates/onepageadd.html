@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>页面上传单选</title>
+ <script src="/js/jquery-3.3.1.js"></script>
+</head>
+<body>
+
+    <p> 
+    <form method="POST"  id="form1" action="oneadd"> 
+     <input type="text" class="onetype1" name="chooseOneDetail" placeholder="请输入单选题目"> 
+     <input type="text" class="onetype1" name="chooseOneAnswer1" placeholder="请输入单选A答案"> 
+     <input type="text" class="onetype1" name="chooseOneAnswer2" placeholder="请输入单选B答案"> 
+     <input type="text" class="onetype1" name="chooseOneAnswer3" placeholder="请输入单选C答案"> 
+     <input type="text" class="onetype1" name="chooseOneAnswer4" placeholder="请输入单选D答案"> 
+     <input type="text" class="onetype1" name="chooseOneTrueAnswer" placeholder="请输入单选正确答案"> 
+     <input type="text" class="onetype1" name="chooseOneComplexity" placeholder="请输入单选题难易程度"> 
+     <input type="text" class="onetype1" name="technologyTypeId" placeholder="请输入单选题类别">  
+     </p>
+       
+           
+            
+       
+            <input type="submit" value="判断题表单提交" onclick="return checkData()">
+            
+    </form> 
+
+</body>
+</html>
