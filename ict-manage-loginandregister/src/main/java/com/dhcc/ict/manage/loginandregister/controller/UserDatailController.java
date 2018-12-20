@@ -61,7 +61,7 @@ public class UserDatailController {
 		userDetailService.addUser(userDetail);
 		return "index";
 	}
-	
+	  
 	/**
 	 *  验证用户名
 	 * @return
