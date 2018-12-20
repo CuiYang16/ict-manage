@@ -51,7 +51,7 @@ public class UserDatailController {
 		}
 		return mv;
 	}	
-	
+	   
 	/**
 	 * 注册接口
 	 * @return
