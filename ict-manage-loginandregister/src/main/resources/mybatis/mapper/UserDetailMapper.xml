@@ -763,7 +763,7 @@
   u.user_name=#{userName} and u.user_pwd=#{userPwd}
   </select>
   <insert id="addUser">
-	INSERT INTO user_detail(user_name,user_pwd,account_number,telephone) VALUES(#{userName},#{userName},#{accountNumber},#{telephone})
+	INSERT INTO user_detail(user_name,user_pwd,account_number,telephone) VALUES(#{userName},#{userPwd},#{accountNumber},#{telephone})
 	</insert>
     
     <select id="findUserName" resultType="Integer">

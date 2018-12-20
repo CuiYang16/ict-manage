@@ -12,68 +12,112 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dhcc.ict.manage.loginandregister.pojo.CreateMD5;
 import com.dhcc.ict.manage.loginandregister.pojo.UserDetail;
 import com.dhcc.ict.manage.loginandregister.service.UserDetailService;
-
-
 
 @Controller
 public class UserDatailController {
 	@Autowired
 	private UserDetailService userDetailService;
 
-	@RequestMapping("/")
-	public String index() {
-		return "index";
+	private static final int COOKIE_AGE = 60 * 60 * 24 * 7; // COOKIE保存时间
 
+	@RequestMapping("/")
+	public ModelAndView index(HttpServletRequest request) {
+		ModelAndView mav=null;
+		Cookie[] cookies = request.getCookies();
+		String username=null;
+		String userPwd=null;
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if(username!=null&&userPwd!=null) {
+					break;
+				}
+				if ("username".equals(cookie.getName())) {
+					username=cookie.getValue();
+				}
+				if("userPwd".equals(cookie.getName())) {
+					userPwd=cookie.getValue();
+				}
+			}
+		}
+		UserDetail localUser = userDetailService.search(username, userPwd);
+		if(localUser!=null) {
+			mav=new ModelAndView("home");
+		}
+		else {
+			mav=new ModelAndView("index");
+		}
+		return mav;
 	}
-	
+
 	/*
 	 * 登录接口
 	 * 
-	 * */
-	
+	 */
+
 	@RequestMapping("login")
-	public ModelAndView login(HttpServletRequest request,HttpServletResponse response, String userName, String userPwd) {
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, String userName, String userPwd,
+			String remember) {
 		ModelAndView mv = null;
+		String md5 = CreateMD5.getMd5(userPwd);
 		HttpSession session = request.getSession();
-		UserDetail localUser = userDetailService.search(userName, userPwd);
-	
+		UserDetail localUser = userDetailService.search(userName, md5);
 		if (localUser != null) {
 			session.setAttribute("localUser", localUser);
-			Cookie cookie=new Cookie("username",userName );
-			Cookie cookie2=new Cookie("userPwd", userPwd);
-			response.addCookie(cookie);
-			response.addCookie(cookie2);
+			Cookie[] cookies = request.getCookies();
+
+			boolean cookieIsExists = false; // cookie存在标识
+
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if ("username".equals(cookie.getName())) {
+						cookieIsExists = true;
+						break;
+					}
+				}
+			}
+			if (!cookieIsExists && "true".equals(remember)) {
+				Cookie cookieUserName = new Cookie("username", userName);
+				cookieUserName.setMaxAge(COOKIE_AGE);
+				Cookie cookieUserPwd = new Cookie("userPwd", md5);
+				cookieUserPwd.setMaxAge(COOKIE_AGE);
+				response.addCookie(cookieUserName);
+				response.addCookie(cookieUserPwd);
+			}
 			mv = new ModelAndView("home");
 		} else {
 			mv = new ModelAndView("index");
 		}
 		return mv;
-	}	
-	   
+	}
+
 	/**
 	 * 注册接口
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/register")
-	public String register(UserDetail userDetail,Model model){
+	public String register(UserDetail userDetail) {
+		
+		userDetail.setUserPwd(CreateMD5.getMd5(userDetail.getUserPwd()));
 		userDetailService.addUser(userDetail);
 		return "index";
 	}
-	  
+
 	/**
-	 *  验证用户名
+	 * 验证用户名
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/checkuser")
 	@ResponseBody
-	public String checkUserName(String userName){
-		boolean result=userDetailService.findUserName(userName);
-		if(result) { //已存在
+	public String checkUserName(String userName) {
+		boolean result = userDetailService.findUserName(userName);
+		if (result) { // 已存在
 			return "1";
-		}
-		else { //不存在
+		} else { // 不存在
 			return "0";
 		}
 	}
