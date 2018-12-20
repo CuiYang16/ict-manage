@@ -38,7 +38,7 @@ public class UserDatailController {
 		ModelAndView mv = null;
 		HttpSession session = request.getSession();
 		UserDetail localUser = userDetailService.search(userName, userPwd);
-		/*System.out.println(localUser.toString());*/
+	
 		if (localUser != null) {
 			session.setAttribute("localUser", localUser);
 			Cookie cookie=new Cookie("username",userName );
