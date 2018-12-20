@@ -762,7 +762,12 @@
   select * from user_detail as u where
   u.user_name=#{userName} and u.user_pwd=#{userPwd}
   </select>
-  <insert id="adduser">
+  <insert id="addUser">
 	INSERT INTO user_detail(user_name,user_pwd,account_number,telephone) VALUES(#{userName},#{userName},#{accountNumber},#{telephone})
 	</insert>
+    
+    <select id="findUserName" resultType="Integer">
+    	select count(*) from user_detail where user_name=#{userName}
+    </select>
+    
 </mapper>

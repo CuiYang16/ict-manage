@@ -16,8 +16,8 @@ spring:
   ##数据库连接信息
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/ictdb?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull
-    username: admin
-    password: 123456
+    username: root
+    password: 5211314.qw
     driver-class-name: com.mysql.jdbc.Driver
     ###################以下为druid增加的配置###########################
     type: com.alibaba.druid.pool.DruidDataSource

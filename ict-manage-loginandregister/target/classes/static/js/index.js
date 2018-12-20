@@ -37,40 +37,81 @@ function wrongful(b) {
 	$(b).siblings('.ok-sign').hide();
 }
 
-// 注册
-$('.register-form').submit(function(e) {
-
+// 注册--阻止默认行为
+function prevent() {
 	var flag = true;
-	console.log($('.register-form .non-null').eq(0).val())
-
-	if ($('.register-form .non-null').eq(0).val() == '') {
-		alert($('.register-form .non-null').eq(0).val() == '');
+	if ($('.register-form .non-null').val() == '') {
 		flag = false;
-		wrongful('.non-null')
-	} else {
-		lawful('.non-null')
+		wrongful('.register-form .non-null')
 	}
-	if ($('.phone-num').match(/^1(3|4|5|7|8)\d{9}$/)) {
-		lawful('.phone-num')
+	if ($('.register-form .phone-num').val().match(/^1(3|4|5|7|8)\d{9}$/)) {
 	} else {
 		flag = false;
-		wrongful('.phone-num')
+		wrongful('.register-form .phone-num');
 	}
-	if (!flag) {
-		// e.preventDefault();
-		return false;
-	}
-});
+	return flag;
+};
 
 // 登录
-var login = document.getElementsByClassName('login-btn');
-login[0].onclick = function() {
-	location.assign('file:///G:/%E4%B8%9C%E5%8D%8E/ICT/html/home.html')
-}
-$(document).ready(function() {
-	$("#login-btn").click(function() {
-		var userName = $("#userName").val();
-		var userPwd = $("#userPwd").val();
-		location.href = "login?userName=" + userName + "&userPwd=" + userPwd;
-	})
+
+$(function() {
+	$('[data-toggle="tooltip"]').tooltip()
 })
+$('.btn-default').click(function() {
+	$('.login-register').toggle();
+	$('.right').toggle();
+})
+
+//$("#login-btn").click(function() {
+//	var userName = $("#userName").val();
+//	var password = $("#password").val();
+//	location.href = "login.do?userName=" + userName + "&password=" + password;
+//})
+//注册判断  ajax传数据
+function register() {
+	var userName= $("#userName").val();
+	var obj={
+		userName:userName,
+	};
+	$.ajax({
+		url:"register",
+		type:"post",
+		dataType:"json",
+		data:JSON.stringify(obj),
+		success:function(result){
+			if(result.data!='1'){
+				alert("用户名已存在");
+			}
+		}	
+	})		
+}
+
+function check() {
+	var userName= $("#userName").val();
+	$.ajax({
+		url:"checkuser",
+		type:"post",
+		dataType:"text",
+		data:{"userName":userName},
+		success:function(result){
+			if(result=='1'){
+				alert("用户名已存在");
+			}
+		}	
+	})		
+}
+
+var firstClick=false; //进入页面后已经点击过了用户名文本框
+
+$("#userName").click(function(){
+	firstClick=true;
+});
+
+$("#userName").blur(function() {
+	if(firstClick){
+		check();
+	}
+	
+});
+
+
