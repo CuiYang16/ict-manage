@@ -46,7 +46,12 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: true
-    
+zuul:
+  routes:
+    technologytest:
+      path: /ictmanagetechnologytest/**
+      service-id: ict-manage-technology-test 
+   
 mybatis:
   mapper-locations: mybatis/mapper/*Mapper.xml
   type-aliases-package: com.dhcc.ict.manage.technology.test.pojo

@@ -10,39 +10,41 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dhcc.ict.manage.loginandregister.pojo.UserDetail;
 import com.dhcc.ict.manage.loginandregister.service.UserDetailService;
 
-
-
 @Controller
 public class UserDatailController {
 	@Autowired
 	private UserDetailService userDetailService;
+	@Autowired
+	private RestTemplate restTemplate;
 
 	@RequestMapping("/")
 	public String index() {
 		return "index";
 
 	}
-	
+
 	/*
 	 * 登录接口
 	 * 
-	 * */
-	
+	 */
+
 	@RequestMapping("login")
-	public ModelAndView login(HttpServletRequest request,HttpServletResponse response, String userName, String userPwd) {
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, String userName,
+			String userPwd) {
 		ModelAndView mv = null;
 		HttpSession session = request.getSession();
 		UserDetail localUser = userDetailService.search(userName, userPwd);
-	
+
 		if (localUser != null) {
 			session.setAttribute("localUser", localUser);
-			Cookie cookie=new Cookie("username",userName );
-			Cookie cookie2=new Cookie("userPwd", userPwd);
+			Cookie cookie = new Cookie("username", userName);
+			Cookie cookie2 = new Cookie("userPwd", userPwd);
 			response.addCookie(cookie);
 			response.addCookie(cookie2);
 			mv = new ModelAndView("home");
@@ -50,31 +52,39 @@ public class UserDatailController {
 			mv = new ModelAndView("index");
 		}
 		return mv;
-	}	
-	   
+	}
+
 	/**
 	 * 注册接口
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/register")
-	public String register(UserDetail userDetail,Model model){
+	public String register(UserDetail userDetail, Model model) {
 		userDetailService.addUser(userDetail);
 		return "index";
 	}
-	  
+
 	/**
-	 *  验证用户名
+	 * 验证用户名
+	 * 
 	 * @return
 	 */
 	@RequestMapping("/checkuser")
 	@ResponseBody
-	public String checkUserName(String userName){
-		boolean result=userDetailService.findUserName(userName);
-		if(result) { //已存在
+	public String checkUserName(String userName) {
+		boolean result = userDetailService.findUserName(userName);
+		if (result) { // 已存在
 			return "1";
-		}
-		else { //不存在
+		} else { // 不存在
 			return "0";
 		}
 	}
+
+	@RequestMapping("/test")
+	public String returnTest() {
+		return "redirect:ictmanagetechnologytest/tectest/tttt";
+
+	}
+
 }

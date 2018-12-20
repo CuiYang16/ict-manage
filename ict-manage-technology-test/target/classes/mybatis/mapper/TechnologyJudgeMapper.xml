@@ -213,4 +213,12 @@
       technology_type_id = #{technologyTypeId,jdbcType=INTEGER}
     where technology_judge_id = #{technologyJudgeId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 管理员添加 -->
+  <select id="selectByLimitJudge" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List"/>
+    from technology_judge
+     where technology_type_id = #{testType,jdbcType=INTEGER} limit #{startValue,jdbcType=INTEGER},#{countValue,jdbcType=INTEGER}
+  </select>
 </mapper>
