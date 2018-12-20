@@ -63,7 +63,7 @@ public class UserDatailController {
 	}
 	
 	/**
-	 * 验证用户名
+	 *  验证用户名
 	 * @return
 	 */
 	@RequestMapping("/checkuser")
