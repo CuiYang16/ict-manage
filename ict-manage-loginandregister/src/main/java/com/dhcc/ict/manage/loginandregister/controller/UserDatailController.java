@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dhcc.ict.manage.loginandregister.pojo.CreateMD5;
+import com.dhcc.ict.manage.loginandregister.pojo.ExamRecord;
 import com.dhcc.ict.manage.loginandregister.pojo.UserDetail;
 import com.dhcc.ict.manage.loginandregister.service.UserDetailService;
 
@@ -32,6 +33,9 @@ public class UserDatailController {
 		String username = null;
 		String userPwd = null;
 		if (cookies != null) {
+			/*
+			 * 遍历cookie 判断cookie内是否有用户信息 如果有 用户名 密码就等于cookie内的数据是
+			 */
 			for (Cookie cookie : cookies) {
 				if (username != null && userPwd != null) {
 					break;
@@ -46,9 +50,10 @@ public class UserDatailController {
 		}
 		UserDetail localUser = userDetailService.search(username, userPwd);
 		if (localUser != null) {
-			mav = new ModelAndView("home");
+
+			mav = new ModelAndView("home");// 如果有数据直接进入首页
 		} else {
-			mav = new ModelAndView("index");
+			mav = new ModelAndView("index");// 如果没有进入登录页
 		}
 		return mav;
 	}
@@ -62,15 +67,13 @@ public class UserDatailController {
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response, String userName, String userPwd,
 			String remember) {
 		ModelAndView mv = null;
-		String md5 = CreateMD5.getMd5(userPwd);
+		String md5 = CreateMD5.getMd5(userPwd);// 加密
 		HttpSession session = request.getSession();
 		UserDetail localUser = userDetailService.search(userName, md5);
 		if (localUser != null) {
-			session.setAttribute("localUser", localUser);
+			session.setAttribute("localUser", localUser);// 将信息存入session中
 			Cookie[] cookies = request.getCookies();
-
 			boolean cookieIsExists = false; // cookie存在标识
-
 			if (cookies != null) {
 				for (Cookie cookie : cookies) {
 					if ("username".equals(cookie.getName())) {
@@ -79,6 +82,7 @@ public class UserDatailController {
 					}
 				}
 			}
+			//判断我记住是否勾选，如果勾选了 就将用户的信息存入cookie
 			if (!cookieIsExists && "true".equals(remember)) {
 				Cookie cookieUserName = new Cookie("username", userName);
 				cookieUserName.setMaxAge(COOKIE_AGE);
@@ -127,6 +131,14 @@ public class UserDatailController {
 	public String returnTest() {
 		return "redirect:ictmanagetechnologytest/tectest/tttt";
 
+	}
+	
+	@RequestMapping("/score")
+	public String analysisScore(ExamRecord examRecord) {
+	
+		return null;
+		
+		
 	}
 
 }
