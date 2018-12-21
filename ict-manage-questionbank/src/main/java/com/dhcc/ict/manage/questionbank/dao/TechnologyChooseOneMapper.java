@@ -38,8 +38,10 @@ public interface TechnologyChooseOneMapper {
 	List<QuestionBankOne> selectOneTechnology();
     //
 	//Object deleteone(Integer chooseOneId);
-
+      //删除多个选择题
 	void qusetionOneDeleteAll(Integer[] ids);
+    //添加单选题到题库
+	void insertonedetail(String[] onedetail);
 	
 	
 	

@@ -98,6 +98,7 @@
     from technology_choose_much
     where choose_much_id = #{chooseMuchId,jdbcType=INTEGER}
   </select>
+<!--   删除单个多选题 根据id -->
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from technology_choose_much
     where choose_much_id = #{chooseMuchId,jdbcType=INTEGER}
@@ -318,5 +319,15 @@
 			javaType="com.dhcc.ict.manage.questionbank.pojo.TechnologyChooseMuch" resultMap="BaseResultMap">
 			</association>
 	</resultMap>
+	
+	<!-- 批量或全选删除多选表数据 -->
+	<delete id="qusetionMuchDeleteAll">
+		delete from technology_choose_much  where choose_much_id in
+		<foreach collection="array" item="ids" open="(" separator=","
+			close=")">
+			<!-- collection表示类型，数组是array,集合是List,item 是一个变量名,open表示左括号,separator是逗号,close是右括号 -->
+			#{ids}
+		</foreach>
+	</delete>
 	
 </mapper>
