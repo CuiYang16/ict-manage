@@ -125,8 +125,13 @@ public class UserDatailController {
 
 	@RequestMapping("/test")
 	public String returnTest() {
-		return "redirect:ictmanagetechnologytest/tectest/tttt";
+		/* return "redirect:ictmanagetechnologytest/tectest/tttt"; */
+		return "exam";
 
 	}
 
+	@RequestMapping("/gotest")
+	public String goTest(int testType) {
+		return "redirect:ictmanagetechnologytest/tectest/gettestpaper?testType=" + testType;
+	}
 }

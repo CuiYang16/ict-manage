@@ -1,7 +1,7 @@
 
 
 body{
-	background: #f8f8f8;
+	/* background: #f8f8f8; */
 	position: relative;
 }
 /* 导航栏 */
@@ -154,14 +154,17 @@ sub{
 }
 
 /* 项目展示 */
+.project-show-bg{
+	padding: 50px 10px;
+}
 .project-show{
 	margin: 40px auto;
 	background: #fff;
 	padding: 20px 0;
-	box-shadow: 0 0 8px rgba(0, 0, 0, .12);
+	
 }
 .project-show img{
-	width: 200px;
+	width: 300px;
 	height: 200px;
 }
 
@@ -176,28 +179,149 @@ sub{
 }
 .media-left>a:hover{
 	border-color:  #07284b;
+	transition: all 0.8s ease-in-out;
+	transform: translate3d(3px, 0px, 3px)
 }
 
+/* 项目---考试系统 */
+.exam-module-bg,.client{
+	background-color: #e1e1e1;
+}
+.exam-module,.client-module,.hrm-module{
+	padding: 50px 0;
+}
+.exam-row{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.exam-row{
+	text-align: center;
+    margin-bottom: 30px;
+}
+.exam-row>.h1{
+	font-size: 36px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.exam-row>p{
+	margin: 30px auto 26px;
+    border-width: 2px;
+    width: 80px;
+    border-top: 1px solid #0ba1e4;
+}
+.exam-row>h2{
+	font-size: 30px;
+}
+.exam-icon{
+    color: #0ba1e4;
+    font-size: 80px;
+    line-height: 1.5em;
+}
+.exam-icon1{
+	color: #fff;
+}
+.exam-show{
+    
+    position: relative;
+    min-height: 1px;
+    padding: 15px;
+}
+.exam-show>li{
+	padding-left: 15px;
+    padding-right: 15px;
+}
+.exam-show>li>div{
+	text-align: center;
+    background-color: #fafafa;
+    /* border: 1px solid #c1c1c1; */
+    box-shadow: 0 0 5px 2px rgba(255, 255, 255, .2);
+    padding: 15px;
+}
+.exam-show h3{
+	font-size: 24px;
+}
+.exam-show p{
+    margin: 0 0 10px;
+    line-height: 1.5rem;
+}
+.exam-show>li>div:hover{
+	cursor: pointer;
+	color: #fff;
+	background:  #0ba1e4;
+	transition: all 1s;
+	transform: translate3d(2px, 2px, 2px);
+}
+
+/* 人力资源管理模块 */
+.hrm-show{
+	text-align: center;
+}
+.hrm-show h3{
+	font-size: 38px;
+	color:  #0ba1e4;
+}
+.hrm-show span{
+    color:rgb(232, 76, 61);
+    font-size: 40px;
+    line-height: 1.5em;
+}
+
+/* 我们的合作伙伴 */
+
+.client-logo img{
+	width: 200px;
+	height: 160px;
+}
 /* 底部 */
 footer{
-		height: 200px;
-		background:  #07284b;
-		color: #fff;
+	
+	background:  #0d0e11;
+	color: rgba(255, 255,255, .7);
+	padding: 20px 10px;
+}
+footer>p{
+	text-align: center;
+}
+.footer-con{
+	padding: 15px;
+}
+.footer-con>li{
+	padding: 10px 7%;
+	width: 33%;
+}
+.footer-con>li>h3{
+	padding-bottom: 20px;
+}
+.footer-con>li>p{
+	font-size: 12px;
+	font-weight: 300;
+	line-height: 2.2rem;
+}
+.footer-con span{
+	margin-right: 10px;
+}
+@media(min-width:992px){
+	.container{
+		width: 1000px;
 	}
-
+}
 /* web端 */
 @media(min-width: 768px){
+	
 	.navbar-default .navbar-nav>.details>a{
 		padding-top: 6px;
 		padding-bottom: 10px;
 	}
-	
+	.personal-info-mobile{
+		display: none;
+	}
 
 }
 
 /* phone端 */
 @media(max-width:768px){
-
+	
+	
 	/* 登录部分 */
 
 	.login{
@@ -231,5 +355,33 @@ footer{
 	}
 	.register-form{
 		margin-top: 5%;
+	}
+	.personal-info-web{
+		display:none;
+	}
+
+	/* 考试系统模块 */
+	.exam-show>li{
+		margin-bottom: 20px;
+	}
+	/* 项目展示 */
+	.project-show-bg{
+		padding: 50px 20px;
+	}
+	/* 客户模块 */
+	.client-logo{
+		padding:4%;
+	}
+	.client-logo img{
+		width: 150px;
+		height: 120px;
+	}
+	.client-logo>li{
+		padding: 0;
+	}
+	/* 底部 */
+	.footer-con>li{
+		padding: 10px 2%;
+		
 	}
 }

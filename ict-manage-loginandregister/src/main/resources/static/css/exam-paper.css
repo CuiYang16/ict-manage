@@ -6,22 +6,76 @@
 	outline: none;
 	text-decoration: none;
 }
-body{
-	background: #f8f8f8;
+
+/* iconfont */
+.icon {
+   width: 1em; height: 1em;
+   vertical-align: -0.15em;
+   fill: currentColor;
+   overflow: hidden;
 }
+
 a:hover{
 	text-decoration: none;
 }
-.exam-question{
-	margin: 20px auto;
+
+
+/* 头部 */
+
+header{
+	background:  #337ab7;
+	padding: 10px 20px;
+	height: 91px;
+}
+.head-title{
+	float: left;
+	color: #fff;
+}
+.exam-time{
+	float: right;
 	background: #fff;
-	box-shadow: 0 0 8px rgba(0, 0, 0, .12);
+	border-radius: 24px;
+	padding: 5px 15px;
+	margin-top: 20px;
+	font-size: 20px;
+
 }
-.exam-question>h2{
-	text-align: center;
+.time-icon{
+	font-size: 28px;
+	margin-right: 5px;
 }
-.exam-question>from{
+/* 考题部分 */
+.exam-paper-con{
+	height: 100%;
+}
+
+/* 左边部分 */
+.exam-paper-left{
+	float: left;
+	width: 30%;
+	height: 100%;
+	box-shadow: 3px 0px 5px rgba(0, 0, 0, .2);
+	padding: 20px;
+}
+.exam-paper-left h2{
+	color:  #3287ff;
+}
+.examinne-info>p{
+	font-size: 18px;
+}
+
+
+/* 右边部分 */
+.exam-question{
+	float: right;
+	width: 68%;
+	padding-left: 10px;
+	background: #fff;
+}
+
+.exam-question>form{
 	padding: 15px;
+	
 }
 .exam-question fieldset{
 	margin-bottom: 15px;
@@ -38,9 +92,12 @@ a:hover{
 	cursor: pointer;
 }
 .exam-question fieldset>input{
-	margin:0px 5px 0 10px;
+	margin:0px 10px;
 	width: 15px;
 	height: 15px;
 	vertical-align: middle;
 }
+
+
+
 
