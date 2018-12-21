@@ -12,7 +12,7 @@ public interface TechnologyJudgeMapper {
     int countByExample(TechnologyJudgeExample example);
 
     int deleteByExample(TechnologyJudgeExample example);
-
+    //删除单个判断题
     int deleteByPrimaryKey(Integer technologyJudgeId);
 
     int insert(TechnologyJudge record);
@@ -35,4 +35,6 @@ public interface TechnologyJudgeMapper {
 	void insertChooseJudge(List list);
     //查询判断和类别
 	List<QuestionBankJudge> selectJudgeTechnology();
+    //批量删除判断题
+	void qusetionJudgeDeleteAll(Integer[] ids);
 }

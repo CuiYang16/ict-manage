@@ -12,7 +12,7 @@ public interface TechnologyChooseMuchMapper {
     int countByExample(TechnologyChooseMuchExample example);
 
     int deleteByExample(TechnologyChooseMuchExample example);
-
+    //根据id删除单条数据
     int deleteByPrimaryKey(Integer chooseMuchId);
 
     int insert(TechnologyChooseMuch record);
@@ -34,4 +34,6 @@ public interface TechnologyChooseMuchMapper {
 	void insertChooseMuch(List list);
     //查询多选和类别
 	List<QuestionBankMuch> selectMuchTechnology();
+    //批量删除多选
+	void qusetionMuchDeleteAll(Integer[] ids);
 }

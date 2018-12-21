@@ -3,8 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="/js/jquery-3.3.1.js"></script>
+
+<script type="text/javascript">
+var oalljudge = document.getElementById("alljudge");
+var onamejudge = document.getElementsByName("judgelen");
+	$(document).ready(function() {
+		$.ajax({
+			url : "judge",//请求地址
+			dataType : "json",//数据格式 
+			type : "post",//请求方式
+			//async : true,//是否异步请求
+			success : function(judgedata) { //如何发送成功
+				showjudge(judgedata);
+			console.log(judgedata);
+			}
+
+		});  
+		
+		var oalljudge = document.getElementById("alljudge");
+		var onamejudge = document.getElementsByName("judgelen");
+		//点击全选框
+		$("#alljudge").click(function(){
+			for(var i = 0 ; i<onamejudge.length; i++){
+				onamejudge[i].checked = oalljudge.checked;
+			}
+		});
+		
+		//点击复选框
+		for( var i = 0; i<onamejudge.length; i++){
+			onamejudge[i].onclick = function(){
+				//判断是否全被选中 遍历集合
+				for(var j = 0; j<onamejudge.length; j++){
+					if(onamejudge[j].checked == false){
+						oalljudge.checked = false; 
+						break;
+					}else{
+						oalljudge.checked = true;
+					}
+				}
+			}
+		}
+		
+		
+});
+	
+	 function	showjudge(judgedata){
+		   var strjudge = "";
+		   var judgelength = judgedata.length;
+		   for(var i=0 ; i<judgelength; i++){
+			   strjudge = "<tr><td>"+"<input name = 'judgelen' type='checkbox' value = '"+judgedata[i].technologyJudge.technologyJudgeId+"'></input></td><td>"
+			    + [i+1]+"</td><td>"
+			    + judgedata[i].technologyJudge.technologyJudgeDetail+ "</td><td>"
+			    + judgedata[i].technologyJudge.technologyJudgeTrueAnswer + "</td><td>"
+				+ judgedata[i].technologyJudge.technologyJudgeComplexity + "</td><td>"
+				+ judgedata[i].technologyTypeName + "</td><td >"
+				+"<button onclick='judgedelete("+judgedata[i].technologyJudge.technologyJudgeId+") '>删除</button></td><tr>";
+			 //追加到table中
+				$("#tabjudge").append(strjudge);
+				$("#ts").html(judgelength);
+		   }
+	    }
+	   //单个删除
+	    function judgedelete(judgeid){
+		  
+		   var r = confirm("是否删除？");
+		   if (r == true ){
+			   var technologyJudgeId = judgeid;
+			  // alert(choosejudgeId);
+			   $.get("/show/judgedelete?technologyJudgeId="+technologyJudgeId,function(data){
+				  if(data == "ok"){
+					  alert("删除成功");
+					  location.reload();
+				  } else{
+					  alert("删除失败");
+				  }
+			   });
+			   return true;
+		   }else{
+			   return false;
+		   }
+	   } 
+	   
+	   //批量删除
+	    function deljudge(){
+		   var rjudge = confirm("是否确认删除？");
+		   if(rjudge == true){
+			   var ids = "";
+			   var n = 0;
+			   for(var i=0 ; i<onamejudge.length; i++){
+				   if(onamejudge[i].checked == true){
+					   var id = onamejudge[i].value;
+					   if(n==0){
+						   ids+="ids="+id;
+					   }else{
+						   ids+="&ids="+id;
+					   }
+					   n++;
+				   }
+			   }
+			   //上面会拼接出一个名为ids的数组ids=1&ids=2&ids=3&ids=4……
+			   $.get("/show/judgedeleteall",ids,function(data){
+				   if(data=="ok"){
+					   alert("删除成功");
+					   location.reload();
+				   }else{
+					   alert("请选中行!");
+				   }
+			   });
+			   return true;
+		   }else{
+			   return false;
+		   }
+	   } 
+	   
+	   
+	
+	
+</script>
 </head>
 <body>
+
+ <div>
+		<span class="l"><a href="javascript:;" onclick="deljudge()"
+			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
+			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
+			id="ts">0</strong> 条
+		</span>
+	</div>
+
+	<table id="tabjudge">
+		<tr>
+			<th><input type="checkbox" id="alljudge" value=""></th>
+			<th>题号</th>
+			<th>题目内容</th>
+			<th>正确答案</th>
+			<th>难易程度</th>
+			<th>类别</th>
+			<th>删除</th>
+
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
 
 </body>
 </html>

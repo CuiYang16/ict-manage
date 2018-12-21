@@ -7,5 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class QuestionBankApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(QuestionBankApplication.class, args);
+		System.out.println("--------题库启动成功------------");
 	}
 }

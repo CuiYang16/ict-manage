@@ -6,6 +6,10 @@
 <script src="/js/jquery-3.3.1.js"></script>
 
 <script type="text/javascript">
+//获取全选的id
+var oall = document.getElementById("all");
+//获取单个复选框的id
+var oid = document.getElementsByName("id");
 	$(document).ready(function() {
 		$.ajax({
 			url : "one",//请求地址
@@ -93,6 +97,7 @@
 	/*封面图-批量删除*/
 
 	function del(){
+	
 		var r=confirm("是否确认删除？");    
 		if(r==true){ 
 			//确认删除

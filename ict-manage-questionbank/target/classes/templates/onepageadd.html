@@ -7,8 +7,8 @@
 </head>
 <body>
 
-    <p> 
-    <form method="POST"  id="form1" action="oneadd"> 
+  
+<!--      <form method="POST"  id="form1" action="show/addone"> 
      <input type="text" class="onetype1" name="chooseOneDetail" placeholder="请输入单选题目"> 
      <input type="text" class="onetype1" name="chooseOneAnswer1" placeholder="请输入单选A答案"> 
      <input type="text" class="onetype1" name="chooseOneAnswer2" placeholder="请输入单选B答案"> 
@@ -17,14 +17,44 @@
      <input type="text" class="onetype1" name="chooseOneTrueAnswer" placeholder="请输入单选正确答案"> 
      <input type="text" class="onetype1" name="chooseOneComplexity" placeholder="请输入单选题难易程度"> 
      <input type="text" class="onetype1" name="technologyTypeId" placeholder="请输入单选题类别">  
-     </p>
-       
-           
-            
-       
             <input type="submit" value="判断题表单提交" onclick="return checkData()">
+    </form>  -->
+    
+    <form action="/show/addone" method="post">
+        <table >
+          
+        
+            <tr height="35px">
+                <th width="150px">单选题目</th>
+                <th width="150px">A</th>
+                <th width="150px">B</th>
+                <th width="150px">C</th>
+                <th width="150px">D</th>
+                <th width="150px">正确答案</th>
+                <th width="150px">难易程度</th>
+                <th width="150px">类别</th> 
+            </tr>
             
-    </form> 
+            
+            <tr height="30px">
+               
+                    <td width="300px"><input type="text" name="chooseOneDetail" id="username" placeholder="请输入单选题目"> </td>
+                    <td width="300px"><input type="text" name="chooseOneAnswer1" id="username" placeholder="请输入单选A答案"> </td>
+                    <td width="300px"><input type="text" name="chooseOneAnswer2" id="username" placeholder="请输入单选B答案"> </td>
+                    <td width="300px"><input type="text" name="chooseOneAnswer3" id="username" placeholder="请输入单选C答案"> </td>
+                    <td width="300px"><input type="text" name="chooseOneAnswer4" id="username" placeholder="请输入单选D答案"> </td>
+                    <td width="300px"><input type="text" name="chooseOneTrueAnswer" id="username" placeholder="请输入单选正确答案"> </td>
+                    <td width="300px"><input type="text" name="chooseOneComplexity" id="username" placeholder="请输入单选题难易程度"> </td>
+                    <td width="300px"><input type="text" name="technologyTypeId" id="username" placeholder="请输入单选题类别"> </td>
+   
+            </tr>
+            <tr>
+                <td colspan="8" align="center">
+                    <input type="submit" id="addone" value="添加单选题"/>
+                </td>
+            </tr>
+        </table>
+    </form>
 
 </body>
 </html>

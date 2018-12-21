@@ -14,6 +14,7 @@ import com.dhcc.ict.manage.questionbank.pojo.QuestionBankJudge;
 import com.dhcc.ict.manage.questionbank.pojo.QuestionBankMuch;
 import com.dhcc.ict.manage.questionbank.pojo.QuestionBankOne;
 import com.dhcc.ict.manage.questionbank.pojo.TechnologyChooseMuch;
+import com.dhcc.ict.manage.questionbank.pojo.TechnologyChooseOne;
 import com.dhcc.ict.manage.questionbank.pojo.TechnologyJudge;
 
 @Service
@@ -64,5 +65,35 @@ public class ShowListService {
 	public List<QuestionBankJudge> qusetionJudgelist() {
 		// TODO Auto-generated method stub
 		return technologyJudgeMapper.selectJudgeTechnology();
+	}
+	//根据id删除多选一条数据
+	public void qusetionMuchdelete(Integer chooseMuchId) {
+		technologyChooseMuchMapper.deleteByPrimaryKey(chooseMuchId);
+		
+	}
+	 //删除多条多选数据
+	public void qusetionMuchDeleteAll(Integer[] ids) {
+		technologyChooseMuchMapper.qusetionMuchDeleteAll(ids);
+		
+	}
+	//根据id删除判断题一条数据
+	public void qusetionJudgedelete(Integer technologyJudgeId) {
+		technologyJudgeMapper.deleteByPrimaryKey(technologyJudgeId);
+		
+	}
+	//根据id删除多条判断题数据
+	public void qusetionJudgeDeleteAll(Integer[] ids) {
+		technologyJudgeMapper.qusetionJudgeDeleteAll(ids);
+		
+	}
+    //添加数据到单选表题库
+	public void addone(String[] onedetail) {
+		technologyChooseOneMapper.insertonedetail(onedetail);
+		
+	}
+    //添加单选题
+	public void addonedetail(TechnologyChooseOne record) {
+		technologyChooseOneMapper.insertSelective(record);
+		
 	}
 }
