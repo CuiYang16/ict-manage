@@ -6,21 +6,157 @@
 <script src="/js/jquery-3.3.1.js"></script>
 
 <script type="text/javascript">
+var oallmuch = document.getElementById("allmuch");
+var onamemuch = document.getElementsByName("muchlen");
 	$(document).ready(function() {
 		$.ajax({
-			url : "one",//请求地址
+			url : "much",//请求地址
 			dataType : "json",//数据格式 
 			type : "post",//请求方式
 			//async : true,//是否异步请求
-			success : function(onedata) { //如何发送成功
-				showone(onedata);
-			console.log(onedata);
+			success : function(muchdata) { //如何发送成功
+				showmuch(muchdata);
+			console.log(muchdata);
 			}
 
+		});  
+		
+		var oallmuch = document.getElementById("allmuch");
+		var onamemuch = document.getElementsByName("muchlen");
+		//点击全选框
+		$("#allmuch").click(function(){
+			for(var i = 0 ; i<onamemuch.length; i++){
+				onamemuch[i].checked = oallmuch.checked;
+			}
 		});
+		
+		//点击复选框
+		for( var i = 0; i<onamemuch.length; i++){
+			onamemuch[i].onclick = function(){
+				//判断是否全被选中 遍历集合
+				for(var j = 0; j<onamemuch.length; j++){
+					if(onamemuch[j].checked == false){
+						oallmuch.checked = false; 
+						break;
+					}else{
+						oallmuch.checked = true;
+					}
+				}
+			}
+		}
+		
+		
+});
+	
+	 function	showmuch(muchdata){
+		   var strmuch = "";
+		   var muchlength = muchdata.length;
+		   for(var i=0 ; i<muchlength; i++){
+			   strmuch = "<tr><td>"+"<input name = 'muchlen' type='checkbox' value = '"+muchdata[i].technologyChooseMuch.chooseMuchId+"'></input></td><td>"
+			    + [i+1]+"</td><td>"
+			    + muchdata[i].technologyChooseMuch.chooseMuchDetail+ "</td><td>"
+			    + muchdata[i].technologyChooseMuch.chooseMuchAnswer1 + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchAnswer2 + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchAnswer3 + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchAnswer4 + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchAnswer5 + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchTrueAnswer + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchComplexity + "</td><td>"
+				+ muchdata[i].technologyTypeName + "</td><td >"
+				+"<button onclick='muchdelete("+muchdata[i].technologyChooseMuch.chooseMuchId+") '>删除</button></td><tr>";
+			 //追加到table中
+				$("#tabmuch").append(strmuch);
+				$("#ts").html(muchlength);
+		   }
+	    }
+	   //单个删除
+	    function muchdelete(muchid){
+		  
+		   var r = confirm("是否删除？");
+		   if (r == true ){
+			   var chooseMuchId = muchid;
+			  // alert(chooseMuchId);
+			   $.get("/show/muchdelete?chooseMuchId="+chooseMuchId,function(data){
+				  if(data == "ok"){
+					  alert("删除成功");
+					  location.reload();
+				  } else{
+					  alert("删除失败");
+				  }
+			   });
+			   return true;
+		   }else{
+			   return false;
+		   }
+	   } 
+	   
+	   //批量删除
+	    function delmuch(){
+		   var rmuch = confirm("是否确认删除？");
+		   if(rmuch == true){
+			   var ids = "";
+			   var n = 0;
+			   for(var i=0 ; i<onamemuch.length; i++){
+				   if(onamemuch[i].checked == true){
+					   var id = onamemuch[i].value;
+					   if(n==0){
+						   ids+="ids="+id;
+					   }else{
+						   ids+="&ids="+id;
+					   }
+					   n++;
+				   }
+			   }
+			   //上面会拼接出一个名为ids的数组ids=1&ids=2&ids=3&ids=4……
+			   $.get("/show/muchdeleteall",ids,function(data){
+				   if(data=="ok"){
+					   alert("删除成功");
+					   location.reload();
+				   }else{
+					   alert("请选中行!");
+				   }
+			   });
+			   return true;
+		   }else{
+			   return false;
+		   }
+	   } 
+	   
+	   
+	
+	
 </script>
 </head>
 <body>
+
+ <div>
+		<span class="l"><a href="javascript:;" onclick="delmuch()"
+			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
+			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
+			id="ts">0</strong> 条
+		</span>
+	</div>
+
+	<table id="tabmuch">
+		<tr>
+			<th><input type="checkbox" id="allmuch" value=""></th>
+			<th>题号</th>
+			<th>题目内容</th>
+			<th>答案A</th>
+			<th>答案B</th>
+			<th>答案C</th>
+			<th>答案D</th>
+			<th>答案E</th>
+			<th>正确答案</th>
+			<th>难易程度</th>
+			<th>类别</th>
+			<th>删除</th>
+
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
 
 </body>
 </html>

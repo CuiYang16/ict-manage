@@ -438,6 +438,7 @@
 	</select>
 	
 	<!-- 批量或全选删除单选表数据 -->
+	<!-- collection表示类型，数组是array,集合是List,item 是一个变量名,open表示左括号,separator是逗号,close是右括号 -->
 	<delete id="qusetionOneDeleteAll">
 		delete from technology_choose_one  where choose_one_id in
 		<foreach collection="array" item="ids" open="(" separator=","

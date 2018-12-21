@@ -87,10 +87,15 @@
 }
 .btn-default{
 	cursor: pointer;
+	float: right;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
 }
 /* 内容 */
 .exam-con{
-	margin-top: 76px;
+	margin-top: 72px;
 	height: 100%;
 	position: relative;
 }
@@ -133,6 +138,9 @@
 .exam-feature>li{
     flex: 1;
     text-align: center;
+    font-size: 16px;
+    color: #8598b1;
+    cursor: pointer;
 }
 .exam-feature>li>span{
 	display: block;
@@ -161,28 +169,20 @@
 	background-position: 0 -1404px;
 
 }
+.exam-text>h1{
+	font-size: 60px;
+	margin-bottom: 30px;
+}
+.exam-text>p{
+	font-size: 30px;
+}
 
-/* .exam-con>ul{
-	display: flex;
-	flex-wrap: wrap;
-	height: 100%;
-	padding: 10px;
-}
-.exam-con>ul>li{
-	height: 100%;
-	text-align: center;
-}
-.exam-func{
-	padding: 15px;
-}
-.exam-func>h2{
-	margin-top: 30px;
-}
-.exam-func>ol,.exam-explain>ol{
+/* 进入考试 */
+.exam-explain>ol{
 	margin-top: 30px;
 	padding: 15px 35px;
 }
-.exam-func>ol>li,.enter-test{
+.enter-test{
 	padding: 6px 12px;
 	background-color:  #00aeee;
 	border-radius: 6px;
@@ -194,6 +194,10 @@
 }
 .exam-explain{
 	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 .exam-explain>ol>li{
 	margin-bottom: 10px;
@@ -218,9 +222,23 @@
 	width: 40%;
 	display: block;
 	margin: 10px auto;
-} */
+} 
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+/* 超大屏幕 */
+@media(min-width:1200px){
+	.container {
+	    width:1250px;
+	}
+}
 /* web端 */
 @media(min-width: 768px){
+
 	/* 导航栏 */
 	.home-head{
 		background: #fff;
@@ -256,31 +274,47 @@
 	
 	}
 	
-	.exam-text>h1{
-		font-size: 60px;
-		margin-bottom: 30px;
-	}
-	.exam-text>p{
-		font-size: 30px;
-	}
+	
 	
 }
 
 
 /* phone端 */
 @media(max-width: 768px){
-	.exam-pic{
-		display: none;
+
+	/* 中间内容 */
+	.exam-con{
+		height: 556px;
 	}
-	.exam-func{
+	/* 文字 */
+	.exam-text{
+		left: 50%;
+		width: 100%;
+		text-align: center;
+	}
+	.exam-text>h1,.exam-text>p{
 		width: 100%;
 	}
+
+	/* 背景图 */
+	.exam-bg-icon{
+		display: none;
+	}
+	/* 功能 */
+	.exam-feature{
+		width: 100%;
+		left: 0;
+		margin-left: 0;
+		border-radius: 0;
+	}
+	/* 进入测试 */
 	.enter-test{
 	width: 80%;
 	}
+	/* 考试说明 */
 	.exam-explain{
 		margin: 0 auto;
 	}
-
+	
 
 }

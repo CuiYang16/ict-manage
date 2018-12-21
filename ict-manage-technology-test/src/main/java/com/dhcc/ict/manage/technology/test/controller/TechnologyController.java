@@ -12,12 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.dhcc.ict.manage.technology.test.pojo.ExamQuestion;
 import com.dhcc.ict.manage.technology.test.pojo.ExamRecord;
 import com.dhcc.ict.manage.technology.test.pojo.ExamRule;
 import com.dhcc.ict.manage.technology.test.pojo.ExamSubmitDetail;
 import com.dhcc.ict.manage.technology.test.pojo.InterviewRecord;
+import com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseMuch;
+import com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseOne;
+import com.dhcc.ict.manage.technology.test.pojo.TechnologyJudge;
 import com.dhcc.ict.manage.technology.test.pojo.TechnologyType;
 import com.dhcc.ict.manage.technology.test.pojo.UserDetail;
 import com.dhcc.ict.manage.technology.test.service.TechnologyService;
@@ -41,7 +46,7 @@ public class TechnologyController {
 	// 开始考试,获取试卷信息
 	@ResponseBody
 	@RequestMapping("/gettestpaper")
-	public ExamQuestion getExamQuestion(HttpServletRequest request, int testType) {
+	public ModelAndView getExamQuestion(HttpServletRequest request, int testType, ModelAndView modelAndView) {
 		session = request.getSession();
 		// 获取当前用户信息
 		UserDetail userDetail = (UserDetail) session.getAttribute("localUser");
@@ -57,7 +62,15 @@ public class TechnologyController {
 			examRecord.setTechnologyTypeId(testType);
 			examRecord.setUserId(1);// userDetail.getUserId();
 			session.setAttribute("userExamRecord", examRecord);
-			return examQuestion;
+			modelAndView.addObject("technologyOne",
+					JSONObject.parseArray(examQuestion.getTechnologyOne(), TechnologyChooseOne.class));
+			modelAndView.addObject("technologyMuch",
+					JSONObject.parseArray(examQuestion.getTechnologyMuch(), TechnologyChooseMuch.class));
+			modelAndView.addObject("technologyJudge",
+					JSONObject.parseArray(examQuestion.getTechnologyJuage(), TechnologyJudge.class));
+			modelAndView.addObject("examQuestion", examQuestion);
+			modelAndView.setViewName("technology_test.html");
+			return modelAndView;
 		}
 		return null;
 	}
@@ -112,6 +125,6 @@ public class TechnologyController {
 
 	@RequestMapping("/tttt")
 	public String tt() {
-		return "index";
+		return "forward:ictmanagetechnologytest/tectest/tttt";
 	}
 }
