@@ -3,31 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <title>技术考试</title>
-<link rel="stylesheet" href="css/technology_test.css">
+<link rel="stylesheet"
+	href="/ictmanagetechnologytest/css/technology_test.css">
+<script type="text/javascript"
+	src="/ictmanagetechnologytest/js/jquery-1.9.1.js"></script>
+<script type="text/javascript"
+	src="/ictmanagetechnologytest/js/technology_test.js"></script>
 </head>
 <body>
-	<form action="/ictmanagetechnologytest/tectest/gettestpaper?testType=1"
-		method="post">
-
-
-		<input type="submit">
-	</form>
-
 	<div class="topic-area">
-		<div class="topic-detail">
-			<div class="topic-content">1.下面哪些是Thread类的方法（）</div>
+		<div class="topic-detail"
+			th:each="technologyone,iterStat : ${technologyOne}"
+			th:classappend="technologyone+${iterStat.count}">
+
+			<div class="topic-content">
+				<label
+					th:text="${iterStat.count}+'.'+${technologyone.chooseOneDetail}"></label>
+			</div>
 			<div class="topic-answer">
-				<input type="radio" name="answer">A:start() <br /> <input
-					type="radio" name="answer">B: run()<br /> <input
-					type="radio" name="answer">C:exit()<br /> <input
-					type="radio" name="answer">D:getPriority()
+				<input type="radio" th:name="'answer'+${iterStat.count}"
+					th:text="'A:'+${technologyone.chooseOneAnswer1}"><br /> <input
+					type="radio" th:name="'answer'+${iterStat.count}"
+					th:text="'B:'+${technologyone.chooseOneAnswer2}"><br /> <input
+					type="radio" th:name="'answer'+${iterStat.count}"
+					th:text="'C:'+${technologyone.chooseOneAnswer3}"><br /> <input
+					type="radio" th:name="'answer'+${iterStat.count}"
+					th:text="'D:'+${technologyone.chooseOneAnswer4}">
 			</div>
 			<div class="topic-choose">
-				<button type="button">上一题</button>
-				<button type="button">下一题</button>
+				<button type="button" class="previous-topic">上一题</button>
+				<button type="button" class="next-topic">下一题</button>
 			</div>
 		</div>
-		<div class="topic-sheet"></div>
+		<div class="topic-sheet">
+			<span class="topic-span" th:each="technologyone,iterStat : ${technologyOne}"
+				th:classappend="technologyone+${iterStat.count}"
+				th:text="${iterStat.count}"></span>
+		</div>
 	</div>
 
 </body>

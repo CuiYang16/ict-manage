@@ -39,3 +39,8 @@
 	width:40%;
 	margin: 5% auto 0 auto;
 }
+
+.topic-span{
+	border: 1px solid #000;
+	margin: 1%;
+}
