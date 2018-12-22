@@ -11,7 +11,9 @@ import com.dhcc.ict.manage.questionbank.pojo.TechnologyType;
 import com.dhcc.ict.manage.questionbank.pojo.QuestionBankJudge;
 import com.dhcc.ict.manage.questionbank.pojo.QuestionBankMuch;
 import com.dhcc.ict.manage.questionbank.pojo.QuestionBankOne;
+import com.dhcc.ict.manage.questionbank.pojo.TechnologyChooseMuch;
 import com.dhcc.ict.manage.questionbank.pojo.TechnologyChooseOne;
+import com.dhcc.ict.manage.questionbank.pojo.TechnologyJudge;
 import com.dhcc.ict.manage.questionbank.service.ShowListService;
 
 @Controller
@@ -196,10 +198,60 @@ public class ShowListController {
 			System.out.println("添加单选题成功");
 			return "showTechnology";
 	}
-	
+	//到整合的页面
 	@RequestMapping("goindextechnology")
 	public String indextechnology( ) {
 		return "indextechnology";
 	}
+	
+	//通过单选id查询并显示到模态框
+	@RequestMapping("selectonemodalid")
+	@ResponseBody
+	public TechnologyChooseOne selectonemodalid( Integer onemodalid) {
+		TechnologyChooseOne technologyChooseOne = showListService.selectonemodalid(onemodalid);
+		return technologyChooseOne;
+	}
+	
+	//通过单选id查询并显示到模态框  修改保存实现
+		@RequestMapping("savaonemodal")
+		@ResponseBody
+		public String savaonemodal( TechnologyChooseOne technologyChooseOne) {
+			showListService.savaonemodal(technologyChooseOne);
+			System.out.println("ggggggggggggg");
+			return "ok";
+		}
+		
+		//通过多选id查询并显示到模态框
+		@RequestMapping("selectmuchmodalid")
+		@ResponseBody
+		public TechnologyChooseMuch selectmuchmodalid( Integer muchmodalid) {
+			TechnologyChooseMuch technologyChooseMuch = showListService.selectmuchmodalid(muchmodalid);
+			return technologyChooseMuch;
+		}
+		
+		//通过多选id查询并显示到模态框  修改保存实现
+			@RequestMapping("savamuchmodal")
+			@ResponseBody
+			public String savamuchmodal( TechnologyChooseMuch technologyChooseMuch) {
+				showListService.savemuchmodal(technologyChooseMuch);
+				System.out.println("ggggggggggggg");
+				return "ok";
+			}
+			//通过多选id查询并显示到模态框
+			@RequestMapping("selectjudgemodalid")
+			@ResponseBody
+			public TechnologyJudge selectjudgemodalid( Integer judgemodalid) {
+				TechnologyJudge technologyJudge = showListService.selectjudgemodalid(judgemodalid);
+				return technologyJudge;
+			}
+			
+			//通过多选id查询并显示到模态框  修改保存实现
+				@RequestMapping("savajudgemodal")
+				@ResponseBody
+				public String savajudgemodal( TechnologyJudge technologyJudge) {
+					showListService.savejudgemodal(technologyJudge);
+					System.out.println("ggggggggggggg");
+					return "ok";
+				}
 
 }

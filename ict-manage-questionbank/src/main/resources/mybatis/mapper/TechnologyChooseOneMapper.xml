@@ -113,6 +113,8 @@
 			order by ${orderByClause}
 		</if>
 	</select>
+	
+	<!-- 根据id查询并显示到模态框 -->
 	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
 		parameterType="java.lang.Integer">
 		select
