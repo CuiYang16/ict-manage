@@ -250,5 +250,16 @@
 			#{ids}
 		</foreach>
 	</delete>
+	
+	<!-- 多表查询选择题根据类别 -->
+	<select id="selectJudgeTypeTechnology" parameterType="java.lang.Integer" resultMap="ResultMap">
+		select o.*,t.technology_type_name
+		from
+		technology_judge o, technology_type t
+		where
+		o.technology_type_id = t.technology_type_id
+		and 
+		t.technology_type_id =#{technologyTypeId}
+	</select>
  
 </mapper>
