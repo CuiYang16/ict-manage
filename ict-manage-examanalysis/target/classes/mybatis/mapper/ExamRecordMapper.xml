@@ -18,7 +18,7 @@
       <arg column="technology_test_complexity" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
-  <sql id="Example_Where_Clause" >
+  <sql id="Example_Where_Clause"  >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
         <if test="criteria.valid" >
