@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/js/jquery-3.3.1.js"></script>
-
+<script src="/bootstrap/js/bootstrap.js"></script>
+<link href="/bootstrap/css/bootstrap.css" rel="stylesheet"/>
 <script type="text/javascript">
 var oallmuch = document.getElementById("allmuch");
 var onamemuch = document.getElementsByName("muchlen");
@@ -63,6 +64,7 @@ var onamemuch = document.getElementsByName("muchlen");
 				+ muchdata[i].technologyChooseMuch.chooseMuchTrueAnswer + "</td><td>"
 				+ muchdata[i].technologyChooseMuch.chooseMuchComplexity + "</td><td>"
 				+ muchdata[i].technologyTypeName + "</td><td >"
+				+ "<button onclick='selectmuchmodalid("+muchdata[i].technologyChooseMuch.chooseMuchId+")' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#muchmyModal'> 修改 </button></td><td >"
 				+"<button onclick='muchdelete("+muchdata[i].technologyChooseMuch.chooseMuchId+") '>删除</button></td><tr>";
 			 //追加到table中
 				$("#tabmuch").append(strmuch);
@@ -122,6 +124,61 @@ var onamemuch = document.getElementsByName("muchlen");
 		   }
 	   } 
 	   
+	  //模态框通过id查询并显示
+		function selectmuchmodalid(muchmodalid){
+			$.ajax({
+				url : "selectmuchmodalid",
+				type : "post",
+				datatype : "json",
+				data : {muchmodalid : muchmodalid },
+				success : function (muchmodaldata){
+					showmuchmodal(muchmodaldata);
+					console.log(muchmodaldata);
+				}
+			});
+		}
+		
+		//通过id查询到的值进行展示
+		function showmuchmodal(muchmodaldata){
+			$("#muchtmid").val(muchmodaldata.chooseMuchId);
+			$("#muchtm").val(muchmodaldata.chooseMuchDetail);
+			$("#muchana").val(muchmodaldata.chooseMuchAnswer1);
+			$("#muchanb").val(muchmodaldata.chooseMuchAnswer2);
+			$("#muchanc").val(muchmodaldata.chooseMuchAnswer3);
+			$("#muchand").val(muchmodaldata.chooseMuchAnswer4);
+			$("#muchane").val(muchmodaldata.chooseMuchAnswer5);
+			$("#muchan").val(muchmodaldata.chooseMuchTrueAnswer);
+			$("#muchny").val(muchmodaldata.chooseMuchComplexity);
+			$("#muchty").val(muchmodaldata.technologyTypeId);	
+		}
+		
+		//模态框通过id查询显示并修改保存提交
+		function savamuch(){
+			$.ajax({
+				url : "savamuchmodal",
+				type : "post",
+				datatype : "json",
+				data : {
+					'chooseMuchId' : $("#muchtmid").val(),
+					'chooseMuchDetail' : $("#muchtm").val(),
+					'chooseMuchAnswer1' : $("#muchana").val(),
+					'chooseMuchAnswer2' : $("#muchanb").val(),
+					'chooseMuchAnswer3' : $("#muchanc").val(),
+					'chooseMuchAnswer4' : $("#muchand").val(),
+					'chooseMuchAnswer5' : $("#muchane").val(),
+					'chooseMuchTrueAnswer' : $("#muchan").val(),
+					'chooseMuchComplexity' : $("#muchny").val(),
+					'technologyTypeId' : $("#muchty").val(),
+				},
+				success : function (muchsavedata){
+					if(muchsavedata =="ok"){
+						alert("修改成功");
+						location.reload();
+					}
+				}
+			});
+		}
+	   
 	   
 	
 	
@@ -150,6 +207,7 @@ var onamemuch = document.getElementsByName("muchlen");
 			<th>正确答案</th>
 			<th>难易程度</th>
 			<th>类别</th>
+			<th>修改</th>
 			<th>删除</th>
 
 		</tr>
@@ -157,6 +215,35 @@ var onamemuch = document.getElementsByName("muchlen");
 			<td></td>
 		</tr>
 	</table>
+	
+	<div class="modal fade" id="muchmyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">修改多选题内容</h4>
+      </div>
+      <div class="modal-body"> 
+         <p>题目id:<input id="muchtmid" type="hidden" placeholder=""/></p>
+	     <p>题目内容:<input id="muchtm" type="text" placeholder=""/></p>
+	     <p>答案A:<input id="muchana"  type="text" placeholder=""/></p>
+		 <p>答案B:<input id="muchanb"  type="text" placeholder=""/></p>
+	     <p>答案C:<input id="muchanc"  type="text" placeholder=""/></p>
+	     <p>答案D:<input id="muchand"  type="text" placeholder=""/></p>
+	     <p>答案E:<input id="muchane"  type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="muchan"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="muchny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="muchty"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="savamuch()">保存修改</button>
+      </div>
+    </div>
+  </div>
+</div> 
 
 </body>
 </html>

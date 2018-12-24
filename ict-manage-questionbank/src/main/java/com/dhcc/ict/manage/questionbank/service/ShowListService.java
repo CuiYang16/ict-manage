@@ -96,4 +96,35 @@ public class ShowListService {
 		technologyChooseOneMapper.insertSelective(record);
 		
 	}
+	//通过单选id查询并显示到模态框
+	public TechnologyChooseOne selectonemodalid(Integer chooseOneId) {
+		return technologyChooseOneMapper.selectByPrimaryKey(chooseOneId);
+	}
+	//通过单选id查询并显示到模态框  修改保存实现
+	public void savaonemodal(TechnologyChooseOne record) {
+		technologyChooseOneMapper.updateByPrimaryKeySelective(record);
+		
+	}
+	//通过多选id查询并显示到模态框
+	public TechnologyChooseMuch selectmuchmodalid(Integer chooseMuchId) {
+		
+		return technologyChooseMuchMapper.selectByPrimaryKey(chooseMuchId);
+	}
+	//通过多选id查询并显示到模态框  修改保存实现
+	public void savemuchmodal(TechnologyChooseMuch record) {
+		technologyChooseMuchMapper.updateByPrimaryKeySelective(record);
+		
+	}
+	//通过判断id查询并显示到模态框
+	public TechnologyJudge selectjudgemodalid(Integer technologyJudgeId) {
+		
+		return technologyJudgeMapper.selectByPrimaryKey(technologyJudgeId);
+	}
+	//通过判断id查询并显示到模态框  修改保存实现
+	public void savejudgemodal(TechnologyJudge record) {
+		technologyJudgeMapper.updateByPrimaryKeySelective(record);
+		
+	}
+
+	
 }

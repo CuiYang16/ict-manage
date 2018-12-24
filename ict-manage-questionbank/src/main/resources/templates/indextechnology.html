@@ -1,64 +1,128 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 <meta charset="utf-8">
-
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-
 <title>标签页</title>
-
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" />
 
 </head>
 
 <body>
 
-<ul class="nav nav-pills">
+	<ul class="nav nav-pills">
 
-<li class="active"><a href="#n1" data-toggle="tab">首页</a></li>
+		<li class="active"><a href="#n1" data-toggle="tab">单选题</a></li>
 
-<li><a href="#n2" data-toggle="tab">梦想</a></li>
+		<li><a href="#n2" data-toggle="tab">多选题</a></li>
 
-<li><a href="#n3" data-toggle="tab">爱心</a></li>
+		<li><a href="#n3" data-toggle="tab">判断题</a></li>
 
-<li><a href="#n4" data-toggle="tab">安逸</a></li>
+		<li><a href="#n4" data-toggle="tab">其他</a></li>
 
-</ul>
+	</ul>
 
-<div class="tab-content" style="padding:20px;">
+	<div class="tab-content" style="padding: 20px;">
 
-<div class="tab-pane active fade in" id="n1">
+		<div class="tab-pane active fade in" id="n1">
+		<div>
+		<span class="l"><a href="javascript:;" onclick="del()"
+			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
+			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
+			id="ts">0</strong> 条
+		</span>
+	</div>
 
-<img src="img/s1.jpg"/>
+	<table id="tabone">
+		<tr>
+		    <th><input type="checkbox" id="all" value=""></th>
+		    <th>题号</th>
+			<th>题目内容</th>
+			<th>答案A</th>
+			<th>答案B</th>
+			<th>答案C</th>
+			<th>答案D</th>
+			<th>正确答案</th>
+			<th>难易程度</th>
+			<th>类别</th>
+			<th>删除</th>
+			
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
 
-</div>
+		</div>
 
-<div class="tab-pane fade" id="n2">
+		<div class="tab-pane fade" id="n2">
+			<div>
+		<span class="l"><a href="javascript:;" onclick="delmuch()"
+			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
+			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
+			id="ts">0</strong> 条
+		</span>
+	</div>
 
-<img src="img/s2.jpg"/>
+	<table id="tabmuch">
+		<tr>
+			<th><input type="checkbox" id="allmuch" value=""></th>
+			<th>题号</th>
+			<th>题目内容</th>
+			<th>答案A</th>
+			<th>答案B</th>
+			<th>答案C</th>
+			<th>答案D</th>
+			<th>答案E</th>
+			<th>正确答案</th>
+			<th>难易程度</th>
+			<th>类别</th>
+			<th>删除</th>
 
-</div>
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
 
-<div class="tab-pane fade" id="n3">
+		</div>
 
-<img src="img/s3.jpg"/>
+		<div class="tab-pane fade" id="n3">
+		<div>
+		<span class="l"><a href="javascript:;" onclick="deljudge()"
+			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
+			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
+			id="ts">0</strong> 条
+		</span>
+	</div>
 
-</div>
+	<table id="tabjudge">
+		<tr>
+			<th><input type="checkbox" id="alljudge" value=""></th>
+			<th>题号</th>
+			<th>题目内容</th>
+			<th>正确答案</th>
+			<th>难易程度</th>
+			<th>类别</th>
+			<th>删除</th>
 
-<div class="tab-pane fade" id="n4">
+		</tr>
+		<tr>
+			<td></td>
+		</tr>
+	</table>
 
-<img src="img/s4.jpg"/>
+		</div>
 
-</div>
+		<div class="tab-pane fade" id="n4">
+			查询类别表 <img src="img/s4.jpg" />
 
-</div>
+		</div>
 
-<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	</div>
 
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+
+	<script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
 
 </body>
 
