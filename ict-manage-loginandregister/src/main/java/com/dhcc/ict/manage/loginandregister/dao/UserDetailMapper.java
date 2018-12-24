@@ -40,5 +40,5 @@ public interface UserDetailMapper {
 
 	int findUserName(@Param("userName") String userName);
 
-	int analysisScore(ExamRecord examRecord);
+
 }

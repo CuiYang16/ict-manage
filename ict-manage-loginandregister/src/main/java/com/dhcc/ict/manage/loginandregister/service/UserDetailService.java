@@ -28,10 +28,6 @@ public class UserDetailService {
 		return userDetailMapper.addUser(UserDetail);
 	}
 
-	public int analysisScore(ExamRecord examRecord) {
-		return userDetailMapper.analysisScore(examRecord);
-		
-		
-	}
+
 
 }

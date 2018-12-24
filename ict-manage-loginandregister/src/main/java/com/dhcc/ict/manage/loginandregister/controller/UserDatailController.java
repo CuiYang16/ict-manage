@@ -134,13 +134,7 @@ public class UserDatailController {
 
 	}
 	 
-	@RequestMapping("/score")
-	public String analysisScore(ExamRecord examRecord) {
-		userDetailService.analysisScore(examRecord);
-		return "echart";
-		
-		
-	}
+
 
 	@RequestMapping("/gotest")
 	public String goTest(int testType) {
