@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/js/jquery-3.3.1.js"></script>
-
+<script src="/bootstrap/js/bootstrap.js"></script>
+<link href="/bootstrap/css/bootstrap.css" rel="stylesheet"/>
 <script type="text/javascript">
 //获取全选的id
-var oall = document.getElementById("all");
+//var oall = document.getElementById("all");
 //获取单个复选框的id
 var oid = document.getElementsByName("id");
 	$(document).ready(function() {
@@ -18,7 +19,26 @@ var oid = document.getElementsByName("id");
 			//async : true,//是否异步请求
 			success : function(onedata) { //如何发送成功
 				showone(onedata);
+				//showoneselect(onedata);
 			console.log(onedata);
+			}
+
+		});
+		//显示下拉列表类别信息
+		$.ajax({
+			url : "selecttype",//请求地址
+			dataType : "json",//数据格式 
+			type : "post",//请求方式
+			success : function(oneselectdata) { //如何发送成功
+				console.log(oneselectdata);
+				//showoneselect(oneselectdata);
+				var stroneselect = "";//用于拼接的字符串
+				var onelength = oneselectdata.length;
+				for (var i = 0; i < onelength; i++) {
+					stroneselect = "<option value='"+oneselectdata[i].technologyTypeId+"'>"+ oneselectdata[i].technologyTypeName + "</option >";
+					//追加到table中
+					$("#oneselectop").append(stroneselect);
+				} 
 			}
 
 		});
@@ -57,7 +77,8 @@ var oid = document.getElementsByName("id");
 		var strone = "";//用于拼接的字符串
 		var onelength = onedata.length;
 		for (var i = 0; i < onelength; i++) {
-			strone = "<tr><td>"+"<input width='50' name='id' type='checkbox' value='"+onedata[i].technologyChooseOne.chooseOneId+"'></input> </td><td>" 
+			strone = "<tr><td>"
+			        +"<input width='50' name='id' type='checkbox' value='"+onedata[i].technologyChooseOne.chooseOneId+"'></input> </td><td>" 
 			        +[i+1]+"</td><td>"
 			        + onedata[i].technologyChooseOne.chooseOneDetail+ "</td><td>"
 					+ onedata[i].technologyChooseOne.chooseOneAnswer1 + "</td><td>"
@@ -67,13 +88,25 @@ var oid = document.getElementsByName("id");
 					+ onedata[i].technologyChooseOne.chooseOneTrueAnswer + "</td><td>"
 					+ onedata[i].technologyChooseOne.chooseOneComplexity + "</td><td>"
 					+ onedata[i].technologyTypeName + "</td><td >"
+					+ "<button onclick='selectonemodalid("+onedata[i].technologyChooseOne.chooseOneId+")' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#onemyModal'> 修改 </button></td><td >"
 					+"<button onclick='onedelete("+onedata[i].technologyChooseOne.chooseOneId+") '>删除</button></td><tr>";
 			//追加到table中
-			$("#tabone").append(strone);
-			$("#ts").html(onelength);
+			$("#titletable").append(strone);
+			$("#onets").html(onelength);
 			//<th width="25"><input type="checkbox" id="all" value="">批量删除</th>
 		}
 	}
+	//显示类别信息
+	 /* function showoneselect(onedata) {
+		var stroneselect = "";//用于拼接的字符串
+		var onelength = onedata.length;
+		for (var i = 0; i < onelength; i++) {
+			stroneselect = "<option>"+ onedata[i].technologyTypeName + "</option >";
+			console.log(onedata[i].technologyTypeName);
+			//追加到table中
+			$("#oneselectop").append(stroneselect);
+		}
+	}  */
 	//单个删除
 	function onedelete(oneid){
 		var r = confirm("是否删除？");
@@ -131,6 +164,106 @@ var oid = document.getElementsByName("id");
 			return false;    
 		} 
 	}
+	
+	//模态框通过id查询并显示
+	function selectonemodalid(onemodalid){
+		$.ajax({
+			url : "selectonemodalid",
+			type : "post",
+			datatype : "json",
+			data : {onemodalid : onemodalid },
+			success : function (onemodaldata){
+				showonemodal(onemodaldata);
+				console.log(onemodaldata);
+			}
+		});
+	}
+	
+	//通过id查询到的值进行展示
+	function showonemodal(onemodaldata){
+		$("#tmid").val(onemodaldata.chooseOneId);
+		$("#tm").val(onemodaldata.chooseOneDetail);
+		$("#ana").val(onemodaldata.chooseOneAnswer1);
+		$("#anb").val(onemodaldata.chooseOneAnswer2);
+		$("#anc").val(onemodaldata.chooseOneAnswer3);
+		$("#and").val(onemodaldata.chooseOneAnswer4);
+		$("#an").val(onemodaldata.chooseOneTrueAnswer);
+		$("#ny").val(onemodaldata.chooseOneComplexity);
+		$("#ty").val(onemodaldata.technologyTypeId);	
+	}
+	
+	//模态框通过id查询显示并修改保存提交
+	function savaone(){
+		$.ajax({
+			url : "savaonemodal",
+			type : "post",
+			datatype : "json",
+			data : {
+				'chooseOneId' : $("#tmid").val(),
+				'chooseOneDetail' : $("#tm").val(),
+				'chooseOneAnswer1' : $("#ana").val(),
+				'chooseOneAnswer2' : $("#anb").val(),
+				'chooseOneAnswer3' : $("#anc").val(),
+				'chooseOneAnswer4' : $("#and").val(),
+				'chooseOneTrueAnswer' : $("#an").val(),
+				'chooseOneComplexity' : $("#ny").val(),
+				'technologyTypeId' : $("#ty").val(),
+			},
+			success : function (onesavedata){
+				if(onesavedata =="ok"){
+					alert("修改成功");
+					location.reload();
+				}
+			}
+		});
+	}
+	
+	//模态框添加试题
+	function addone(){
+		$.ajax({
+			url : "addonemodal",
+			type : "post",
+			datatype : "json",
+			data : {
+				'chooseOneDetail' : $("#addtm").val(),
+				'chooseOneAnswer1' : $("#addana").val(),
+				'chooseOneAnswer2' : $("#addanb").val(),
+				'chooseOneAnswer3' : $("#addanc").val(),
+				'chooseOneAnswer4' : $("#addand").val(),
+				'chooseOneTrueAnswer' : $("#addan").val(),
+				'chooseOneComplexity' : $("#addny").val(),
+				'technologyTypeId' : $("#addty").val(),
+			},
+			success : function (oneadddata){
+				if(oneadddata =="ok"){
+					alert("添加成功");
+					location.reload();
+				}
+			}
+		});
+	}
+	
+	
+	
+	//通过类别查询
+	function oneselectop(){
+		
+		//alert( $('select option:selected').val());
+			$.ajax({
+				url : "oneselecttype",
+				type : "post",
+				datatype : "json",
+				data : {
+					'technologyTypeId' : $('select option:selected').val(),
+				},
+				success : function (onetypedata){
+					$("#titletable").empty();
+					showone(onetypedata);
+					
+					console.log(onetypedata);
+				}
+			});
+	}	
 </script>
 
 
@@ -138,12 +271,16 @@ var oid = document.getElementsByName("id");
 <body>
 	<div>
 		<span class="l"><a href="javascript:;" onclick="del()"
-			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
-			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
-			id="ts">0</strong> 条
+			class="btn btn-danger radius" id="plid"> 批量删除</a>
+			 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#oneaddmyModal">添加单选题</button></span>
+			  <span class="r">共有数据：<strong id="onets">0</strong> 条
 		</span>
+		
+		题型类别:<select onchange="oneselectop()" id="oneselectop" >
+			  <option value="">题型类别</option>
+		</select>
 	</div>
-
+    
 	<table id="tabone">
 		<tr>
 		    <th><input type="checkbox" id="all" value=""></th>
@@ -156,12 +293,80 @@ var oid = document.getElementsByName("id");
 			<th>正确答案</th>
 			<th>难易程度</th>
 			<th>类别</th>
+			<th>修改</th>
 			<th>删除</th>
 			
 		</tr>
+		<tbody id="titletable">
 		<tr>
 			<td></td>
 		</tr>
+		</tbody>
+		
 	</table>
+	
+ 	<!-- Button trigger modal -->
+<!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  修改单选题
+</button>-->
+
+<!-- 修改Modal -->
+<div class="modal fade" id="onemyModal" tabindex="-1" role="dialog" aria-labelledby="onemyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="onemyModalLabel">修改单选题内容</h4>
+      </div>
+      <div class="modal-body"> 
+         <p>题目id:<input id="tmid" type="hidden" placeholder=""/></p>
+	     <p>题目内容:<input id="tm" type="text" placeholder=""/></p>
+	     <p>答案A:<input id="ana"  type="text" placeholder=""/></p>
+		 <p>答案B:<input id="anb"  type="text" placeholder=""/></p>
+	     <p>答案C:<input id="anc"  type="text" placeholder=""/></p>
+	     <p>答案D:<input id="and"  type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="an"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="ny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="ty"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="savaone()">保存修改</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- 添加Modal -->
+<div class="modal fade" id="oneaddmyModal" tabindex="-1" role="dialog" aria-labelledby="addonemyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addonemyModalLabel">修改单选题内容</h4>
+      </div>
+      <div class="modal-body"> 
+        
+	     <p>题目内容:<input id="addtm" type="text" placeholder=""/></p>
+	     <p>答案A:<input id="addana"  type="text" placeholder=""/></p>
+		 <p>答案B:<input id="addanb"  type="text" placeholder=""/></p>
+	     <p>答案C:<input id="addanc"  type="text" placeholder=""/></p>
+	     <p>答案D:<input id="addand"  type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="addan"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="addny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="addty"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="addone()">添加保存</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
 </body>
 </html>

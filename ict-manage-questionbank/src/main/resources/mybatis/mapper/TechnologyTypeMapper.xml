@@ -174,4 +174,8 @@
  
   </select> -->
   
+  <select id="selectType"  resultMap="BaseResultMap" >
+    	select * from technology_type 
+  </select> 
+  
 </mapper>

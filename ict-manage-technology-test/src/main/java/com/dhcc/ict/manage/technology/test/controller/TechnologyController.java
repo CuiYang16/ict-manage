@@ -102,6 +102,7 @@ public class TechnologyController {
 	@ResponseBody
 	@RequestMapping("/getGrade")
 	public ExamRecord giveGrade(HttpServletRequest request, String userSubmitDetail) {
+
 		session = request.getSession();
 		List<List<ExamSubmitDetail>> examList = technologyService.getExamRecord(userSubmitDetail);
 

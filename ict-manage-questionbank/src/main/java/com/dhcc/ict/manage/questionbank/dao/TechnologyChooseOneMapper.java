@@ -42,6 +42,8 @@ public interface TechnologyChooseOneMapper {
 	void qusetionOneDeleteAll(Integer[] ids);
     //添加单选题到题库
 	void insertonedetail(String[] onedetail);
+	 //通过扩展类根据类别id查询题库
+	List<QuestionBankOne> selectOneTypeTechnology(Integer technologyTypeId);
 	
 	
 	

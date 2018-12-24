@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/js/jquery-3.3.1.js"></script>
-
+<script src="/bootstrap/js/bootstrap.js"></script>
+<link href="/bootstrap/css/bootstrap.css" rel="stylesheet"/>
 <script type="text/javascript">
-var oalljudge = document.getElementById("alljudge");
+//var oalljudge = document.getElementById("alljudge");
 var onamejudge = document.getElementsByName("judgelen");
 	$(document).ready(function() {
 		$.ajax({
@@ -20,6 +21,25 @@ var onamejudge = document.getElementsByName("judgelen");
 			}
 
 		});  
+		
+		//显示下拉列表类别信息
+		$.ajax({
+			url : "selecttype",//请求地址
+			dataType : "json",//数据格式 
+			type : "post",//请求方式
+			success : function(judgeselectdata) { //如何发送成功
+				console.log(judgeselectdata);
+				//showoneselect(oneselectdata);
+				var strjudgeselect = "";//用于拼接的字符串
+				var judgelength = judgeselectdata.length;
+				for (var i = 0; i < judgelength; i++) {
+					strjudgeselect = "<option value='"+judgeselectdata[i].technologyTypeId+"'>"+ judgeselectdata[i].technologyTypeName + "</option >";
+					//追加到table中
+					$("#judgeselectop").append(strjudgeselect);
+				} 
+			}
+
+		});
 		
 		var oalljudge = document.getElementById("alljudge");
 		var onamejudge = document.getElementsByName("judgelen");
@@ -58,10 +78,11 @@ var onamejudge = document.getElementsByName("judgelen");
 			    + judgedata[i].technologyJudge.technologyJudgeTrueAnswer + "</td><td>"
 				+ judgedata[i].technologyJudge.technologyJudgeComplexity + "</td><td>"
 				+ judgedata[i].technologyTypeName + "</td><td >"
+				+ "<button onclick='selectjudgemodalid("+judgedata[i].technologyJudge.technologyJudgeId+")' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#judgemyModal'> 修改 </button></td><td >"
 				+"<button onclick='judgedelete("+judgedata[i].technologyJudge.technologyJudgeId+") '>删除</button></td><tr>";
 			 //追加到table中
-				$("#tabjudge").append(strjudge);
-				$("#ts").html(judgelength);
+				$("#judgetitletable").append(strjudge);
+				$("#judgets").html(judgelength);
 		   }
 	    }
 	   //单个删除
@@ -117,7 +138,92 @@ var onamejudge = document.getElementsByName("judgelen");
 		   }
 	   } 
 	   
-	   
+	  //模态框通过判断id查询并显示
+		function selectjudgemodalid(judgemodalid){
+			$.ajax({
+				url : "selectjudgemodalid",
+				type : "post",
+				datatype : "json",
+				data : {judgemodalid : judgemodalid },
+				success : function (judgemodaldata){
+					showjudgemodal(judgemodaldata);
+					console.log(judgemodaldata);
+				}
+			});
+		}
+		
+		//通过id查询到的值进行展示
+		function showjudgemodal(judgemodaldata){
+			$("#judgetmid").val(judgemodaldata.technologyJudgeId);
+			$("#judgetm").val(judgemodaldata.technologyJudgeDetail);
+			$("#judgean").val(judgemodaldata.technologyJudgeTrueAnswer);
+			$("#judgeny").val(judgemodaldata.technologyJudgeComplexity);
+			$("#judgety").val(judgemodaldata.technologyTypeId);
+		}
+		
+		//模态框通过id查询显示并修改保存提交
+		function savajudge(){
+			$.ajax({
+				url : "savajudgemodal",
+				type : "post",
+				datatype : "json",
+				data : {
+					'technologyJudgeId' : $("#judgetmid").val(),
+					'technologyJudgeDetail' : $("#judgetm").val(),
+					'technologyJudgeTrueAnswer' : $("#judgean").val(),
+					'technologyJudgeComplexity' : $("#judgeny").val(),
+					'technologyTypeId' : $("#judgety").val(),
+				},
+				success : function (judgesavedata){
+					if(judgesavedata =="ok"){
+						alert("修改成功");
+						location.reload();
+					}
+				}
+			});
+		}
+		
+		//模态框添加判断题
+		function addjudge(){
+			$.ajax({
+				url : "addjudgemodal",
+				type : "post",
+				datatype : "json",
+				data : {
+					
+					'technologyJudgeDetail' : $("#addjudgetm").val(),
+					'technologyJudgeTrueAnswer' : $("#addjudgean").val(),
+					'technologyJudgeComplexity' : $("#addjudgeny").val(),
+					'technologyTypeId' : $("#addjudgety").val(),
+				},
+				success : function (judgeadddata){
+					if(judgeadddata =="ok"){
+						alert("添加成功");
+						location.reload();
+					}
+				}
+			});
+		}
+		
+		//通过类别查询选中下拉框的值
+		function judgeselectop(){
+			
+			//alert( $('select option:selected').val());
+				$.ajax({
+					url : "judgeselecttype",
+					type : "post",
+					datatype : "json",
+					data : {
+						'technologyTypeId' : $('select option:selected').val(),
+					},
+					success : function (judgetypedata){
+						$("#judgetitletable").empty();
+						showjudge(judgetypedata);
+						
+						console.log(judgetypedata);
+					}
+				});
+		}	
 	
 	
 </script>
@@ -126,10 +232,14 @@ var onamejudge = document.getElementsByName("judgelen");
 
  <div>
 		<span class="l"><a href="javascript:;" onclick="deljudge()"
-			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
-			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
-			id="ts">0</strong> 条
+			class="btn btn-danger radius" id="judgeplid"> 批量删除</a> 
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#judgeaddmyModal">添加判断题</button></span>
+			 <span class="r">共有数据：<strong
+			id="judgets">0</strong> 条
 		</span>
+		题型类别:<select onchange="judgeselectop()" id="judgeselectop" >
+			  <option value="">题型类别</option>
+		</select>
 	</div>
 
 	<table id="tabjudge">
@@ -140,13 +250,65 @@ var onamejudge = document.getElementsByName("judgelen");
 			<th>正确答案</th>
 			<th>难易程度</th>
 			<th>类别</th>
+			<th>修改</th>
 			<th>删除</th>
 
 		</tr>
+		<tbody id="judgetitletable">
 		<tr>
 			<td></td>
 		</tr>
+		</tbody>
 	</table>
+	<!-- 修改判断题 -->
+	<div class="modal fade" id="judgemyModal" tabindex="-1" role="dialog" aria-labelledby="judgemyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="judgemyModalLabel">修改判断题内容</h4>
+      </div>
+      <div class="modal-body"> 
+         <p>题目id:<input id="judgetmid" type="hidden" placeholder=""/></p>
+	     <p>题目内容:<input id="judgetm" type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="judgean"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="judgeny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="judgety"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="savajudge()">保存修改</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<!-- 添加判断题 -->
+	<div class="modal fade" id="judgeaddmyModal" tabindex="-1" role="dialog" aria-labelledby="addjudgemyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addjudgemyModalLabel">添加判断题内容</h4>
+      </div>
+      <div class="modal-body"> 
+       
+	     <p>题目内容:<input id="addjudgetm" type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="addjudgean"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="addjudgeny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="addjudgety"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="addjudge()">添加保存</button>
+      </div>
+    </div>
+  </div>
+</div> 
 
 </body>
 </html>

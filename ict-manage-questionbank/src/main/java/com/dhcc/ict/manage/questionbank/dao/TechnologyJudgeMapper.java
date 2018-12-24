@@ -37,4 +37,6 @@ public interface TechnologyJudgeMapper {
 	List<QuestionBankJudge> selectJudgeTechnology();
     //批量删除判断题
 	void qusetionJudgeDeleteAll(Integer[] ids);
+	// 查询判断题库id按类别查找
+	List<QuestionBankJudge> selectJudgeTypeTechnology(Integer technologyTypeId);
 }
