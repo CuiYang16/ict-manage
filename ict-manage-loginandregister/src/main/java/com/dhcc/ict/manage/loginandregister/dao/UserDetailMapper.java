@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.dhcc.ict.manage.loginandregister.pojo.ExamRecord;
 import com.dhcc.ict.manage.loginandregister.pojo.UserDetail;
 import com.dhcc.ict.manage.loginandregister.pojo.UserDetailExample;
 
@@ -38,4 +39,6 @@ public interface UserDetailMapper {
 	int addUser(UserDetail userDetail);
 
 	int findUserName(@Param("userName") String userName);
+
+	int analysisScore(ExamRecord examRecord);
 }

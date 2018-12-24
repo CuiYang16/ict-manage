@@ -133,11 +133,11 @@ public class UserDatailController {
 		return "exam";
 
 	}
-	
+	 
 	@RequestMapping("/score")
 	public String analysisScore(ExamRecord examRecord) {
-	
-		return null;
+		userDetailService.analysisScore(examRecord);
+		return "echart";
 		
 		
 	}

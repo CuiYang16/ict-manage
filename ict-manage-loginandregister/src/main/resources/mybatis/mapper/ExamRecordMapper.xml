@@ -351,6 +351,6 @@
 <result property="technologyTestComplexity" column="technology_test_Complexity" />
 </resultMap>
 <select id="searchScore" resultMap="Score">
-select * from exam_record 
+select * from exam_record as e where e_id=user_id 
 </select>
 </mapper>
