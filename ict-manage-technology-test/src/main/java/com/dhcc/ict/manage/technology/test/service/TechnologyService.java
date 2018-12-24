@@ -128,18 +128,18 @@ public class TechnologyService {
 
 		JSONObject submitObject = JSONObject.parseObject(userSubmitDetail);
 		// 分别获取不同题型的信息
-		String chooseone = submitObject.getString("chooseone");
+		String chooseone = submitObject.getString("oneSubmit");
 		List<ExamSubmitDetail> submitChooseOne = JSON.parseObject(chooseone,
 				new TypeReference<List<ExamSubmitDetail>>() {
 				});
-		String choosemuch = submitObject.getString("choosemuch");
+		String choosemuch = submitObject.getString("muchSubmit");
 		List<ExamSubmitDetail> submitChooseMuch = JSON.parseObject(choosemuch,
 				new TypeReference<List<ExamSubmitDetail>>() {
 				});
-		String judge = submitObject.getString("judge");
+		String judge = submitObject.getString("judgeSubmit");
 		List<ExamSubmitDetail> submitJudge = JSON.parseObject(judge, new TypeReference<List<ExamSubmitDetail>>() {
 		});
-
+		System.out.println(chooseone);
 		List<List<ExamSubmitDetail>> listArr = new ArrayList<List<ExamSubmitDetail>>();
 		listArr.add(submitChooseOne);
 		listArr.add(submitChooseMuch);
