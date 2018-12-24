@@ -420,10 +420,14 @@
 			<result column="technology_type_id" jdbcType="INTEGER"
 				javaType="java.lang.Integer" property="technologyTypeId" /> -->
 		</association>
-
-
 	</resultMap>
-
+	
+	<resultMap id="ResultTypeMap"
+		type="com.dhcc.ict.manage.questionbank.pojo.QuestionBankOne">
+		<result column="technology_type_name" jdbcType="VARCHAR"
+			javaType="java.lang.String" property="technologyTypeName" />
+	</resultMap>
+	
 	<select id="getone"
 		resultType="com.dhcc.ict.manage.questionbank.pojo.TechnologyChooseOne">
 		select * from technology_choose_one
@@ -448,6 +452,17 @@
 			#{ids}
 		</foreach>
 	</delete>
+	
+	<!-- 多表查询选择题根据类别 -->
+	<select id="selectOneTypeTechnology" parameterType="java.lang.Integer" resultMap="ResultMap">
+		select o.*,t.technology_type_name
+		from
+		technology_choose_one o, technology_type t
+		where
+		o.technology_type_id = t.technology_type_id
+		and 
+		t.technology_type_id =#{technologyTypeId}
+	</select>
 	
 	
 </mapper>

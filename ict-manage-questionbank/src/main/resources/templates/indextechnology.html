@@ -3,8 +3,733 @@
 <head>
 <meta charset="utf-8">
 <title>标签页</title>
-<link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css" />
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="/bootstrap/js/bootstrap.js"></script>
+<link href="/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+<script type="text/javascript">
 
+var oid = document.getElementsByName("id");
+var onamemuch = document.getElementsByName("muchlen");
+var onamejudge = document.getElementsByName("judgelen");
+$(document).ready(function() {
+	
+	//单选
+	$.ajax({
+		url : "one",//请求地址
+		dataType : "json",//数据格式 
+		type : "post",//请求方式
+		//async : true,//是否异步请求
+		success : function(onedata) { //如何发送成功
+			showone(onedata);
+			//showoneselect(onedata);
+		console.log(onedata);
+		}
+
+	});
+	//显示下拉列表类别信息
+	$.ajax({
+		url : "selecttype",//请求地址
+		dataType : "json",//数据格式 
+		type : "post",//请求方式
+		success : function(oneselectdata) { //如何发送成功
+			console.log(oneselectdata);
+			//showoneselect(oneselectdata);
+			var stroneselect = "";//用于拼接的字符串
+			var onelength = oneselectdata.length;
+			for (var i = 0; i < onelength; i++) {
+				stroneselect = "<option value='"+oneselectdata[i].technologyTypeId+"'>"+ oneselectdata[i].technologyTypeName + "</option >";
+				//追加到table中
+				$("#oneselectop").append(stroneselect);
+				$("#muchselectop").append(stroneselect);
+				$("#judgeselectop").append(stroneselect);
+			} 
+		}
+
+	});
+	
+	//获取全选的id
+	var oall = document.getElementById("all");
+	//获取单个复选框的id
+	var oid = document.getElementsByName("id");
+	//点击复选框   全部选中
+	$("#all").click(function(){
+		for(var i = 0; i<oid.length;i++){
+			oid[i].checked = oall.checked;
+			
+		}
+	}); 
+	
+	//点击复选框
+	for( var i = 0; i < oid.length;i++){
+		oid[i].onclick = function(){
+			//判断是否全部选中，遍历集合
+			for(var j = 0; j<oid.length; j++){
+				if(oid[j].checked == false){
+					oall.checked = false;
+					break;
+				}else{
+					oall.checked = true;
+				}
+			}
+		};
+	} 
+	
+	//多选
+	
+	$.ajax({
+		url : "much",//请求地址
+		dataType : "json",//数据格式 
+		type : "post",//请求方式
+		//async : true,//是否异步请求
+		success : function(muchdata) { //如何发送成功
+			showmuch(muchdata);
+		console.log(muchdata);
+		}
+
+	});  
+	
+	//显示下拉列表类别信息
+	/* $.ajax({
+		url : "selecttype",//请求地址
+		dataType : "json",//数据格式 
+		type : "post",//请求方式
+		success : function(muchselectdata) { //如何发送成功
+			console.log(muchselectdata);
+			//showoneselect(oneselectdata);
+			var strmuchselect = "";//用于拼接的字符串
+			var muchlength = muchselectdata.length;
+			for (var i = 0; i < muchlength; i++) {
+				strmuchselect = "<option value='"+muchselectdata[i].technologyTypeId+"'>"+ muchselectdata[i].technologyTypeName + "</option >";
+				//追加到table中
+				$("#muchselectop").append(strmuchselect);
+			} 
+		}
+
+	}); */
+	
+	var oallmuch = document.getElementById("allmuch");
+	var onamemuch = document.getElementsByName("muchlen");
+	//点击全选框
+	$("#allmuch").click(function(){
+		for(var i = 0 ; i<onamemuch.length; i++){
+			onamemuch[i].checked = oallmuch.checked;
+		}
+	});
+	
+	//点击复选框
+	for( var i = 0; i<onamemuch.length; i++){
+		onamemuch[i].onclick = function(){
+			//判断是否全被选中 遍历集合
+			for(var j = 0; j<onamemuch.length; j++){
+				if(onamemuch[j].checked == false){
+					oallmuch.checked = false; 
+					break;
+				}else{
+					oallmuch.checked = true;
+				}
+			}
+		}
+	}
+	
+	
+	//判断
+	$.ajax({
+		url : "judge",//请求地址
+		dataType : "json",//数据格式 
+		type : "post",//请求方式
+		//async : true,//是否异步请求
+		success : function(judgedata) { //如何发送成功
+			showjudge(judgedata);
+		console.log(judgedata);
+		}
+
+	});  
+	
+	//显示下拉列表类别信息
+	/* $.ajax({
+		url : "selecttype",//请求地址
+		dataType : "json",//数据格式 
+		type : "post",//请求方式
+		success : function(judgeselectdata) { //如何发送成功
+			console.log(judgeselectdata);
+			//showoneselect(oneselectdata);
+			var strjudgeselect = "";//用于拼接的字符串
+			var judgelength = judgeselectdata.length;
+			for (var i = 0; i < judgelength; i++) {
+				strjudgeselect = "<option value='"+judgeselectdata[i].technologyTypeId+"'>"+ judgeselectdata[i].technologyTypeName + "</option >";
+				//追加到table中
+				$("#judgeselectop").append(strjudgeselect);
+			} 
+		}
+
+	}); */
+	
+	var oalljudge = document.getElementById("alljudge");
+	var onamejudge = document.getElementsByName("judgelen");
+	//点击全选框
+	$("#alljudge").click(function(){
+		for(var i = 0 ; i<onamejudge.length; i++){
+			onamejudge[i].checked = oalljudge.checked;
+		}
+	});
+	
+	//点击复选框
+	for( var i = 0; i<onamejudge.length; i++){
+		onamejudge[i].onclick = function(){
+			//判断是否全被选中 遍历集合
+			for(var j = 0; j<onamejudge.length; j++){
+				if(onamejudge[j].checked == false){
+					oalljudge.checked = false; 
+					break;
+				}else{
+					oalljudge.checked = true;
+				}
+			}
+		}
+	}
+	
+
+});//自加载
+
+
+	
+	/* 自执行---------------------- */
+
+	/* 单选 */
+	
+	
+function showone(onedata) {
+	var strone = "";//用于拼接的字符串
+	var onelength = onedata.length;
+	for (var i = 0; i < onelength; i++) {
+		strone = "<tr><td>"
+		        +"<input width='50' name='id' type='checkbox' value='"+onedata[i].technologyChooseOne.chooseOneId+"'></input> </td><td>" 
+		        +[i+1]+"</td><td>"
+		        + onedata[i].technologyChooseOne.chooseOneDetail+ "</td><td>"
+				+ onedata[i].technologyChooseOne.chooseOneAnswer1 + "</td><td>"
+				+ onedata[i].technologyChooseOne.chooseOneAnswer2 + "</td><td>"
+				+ onedata[i].technologyChooseOne.chooseOneAnswer3 + "</td><td>"
+				+ onedata[i].technologyChooseOne.chooseOneAnswer4 + "</td><td>"
+				+ onedata[i].technologyChooseOne.chooseOneTrueAnswer + "</td><td>"
+				+ onedata[i].technologyChooseOne.chooseOneComplexity + "</td><td>"
+				+ onedata[i].technologyTypeName + "</td><td >"
+				+ "<button onclick='selectonemodalid("+onedata[i].technologyChooseOne.chooseOneId+")' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#onemyModal'> 修改 </button></td><td >"
+				+"<button onclick='onedelete("+onedata[i].technologyChooseOne.chooseOneId+") '>删除</button></td><tr>";
+		//追加到table中
+		$("#titletable").append(strone);
+		$("#onets").html(onelength);
+		//<th width="25"><input type="checkbox" id="all" value="">批量删除</th>
+	}
+}
+//显示类别信息
+  function showoneselect(onedata) {
+	var stroneselect = "";//用于拼接的字符串
+	var onelength = onedata.length;
+	for (var i = 0; i < onelength; i++) {
+		stroneselect = "<option>"+ onedata[i].technologyTypeName + "</option >";
+		console.log(onedata[i].technologyTypeName);
+		//追加到table中
+		$("#oneselectop").append(stroneselect);
+	}
+}  
+//单个删除
+function onedelete(oneid){
+	var r = confirm("是否删除？");
+	if(r==true){
+		var chooseOneId = oneid;
+		$.get("/show/onedelete?chooseOneId="+chooseOneId,function(data){
+			if(data=="ok"){
+				alert("删除成功！");
+				//删除成功，刷新页面信息
+				location.reload();
+			}else{
+				alert("删除失败！!");
+			}
+		});
+		return true;
+	}else{
+		return false;
+	}
+}//
+
+/*封面图-批量删除*/
+
+function del(){
+
+	var r=confirm("是否确认删除？");    
+	if(r==true){ 
+		//确认删除
+		var ids="";
+		var n=0;
+		for(var i=0;i<oid.length;i++){
+			if(oid[i].checked==true){//选中为true
+				var id=oid[i].value;
+				if(n==0){
+					ids+="ids="+id;
+				}else{
+					ids+="&ids="+id;
+				}
+				n++;
+			}			
+		}
+	    //上面会拼接出一个名为ids的数组ids=1&ids=2&ids=3&ids=4……
+	    $.get("/show/onedeleteall",ids,function(data){
+			 if(data=="ok"){
+				alert("删除成功!");
+				//删除成功后，调用action方法刷新页面信息
+				location.reload();
+				$("input[name=id]").removeAttr("checked");
+			}else{
+				alert("请选中行!");
+			} 
+		});
+		return true; 
+	}else{ 
+		//不删除
+		return false;    
+	} 
+}
+
+//模态框通过id查询并显示
+function selectonemodalid(onemodalid){
+	$.ajax({
+		url : "selectonemodalid",
+		type : "post",
+		datatype : "json",
+		data : {onemodalid : onemodalid },
+		success : function (onemodaldata){
+			showonemodal(onemodaldata);
+			console.log(onemodaldata);
+		}
+	});
+}
+
+//通过id查询到的值进行展示
+function showonemodal(onemodaldata){
+	$("#tmid").val(onemodaldata.chooseOneId);
+	$("#tm").val(onemodaldata.chooseOneDetail);
+	$("#ana").val(onemodaldata.chooseOneAnswer1);
+	$("#anb").val(onemodaldata.chooseOneAnswer2);
+	$("#anc").val(onemodaldata.chooseOneAnswer3);
+	$("#and").val(onemodaldata.chooseOneAnswer4);
+	$("#an").val(onemodaldata.chooseOneTrueAnswer);
+	$("#ny").val(onemodaldata.chooseOneComplexity);
+	$("#ty").val(onemodaldata.technologyTypeId);	
+}
+
+//模态框通过id查询显示并修改保存提交
+function savaone(){
+	$.ajax({
+		url : "savaonemodal",
+		type : "post",
+		datatype : "json",
+		data : {
+			'chooseOneId' : $("#tmid").val(),
+			'chooseOneDetail' : $("#tm").val(),
+			'chooseOneAnswer1' : $("#ana").val(),
+			'chooseOneAnswer2' : $("#anb").val(),
+			'chooseOneAnswer3' : $("#anc").val(),
+			'chooseOneAnswer4' : $("#and").val(),
+			'chooseOneTrueAnswer' : $("#an").val(),
+			'chooseOneComplexity' : $("#ny").val(),
+			'technologyTypeId' : $("#ty").val(),
+		},
+		success : function (onesavedata){
+			if(onesavedata =="ok"){
+				alert("修改成功");
+				location.reload();
+			}
+		}
+	});
+}
+
+//模态框添加试题
+function addone(){
+	$.ajax({
+		url : "addonemodal",
+		type : "post",
+		datatype : "json",
+		data : {
+			'chooseOneDetail' : $("#addtm").val(),
+			'chooseOneAnswer1' : $("#addana").val(),
+			'chooseOneAnswer2' : $("#addanb").val(),
+			'chooseOneAnswer3' : $("#addanc").val(),
+			'chooseOneAnswer4' : $("#addand").val(),
+			'chooseOneTrueAnswer' : $("#addan").val(),
+			'chooseOneComplexity' : $("#addny").val(),
+			'technologyTypeId' : $("#addty").val(),
+		},
+		success : function (oneadddata){
+			if(oneadddata =="ok"){
+				alert("添加成功");
+				location.reload();
+			}
+		}
+	});
+}
+
+
+
+//通过类别查询
+function oneselectop(){
+	
+	//alert( $('select option:selected').val());
+		$.ajax({
+			url : "oneselecttype",
+			type : "post",
+			datatype : "json",
+			data : {
+				'technologyTypeId' : $('select option:selected').val(),
+			},
+			success : function (onetypedata){
+				$("#titletable").empty();
+				showone(onetypedata);
+				
+				console.log(onetypedata);
+			}
+		});
+}	
+	
+        /* 	多选 */
+        
+       function	showmuch(muchdata){
+		   var strmuch = "";
+		   var muchlength = muchdata.length;
+		   for(var i=0 ; i<muchlength; i++){
+			   strmuch = "<tr><td>"+"<input name = 'muchlen' type='checkbox' value = '"+muchdata[i].technologyChooseMuch.chooseMuchId+"'></input></td><td>"
+			    + [i+1]+"</td><td>"
+			    + muchdata[i].technologyChooseMuch.chooseMuchDetail+ "</td><td>"
+			    + muchdata[i].technologyChooseMuch.chooseMuchAnswer1 + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchAnswer2 + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchAnswer3 + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchAnswer4 + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchAnswer5 + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchTrueAnswer + "</td><td>"
+				+ muchdata[i].technologyChooseMuch.chooseMuchComplexity + "</td><td>"
+				+ muchdata[i].technologyTypeName + "</td><td >"
+				+ "<button onclick='selectmuchmodalid("+muchdata[i].technologyChooseMuch.chooseMuchId+")' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#muchmyModal'> 修改 </button></td><td >"
+				+"<button onclick='muchdelete("+muchdata[i].technologyChooseMuch.chooseMuchId+") '>删除</button></td><tr>";
+			 //追加到table中
+				$("#muchtitletable").append(strmuch);
+				$("#muchts").html(muchlength);
+		   }
+	    }
+	   //单个删除
+	    function muchdelete(muchid){
+		  
+		   var r = confirm("是否删除？");
+		   if (r == true ){
+			   var chooseMuchId = muchid;
+			  // alert(chooseMuchId);
+			   $.get("/show/muchdelete?chooseMuchId="+chooseMuchId,function(data){
+				  if(data == "ok"){
+					  alert("删除成功");
+					  location.reload();
+				  } else{
+					  alert("删除失败");
+				  }
+			   });
+			   return true;
+		   }else{
+			   return false;
+		   }
+	   } 
+	   
+	   //批量删除
+	    function delmuch(){
+		   var rmuch = confirm("是否确认删除？");
+		   if(rmuch == true){
+			   var ids = "";
+			   var n = 0;
+			   for(var i=0 ; i<onamemuch.length; i++){
+				   if(onamemuch[i].checked == true){
+					   var id = onamemuch[i].value;
+					   if(n==0){
+						   ids+="ids="+id;
+					   }else{
+						   ids+="&ids="+id;
+					   }
+					   n++;
+				   }
+			   }
+			   //上面会拼接出一个名为ids的数组ids=1&ids=2&ids=3&ids=4……
+			   $.get("/show/muchdeleteall",ids,function(data){
+				   if(data=="ok"){
+					   alert("删除成功");
+					   location.reload();
+				   }else{
+					   alert("请选中行!");
+				   }
+			   });
+			   return true;
+		   }else{
+			   return false;
+		   }
+	   } 
+	   
+	  //模态框通过id查询并显示
+		function selectmuchmodalid(muchmodalid){
+			$.ajax({
+				url : "selectmuchmodalid",
+				type : "post",
+				datatype : "json",
+				data : {muchmodalid : muchmodalid },
+				success : function (muchmodaldata){
+					showmuchmodal(muchmodaldata);
+					console.log(muchmodaldata);
+				}
+			});
+		}
+		
+		//通过id查询到的值进行展示
+		function showmuchmodal(muchmodaldata){
+			$("#muchtmid").val(muchmodaldata.chooseMuchId);
+			$("#muchtm").val(muchmodaldata.chooseMuchDetail);
+			$("#muchana").val(muchmodaldata.chooseMuchAnswer1);
+			$("#muchanb").val(muchmodaldata.chooseMuchAnswer2);
+			$("#muchanc").val(muchmodaldata.chooseMuchAnswer3);
+			$("#muchand").val(muchmodaldata.chooseMuchAnswer4);
+			$("#muchane").val(muchmodaldata.chooseMuchAnswer5);
+			$("#muchan").val(muchmodaldata.chooseMuchTrueAnswer);
+			$("#muchny").val(muchmodaldata.chooseMuchComplexity);
+			$("#muchty").val(muchmodaldata.technologyTypeId);	
+		}
+		
+		//模态框通过id查询显示并修改保存提交
+		function savamuch(){
+			$.ajax({
+				url : "savamuchmodal",
+				type : "post",
+				datatype : "json",
+				data : {
+					'chooseMuchId' : $("#muchtmid").val(),
+					'chooseMuchDetail' : $("#muchtm").val(),
+					'chooseMuchAnswer1' : $("#muchana").val(),
+					'chooseMuchAnswer2' : $("#muchanb").val(),
+					'chooseMuchAnswer3' : $("#muchanc").val(),
+					'chooseMuchAnswer4' : $("#muchand").val(),
+					'chooseMuchAnswer5' : $("#muchane").val(),
+					'chooseMuchTrueAnswer' : $("#muchan").val(),
+					'chooseMuchComplexity' : $("#muchny").val(),
+					'technologyTypeId' : $("#muchty").val(),
+				},
+				success : function (muchsavedata){
+					if(muchsavedata =="ok"){
+						alert("修改成功");
+						location.reload();
+					}
+				}
+			});
+		}
+	   
+		//模态框通过id查询显示并修改保存提交
+		function addmuch(){
+			$.ajax({
+				url : "addmuchmodal",
+				type : "post",
+				datatype : "json",
+				data : {
+					
+					'chooseMuchDetail' : $("#addmuchtm").val(),
+					'chooseMuchAnswer1' : $("#addmuchana").val(),
+					'chooseMuchAnswer2' : $("#addmuchanb").val(),
+					'chooseMuchAnswer3' : $("#addmuchanc").val(),
+					'chooseMuchAnswer4' : $("#addmuchand").val(),
+					'chooseMuchAnswer5' : $("#addmuchane").val(),
+					'chooseMuchTrueAnswer' : $("#addmuchan").val(),
+					'chooseMuchComplexity' : $("#addmuchny").val(),
+					'technologyTypeId' : $("#addmuchty").val(),
+				},
+				success : function (muchadddata){
+					if(muchadddata =="ok"){
+						alert("添加成功");
+						location.reload();
+					}
+				}
+			});
+		}
+	   
+		//通过类别查询
+		function muchselectop(){
+			
+			//alert( $('select option:selected').val());
+				$.ajax({
+					url : "muchselecttype",
+					type : "post",
+					datatype : "json",
+					data : {
+						'technologyTypeId' : $('select option:selected').val(),
+					},
+					success : function (muchtypedata){
+						$("#muchtitletable").empty();
+						showmuch(muchtypedata);
+						
+						console.log(muchtypedata);
+					}
+				});
+		}	
+	
+        
+  /*       判断 */
+  
+   function	showjudge(judgedata){
+		   var strjudge = "";
+		   var judgelength = judgedata.length;
+		   for(var i=0 ; i<judgelength; i++){
+			   strjudge = "<tr><td>"+"<input name = 'judgelen' type='checkbox' value = '"+judgedata[i].technologyJudge.technologyJudgeId+"'></input></td><td>"
+			    + [i+1]+"</td><td>"
+			    + judgedata[i].technologyJudge.technologyJudgeDetail+ "</td><td>"
+			    + judgedata[i].technologyJudge.technologyJudgeTrueAnswer + "</td><td>"
+				+ judgedata[i].technologyJudge.technologyJudgeComplexity + "</td><td>"
+				+ judgedata[i].technologyTypeName + "</td><td >"
+				+ "<button onclick='selectjudgemodalid("+judgedata[i].technologyJudge.technologyJudgeId+")' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#judgemyModal'> 修改 </button></td><td >"
+				+"<button onclick='judgedelete("+judgedata[i].technologyJudge.technologyJudgeId+") '>删除</button></td><tr>";
+			 //追加到table中
+				$("#judgetitletable").append(strjudge);
+				$("#judgets").html(judgelength);
+		   }
+	    }
+	   //单个删除
+	    function judgedelete(judgeid){
+		  
+		   var r = confirm("是否删除？");
+		   if (r == true ){
+			   var technologyJudgeId = judgeid;
+			  // alert(choosejudgeId);
+			   $.get("/show/judgedelete?technologyJudgeId="+technologyJudgeId,function(data){
+				  if(data == "ok"){
+					  alert("删除成功");
+					  location.reload();
+				  } else{
+					  alert("删除失败");
+				  }
+			   });
+			   return true;
+		   }else{
+			   return false;
+		   }
+	   } 
+	   
+	   //批量删除
+	    function deljudge(){
+		   var rjudge = confirm("是否确认删除？");
+		   if(rjudge == true){
+			   var ids = "";
+			   var n = 0;
+			   for(var i=0 ; i<onamejudge.length; i++){
+				   if(onamejudge[i].checked == true){
+					   var id = onamejudge[i].value;
+					   if(n==0){
+						   ids+="ids="+id;
+					   }else{
+						   ids+="&ids="+id;
+					   }
+					   n++;
+				   }
+			   }
+			   //上面会拼接出一个名为ids的数组ids=1&ids=2&ids=3&ids=4……
+			   $.get("/show/judgedeleteall",ids,function(data){
+				   if(data=="ok"){
+					   alert("删除成功");
+					   location.reload();
+				   }else{
+					   alert("请选中行!");
+				   }
+			   });
+			   return true;
+		   }else{
+			   return false;
+		   }
+	   } 
+	   
+	  //模态框通过判断id查询并显示
+		function selectjudgemodalid(judgemodalid){
+			$.ajax({
+				url : "selectjudgemodalid",
+				type : "post",
+				datatype : "json",
+				data : {judgemodalid : judgemodalid },
+				success : function (judgemodaldata){
+					showjudgemodal(judgemodaldata);
+					console.log(judgemodaldata);
+				}
+			});
+		}
+		
+		//通过id查询到的值进行展示
+		function showjudgemodal(judgemodaldata){
+			$("#judgetmid").val(judgemodaldata.technologyJudgeId);
+			$("#judgetm").val(judgemodaldata.technologyJudgeDetail);
+			$("#judgean").val(judgemodaldata.technologyJudgeTrueAnswer);
+			$("#judgeny").val(judgemodaldata.technologyJudgeComplexity);
+			$("#judgety").val(judgemodaldata.technologyTypeId);
+		}
+		
+		//模态框通过id查询显示并修改保存提交
+		function savajudge(){
+			$.ajax({
+				url : "savajudgemodal",
+				type : "post",
+				datatype : "json",
+				data : {
+					'technologyJudgeId' : $("#judgetmid").val(),
+					'technologyJudgeDetail' : $("#judgetm").val(),
+					'technologyJudgeTrueAnswer' : $("#judgean").val(),
+					'technologyJudgeComplexity' : $("#judgeny").val(),
+					'technologyTypeId' : $("#judgety").val(),
+				},
+				success : function (judgesavedata){
+					if(judgesavedata =="ok"){
+						alert("修改成功");
+						location.reload();
+					}
+				}
+			});
+		}
+		
+		//模态框添加判断题
+		function addjudge(){
+			$.ajax({
+				url : "addjudgemodal",
+				type : "post",
+				datatype : "json",
+				data : {
+					
+					'technologyJudgeDetail' : $("#addjudgetm").val(),
+					'technologyJudgeTrueAnswer' : $("#addjudgean").val(),
+					'technologyJudgeComplexity' : $("#addjudgeny").val(),
+					'technologyTypeId' : $("#addjudgety").val(),
+				},
+				success : function (judgeadddata){
+					if(judgeadddata =="ok"){
+						alert("添加成功");
+						location.reload();
+					}
+				}
+			});
+		}
+		
+		//通过类别查询选中下拉框的值
+		function judgeselectop(){
+			
+			//alert( $('select option:selected').val());
+				$.ajax({
+					url : "judgeselecttype",
+					type : "post",
+					datatype : "json",
+					data : {
+						'technologyTypeId' : $('select option:selected').val(),
+					},
+					success : function (judgetypedata){
+						$("#judgetitletable").empty();
+						showjudge(judgetypedata);
+						
+						console.log(judgetypedata);
+					}
+				});
+		}	
+	
+</script>
 </head>
 
 <body>
@@ -22,16 +747,21 @@
 	</ul>
 
 	<div class="tab-content" style="padding: 20px;">
-
-		<div class="tab-pane active fade in" id="n1">
-		<div>
+		
+		<div class="tab-pane active fade in" id="n1">  <!--     第一个页面开始 -->
+			
+			<div>
 		<span class="l"><a href="javascript:;" onclick="del()"
-			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
-			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
-			id="ts">0</strong> 条
+			class="btn btn-danger radius" id="plid"> 批量删除</a>
+			 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#oneaddmyModal">添加单选题</button></span>
+			  <span class="r">共有数据：<strong id="onets">0</strong> 条
 		</span>
+		
+		题型类别:<select onchange="oneselectop()" id="oneselectop" >
+			  <option value="">题型类别</option>
+		</select>
 	</div>
-
+    
 	<table id="tabone">
 		<tr>
 		    <th><input type="checkbox" id="all" value=""></th>
@@ -44,23 +774,94 @@
 			<th>正确答案</th>
 			<th>难易程度</th>
 			<th>类别</th>
+			<th>修改</th>
 			<th>删除</th>
 			
 		</tr>
+		<tbody id="titletable">
 		<tr>
 			<td></td>
 		</tr>
+		</tbody>
+		
 	</table>
+	
+ 	<!-- Button trigger modal -->
+<!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  修改单选题
+</button>-->
 
-		</div>
+<!-- 修改Modal -->
+<div class="modal fade" id="onemyModal" tabindex="-1" role="dialog" aria-labelledby="onemyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="onemyModalLabel">修改单选题内容</h4>
+      </div>
+      <div class="modal-body"> 
+         <p>题目id:<input id="tmid" type="hidden" placeholder=""/></p>
+	     <p>题目内容:<input id="tm" type="text" placeholder=""/></p>
+	     <p>答案A:<input id="ana"  type="text" placeholder=""/></p>
+		 <p>答案B:<input id="anb"  type="text" placeholder=""/></p>
+	     <p>答案C:<input id="anc"  type="text" placeholder=""/></p>
+	     <p>答案D:<input id="and"  type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="an"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="ny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="ty"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="savaone()">保存修改</button>
+      </div>
+    </div>
+  </div>
+</div> 
 
-		<div class="tab-pane fade" id="n2">
+<!-- 添加Modal -->
+<div class="modal fade" id="oneaddmyModal" tabindex="-1" role="dialog" aria-labelledby="addonemyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addonemyModalLabel">修改单选题内容</h4>
+      </div>
+      <div class="modal-body"> 
+        
+	     <p>题目内容:<input id="addtm" type="text" placeholder=""/></p>
+	     <p>答案A:<input id="addana"  type="text" placeholder=""/></p>
+		 <p>答案B:<input id="addanb"  type="text" placeholder=""/></p>
+	     <p>答案C:<input id="addanc"  type="text" placeholder=""/></p>
+	     <p>答案D:<input id="addand"  type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="addan"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="addny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="addty"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="addone()">添加保存</button>
+      </div>
+    </div>
+  </div>
+</div> 
+			
+		</div>   <!--     第一个页面结束 -->
+
+		<div class="tab-pane fade" id="n2">  <!-- 第二个页面开始 -->
+			
 			<div>
 		<span class="l"><a href="javascript:;" onclick="delmuch()"
-			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
-			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
-			id="ts">0</strong> 条
+			class="btn btn-danger radius" id="muchplid"> 批量删除</a>
+			  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#muchaddmyModal">添加多选题</button></span>
+			  <span class="r">共有数据：<strong id="muchts">0</strong> 条
 		</span>
+		题型类别:<select onchange="muchselectop()" id="muchselectop" >
+			  <option value="">题型类别</option>
+		</select>
 	</div>
 
 	<table id="tabmuch">
@@ -76,23 +877,92 @@
 			<th>正确答案</th>
 			<th>难易程度</th>
 			<th>类别</th>
+			<th>修改</th>
 			<th>删除</th>
 
 		</tr>
+		<tbody id="muchtitletable">
 		<tr>
 			<td></td>
 		</tr>
+		</tbody>
 	</table>
+	<!-- 修改 -->
+	<div class="modal fade" id="muchmyModal" tabindex="-1" role="dialog" aria-labelledby="muchmyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="muchmyModalLabel">修改多选题内容</h4>
+      </div>
+      <div class="modal-body"> 
+         <p>题目id:<input id="muchtmid" type="hidden" placeholder=""/></p>
+	     <p>题目内容:<input id="muchtm" type="text" placeholder=""/></p>
+	     <p>答案A:<input id="muchana"  type="text" placeholder=""/></p>
+		 <p>答案B:<input id="muchanb"  type="text" placeholder=""/></p>
+	     <p>答案C:<input id="muchanc"  type="text" placeholder=""/></p>
+	     <p>答案D:<input id="muchand"  type="text" placeholder=""/></p>
+	     <p>答案E:<input id="muchane"  type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="muchan"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="muchny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="muchty"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="savamuch()">保存修改</button>
+      </div>
+    </div>
+  </div>
+</div> 
 
-		</div>
 
-		<div class="tab-pane fade" id="n3">
-		<div>
+<!-- 添加 -->
+
+	<div class="modal fade" id="muchaddmyModal" tabindex="-1" role="dialog" aria-labelledby="addmuchmyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addmuchmyModalLabel">修改多选题内容</h4>
+      </div>
+      <div class="modal-body"> 
+         
+	     <p>题目内容:<input id="addmuchtm" type="text" placeholder=""/></p>
+	     <p>答案A:<input id="addmuchana"  type="text" placeholder=""/></p>
+		 <p>答案B:<input id="addmuchanb"  type="text" placeholder=""/></p>
+	     <p>答案C:<input id="addmuchanc"  type="text" placeholder=""/></p>
+	     <p>答案D:<input id="addmuchand"  type="text" placeholder=""/></p>
+	     <p>答案E:<input id="addmuchane"  type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="addmuchan"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="addmuchny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="addmuchty"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="addmuch()">添加保存</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+		</div>  <!-- 第二个页面结束 -->
+		
+		<div class="tab-pane fade" id="n3">  <!--     第三个页面开始 -->
+			
+			<div>
 		<span class="l"><a href="javascript:;" onclick="deljudge()"
-			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
-			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
-			id="ts">0</strong> 条
+			class="btn btn-danger radius" id="judgeplid"> 批量删除</a> 
+			<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#judgeaddmyModal">添加判断题</button></span>
+			 <span class="r">共有数据：<strong
+			id="judgets">0</strong> 条
 		</span>
+		题型类别:<select onchange="judgeselectop()" id="judgeselectop" >
+			  <option value="">题型类别</option>
+		</select>
 	</div>
 
 	<table id="tabjudge">
@@ -103,18 +973,70 @@
 			<th>正确答案</th>
 			<th>难易程度</th>
 			<th>类别</th>
+			<th>修改</th>
 			<th>删除</th>
 
 		</tr>
+		<tbody id="judgetitletable">
 		<tr>
 			<td></td>
 		</tr>
+		</tbody>
 	</table>
+	<!-- 修改判断题 -->
+	<div class="modal fade" id="judgemyModal" tabindex="-1" role="dialog" aria-labelledby="judgemyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="judgemyModalLabel">修改判断题内容</h4>
+      </div>
+      <div class="modal-body"> 
+         <p>题目id:<input id="judgetmid" type="hidden" placeholder=""/></p>
+	     <p>题目内容:<input id="judgetm" type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="judgean"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="judgeny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="judgety"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="savajudge()">保存修改</button>
+      </div>
+    </div>
+  </div>
+</div> 
 
-		</div>
-
+<!-- 添加判断题 -->
+	<div class="modal fade" id="judgeaddmyModal" tabindex="-1" role="dialog" aria-labelledby="addjudgemyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addjudgemyModalLabel">添加判断题内容</h4>
+      </div>
+      <div class="modal-body"> 
+       
+	     <p>题目内容:<input id="addjudgetm" type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="addjudgean"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="addjudgeny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="addjudgety"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="addjudge()">添加保存</button>
+      </div>
+    </div>
+  </div>
+</div> 
+			
+		</div>   <!--     第三个页面结束 -->
+		<!-- 查询并添加类别表 -->
 		<div class="tab-pane fade" id="n4">
-			查询类别表 <img src="img/s4.jpg" />
+			查询并添加类别表<!--  <img src="img/s4.jpg" /> -->
 
 		</div>
 

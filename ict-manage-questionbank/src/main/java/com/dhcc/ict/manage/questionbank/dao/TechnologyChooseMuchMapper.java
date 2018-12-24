@@ -36,4 +36,7 @@ public interface TechnologyChooseMuchMapper {
 	List<QuestionBankMuch> selectMuchTechnology();
     //批量删除多选
 	void qusetionMuchDeleteAll(Integer[] ids);
+	// 查询多选题库id按类别查找
+	List<QuestionBankMuch> selectMuchTypeTechnology(Integer technologyTypeId);
+
 }

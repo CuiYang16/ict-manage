@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -185,73 +186,130 @@ public class ShowListController {
 			return "ok";
 		}
 	}
-	
+
 	@RequestMapping("goaddone")
-	public String goaddone( ) {
+	public String goaddone() {
 		return "onepageadd";
 	}
-	
-	@RequestMapping("addone")
-	public String addone( TechnologyChooseOne technologyChooseOne) {
-		System.out.println("添加单选题");
-			showListService.addonedetail(technologyChooseOne);
-			System.out.println("添加单选题成功");
-			return "showTechnology";
-	}
-	//到整合的页面
-	@RequestMapping("goindextechnology")
-	public String indextechnology( ) {
+
+	// 到整合的页面
+	@RequestMapping("indextechnology")
+	public String indextechnology() {
 		return "indextechnology";
 	}
-	
-	//通过单选id查询并显示到模态框
+
+	// 通过单选id查询并显示到模态框
 	@RequestMapping("selectonemodalid")
 	@ResponseBody
-	public TechnologyChooseOne selectonemodalid( Integer onemodalid) {
+	public TechnologyChooseOne selectonemodalid(Integer onemodalid) {
 		TechnologyChooseOne technologyChooseOne = showListService.selectonemodalid(onemodalid);
 		return technologyChooseOne;
 	}
+
+	// 通过单选id查询并显示到模态框 修改保存实现
+	@RequestMapping("savaonemodal")
+	@ResponseBody
+	public String savaonemodal(TechnologyChooseOne technologyChooseOne) {
+		showListService.savaonemodal(technologyChooseOne);
+		System.out.println("ggggggggggggg");
+		return "ok";
+	}
+
+	// 通过多选id查询并显示到模态框
+	@RequestMapping("selectmuchmodalid")
+	@ResponseBody
+	public TechnologyChooseMuch selectmuchmodalid(Integer muchmodalid) {
+		TechnologyChooseMuch technologyChooseMuch = showListService.selectmuchmodalid(muchmodalid);
+		return technologyChooseMuch;
+	}
+
+	// 通过多选id查询并显示到模态框 修改保存实现
+	@RequestMapping("savamuchmodal")
+	@ResponseBody
+	public String savamuchmodal(TechnologyChooseMuch technologyChooseMuch) {
+		showListService.savemuchmodal(technologyChooseMuch);
+		System.out.println("ggggggggggggg");
+		return "ok";
+	}
+
+	// 通过多选id查询并显示到模态框
+	@RequestMapping("selectjudgemodalid")
+	@ResponseBody
+	public TechnologyJudge selectjudgemodalid(Integer judgemodalid) {
+		TechnologyJudge technologyJudge = showListService.selectjudgemodalid(judgemodalid);
+		return technologyJudge;
+	}
+
+	// 通过多选id查询并显示到模态框 修改保存实现
+	@RequestMapping("savajudgemodal")
+	@ResponseBody
+	public String savajudgemodal(TechnologyJudge technologyJudge) {
+		showListService.savejudgemodal(technologyJudge);
+		System.out.println("ggggggggggggg");
+		return "ok";
+	}
+
+	// 添加单选题
+	@RequestMapping("addonemodal")
+	@ResponseBody
+	public String addOne(TechnologyChooseOne technologyChooseOne) {
+
+		showListService.addonedetail(technologyChooseOne);
+
+		return "ok";
+	}
+
+	// 添加多选题
+	@RequestMapping("addmuchmodal")
+	@ResponseBody
+	public String addMuch(TechnologyChooseMuch technologyChooseMuch) {
+
+		showListService.addmuchdetail(technologyChooseMuch);
+
+		return "ok";
+	}
+
+	// 添加判断题
+	@RequestMapping("addjudgemodal")
+	@ResponseBody
+	public String addJudge(TechnologyJudge technologyJudge) {
+		showListService.addJudgeDetail(technologyJudge);
+		return "ok";
+	}
+
+	// 查询类别表
+	@RequestMapping("/selecttype")
+	@ResponseBody
+	public List<TechnologyType> selectType() {
+		List<TechnologyType> list = showListService.selectType();
+		return list;
+	}
+
+	// 查询单选题库按类别查找
+	@ResponseBody
+	@RequestMapping("/oneselecttype")
+	public List<QuestionBankOne> oneSelectType(Integer technologyTypeId) {
+		System.out.println(technologyTypeId);
+		List<QuestionBankOne> list = showListService.oneSelectType(technologyTypeId);
+		return list;
+	}
 	
-	//通过单选id查询并显示到模态框  修改保存实现
-		@RequestMapping("savaonemodal")
+	// 查询多选题库按类别查找
 		@ResponseBody
-		public String savaonemodal( TechnologyChooseOne technologyChooseOne) {
-			showListService.savaonemodal(technologyChooseOne);
-			System.out.println("ggggggggggggg");
-			return "ok";
+		@RequestMapping("/muchselecttype")
+		public List<QuestionBankMuch> muchSelectType(Integer technologyTypeId) {
+			System.out.println(technologyTypeId);
+			List<QuestionBankMuch> list = showListService.muchSelectType(technologyTypeId);
+			return list;
 		}
 		
-		//通过多选id查询并显示到模态框
-		@RequestMapping("selectmuchmodalid")
+		// 查询判断题库按类别查找
 		@ResponseBody
-		public TechnologyChooseMuch selectmuchmodalid( Integer muchmodalid) {
-			TechnologyChooseMuch technologyChooseMuch = showListService.selectmuchmodalid(muchmodalid);
-			return technologyChooseMuch;
+		@RequestMapping("/judgeselecttype")
+		public List<QuestionBankJudge> judgeSelectType(Integer technologyTypeId) {
+			System.out.println(technologyTypeId);
+			List<QuestionBankJudge> list = showListService.judgeSelectType(technologyTypeId);
+			return list;
 		}
-		
-		//通过多选id查询并显示到模态框  修改保存实现
-			@RequestMapping("savamuchmodal")
-			@ResponseBody
-			public String savamuchmodal( TechnologyChooseMuch technologyChooseMuch) {
-				showListService.savemuchmodal(technologyChooseMuch);
-				System.out.println("ggggggggggggg");
-				return "ok";
-			}
-			//通过多选id查询并显示到模态框
-			@RequestMapping("selectjudgemodalid")
-			@ResponseBody
-			public TechnologyJudge selectjudgemodalid( Integer judgemodalid) {
-				TechnologyJudge technologyJudge = showListService.selectjudgemodalid(judgemodalid);
-				return technologyJudge;
-			}
-			
-			//通过多选id查询并显示到模态框  修改保存实现
-				@RequestMapping("savajudgemodal")
-				@ResponseBody
-				public String savajudgemodal( TechnologyJudge technologyJudge) {
-					showListService.savejudgemodal(technologyJudge);
-					System.out.println("ggggggggggggg");
-					return "ok";
-				}
 
 }

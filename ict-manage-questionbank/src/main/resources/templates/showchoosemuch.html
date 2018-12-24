@@ -7,7 +7,7 @@
 <script src="/bootstrap/js/bootstrap.js"></script>
 <link href="/bootstrap/css/bootstrap.css" rel="stylesheet"/>
 <script type="text/javascript">
-var oallmuch = document.getElementById("allmuch");
+//var oallmuch = document.getElementById("allmuch");
 var onamemuch = document.getElementsByName("muchlen");
 	$(document).ready(function() {
 		$.ajax({
@@ -21,6 +21,25 @@ var onamemuch = document.getElementsByName("muchlen");
 			}
 
 		});  
+		
+		//显示下拉列表类别信息
+		$.ajax({
+			url : "selecttype",//请求地址
+			dataType : "json",//数据格式 
+			type : "post",//请求方式
+			success : function(muchselectdata) { //如何发送成功
+				console.log(muchselectdata);
+				//showoneselect(oneselectdata);
+				var strmuchselect = "";//用于拼接的字符串
+				var muchlength = muchselectdata.length;
+				for (var i = 0; i < muchlength; i++) {
+					strmuchselect = "<option value='"+muchselectdata[i].technologyTypeId+"'>"+ muchselectdata[i].technologyTypeName + "</option >";
+					//追加到table中
+					$("#muchselectop").append(strmuchselect);
+				} 
+			}
+
+		});
 		
 		var oallmuch = document.getElementById("allmuch");
 		var onamemuch = document.getElementsByName("muchlen");
@@ -67,8 +86,8 @@ var onamemuch = document.getElementsByName("muchlen");
 				+ "<button onclick='selectmuchmodalid("+muchdata[i].technologyChooseMuch.chooseMuchId+")' type='button' class='btn btn-primary btn-lg' data-toggle='modal' data-target='#muchmyModal'> 修改 </button></td><td >"
 				+"<button onclick='muchdelete("+muchdata[i].technologyChooseMuch.chooseMuchId+") '>删除</button></td><tr>";
 			 //追加到table中
-				$("#tabmuch").append(strmuch);
-				$("#ts").html(muchlength);
+				$("#muchtitletable").append(strmuch);
+				$("#muchts").html(muchlength);
 		   }
 	    }
 	   //单个删除
@@ -179,7 +198,52 @@ var onamemuch = document.getElementsByName("muchlen");
 			});
 		}
 	   
+		//模态框通过id查询显示并修改保存提交
+		function addmuch(){
+			$.ajax({
+				url : "addmuchmodal",
+				type : "post",
+				datatype : "json",
+				data : {
+					
+					'chooseMuchDetail' : $("#addmuchtm").val(),
+					'chooseMuchAnswer1' : $("#addmuchana").val(),
+					'chooseMuchAnswer2' : $("#addmuchanb").val(),
+					'chooseMuchAnswer3' : $("#addmuchanc").val(),
+					'chooseMuchAnswer4' : $("#addmuchand").val(),
+					'chooseMuchAnswer5' : $("#addmuchane").val(),
+					'chooseMuchTrueAnswer' : $("#addmuchan").val(),
+					'chooseMuchComplexity' : $("#addmuchny").val(),
+					'technologyTypeId' : $("#addmuchty").val(),
+				},
+				success : function (muchadddata){
+					if(muchadddata =="ok"){
+						alert("添加成功");
+						location.reload();
+					}
+				}
+			});
+		}
 	   
+		//通过类别查询
+		function muchselectop(){
+			
+			//alert( $('select option:selected').val());
+				$.ajax({
+					url : "muchselecttype",
+					type : "post",
+					datatype : "json",
+					data : {
+						'technologyTypeId' : $('select option:selected').val(),
+					},
+					success : function (muchtypedata){
+						$("#muchtitletable").empty();
+						showmuch(muchtypedata);
+						
+						console.log(muchtypedata);
+					}
+				});
+		}	
 	
 	
 </script>
@@ -188,10 +252,13 @@ var onamemuch = document.getElementsByName("muchlen");
 
  <div>
 		<span class="l"><a href="javascript:;" onclick="delmuch()"
-			class="btn btn-danger radius" id="plid"> 批量删除</a> <a title="添加"
-			href="javascript:;">添加</a></span> <span class="r">共有数据：<strong
-			id="ts">0</strong> 条
+			class="btn btn-danger radius" id="muchplid"> 批量删除</a>
+			  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#muchaddmyModal">添加多选题</button></span>
+			  <span class="r">共有数据：<strong id="muchts">0</strong> 条
 		</span>
+		题型类别:<select onchange="muchselectop()" id="muchselectop" >
+			  <option value="">题型类别</option>
+		</select>
 	</div>
 
 	<table id="tabmuch">
@@ -211,17 +278,19 @@ var onamemuch = document.getElementsByName("muchlen");
 			<th>删除</th>
 
 		</tr>
+		<tbody id="muchtitletable">
 		<tr>
 			<td></td>
 		</tr>
+		</tbody>
 	</table>
-	
-	<div class="modal fade" id="muchmyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<!-- 修改 -->
+	<div class="modal fade" id="muchmyModal" tabindex="-1" role="dialog" aria-labelledby="muchmyModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">修改多选题内容</h4>
+        <h4 class="modal-title" id="muchmyModalLabel">修改多选题内容</h4>
       </div>
       <div class="modal-body"> 
          <p>题目id:<input id="muchtmid" type="hidden" placeholder=""/></p>
@@ -244,6 +313,39 @@ var onamemuch = document.getElementsByName("muchlen");
     </div>
   </div>
 </div> 
+
+
+<!-- 添加 -->
+
+	<div class="modal fade" id="muchaddmyModal" tabindex="-1" role="dialog" aria-labelledby="addmuchmyModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addmuchmyModalLabel">修改多选题内容</h4>
+      </div>
+      <div class="modal-body"> 
+         
+	     <p>题目内容:<input id="addmuchtm" type="text" placeholder=""/></p>
+	     <p>答案A:<input id="addmuchana"  type="text" placeholder=""/></p>
+		 <p>答案B:<input id="addmuchanb"  type="text" placeholder=""/></p>
+	     <p>答案C:<input id="addmuchanc"  type="text" placeholder=""/></p>
+	     <p>答案D:<input id="addmuchand"  type="text" placeholder=""/></p>
+	     <p>答案E:<input id="addmuchane"  type="text" placeholder=""/></p>
+	     <p>正确答案:<input id="addmuchan"  type="text" placeholder=""/></p>
+	     <p>难易程度:<input id="addmuchny"  type="text" placeholder=""/></p>
+	     <p>类别:<input id="addmuchty"  type="text" placeholder=""/></p> 
+   
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">退出</button>
+        <button type="button" class="btn btn-primary" onclick="addmuch()">添加保存</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
 
 </body>
 </html>

@@ -24,6 +24,8 @@ public interface TechnologyTypeMapper {
 
 	List<Integer> selectByid();
 	//查询单选题库
-	List<TechnologyType> selectOneTechnology();
+	/*List<TechnologyType> selectOneTechnology();*/
+    //查询类别表
+	List<TechnologyType> selectType();
 
 }

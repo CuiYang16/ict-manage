@@ -1,8 +1,6 @@
 package com.dhcc.ict.manage.questionbank.pojo;
 //查询单选题库和类别的扩展类
 
-import java.util.List;
-
 public class QuestionBankOne{
 	private  TechnologyChooseOne technologyChooseOne;
 	
