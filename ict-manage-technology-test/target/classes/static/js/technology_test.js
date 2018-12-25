@@ -78,12 +78,14 @@ $(document).ready(function() {
 				'.one-answer').eq(i).children('input[type="radio"]:checked').val()));
 		}
 		for (i = 0; i < $('.much-answer').children('input[type="hidden"]').length; i++) {
-			muchSubmit.push(new ExamSubmitDetail($('.much-answer').children('input[type="hidden"]').eq(i).val(), $(
-				'.much-answer').eq(i).children('input[type="checkbox"]:checked').each(function(j) {
-				checkedVal[j] = $(this).val()
-			})));
+			$('.much-answer').eq(i).children('input[type="checkbox"]:checked').each(function(j) {
+				console.log($(this).val());
+			checkedVal.push($(this).val().replace(/\"/g, ""));
+			});
+			muchSubmit.push(new ExamSubmitDetail($('.much-answer').children('input[type="hidden"]').eq(i).val(),checkedVal));
+			checkedVal = [];
 		}
-		
+	
 		for(i=0;i<$('.judge-answer').children('input[type="hidden"]').length;i++){
 			judgeSubmit.push(new ExamSubmitDetail($('.judge-answer').children('input[type="hidden"]').eq(i).val(), $(
 			'.judge-answer').eq(i).children('input[type="radio"]:checked').val()));

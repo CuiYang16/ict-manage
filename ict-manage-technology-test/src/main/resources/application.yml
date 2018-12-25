@@ -1,5 +1,9 @@
 server:
   port: 8083
+  session:
+    timeout: 3600
+    cookie:
+      name: sessionid
 eureka:
   instance:
     hostname: localhost
@@ -50,7 +54,8 @@ zuul:
   routes:
     technologytest:
       path: /ictmanagetechnologytest/**
-      service-id: ict-manage-technology-test 
+      service-id: ict-manage-technology-test
+      sensitiveHeaders: Authorization 
    
 mybatis:
   mapper-locations: mybatis/mapper/*Mapper.xml

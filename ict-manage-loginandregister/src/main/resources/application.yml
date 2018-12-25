@@ -47,12 +47,13 @@ spring:
     # 合并多个DruidDataSource的监控数据
     useGlobalDataSourceStat: true
 zuul:
-  routes:
+  routes: 
     technologytest:
       path: /ictmanagetechnologytest/**
       service-id: ict-manage-technology-test
+      sensitiveHeaders: Authorization
   ignore-local-service: true
-   
+
 #mybatis
 mybatis:
   type-aliases-package: com.dhcc.ict.manage.loginandregister.pojo
