@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dhcc.ict.manage.loginandregister.dao.ExamRecordMapper" >
-  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.loginandregister.pojo.ExamRecord" >
+<mapper namespace="com.dhcc.ict.manage.examanalysis.dao.ExamRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.examanalysis.pojo.ExamRecord" >
     <constructor >
       <idArg column="exam_record_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="exam_starttime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
@@ -18,7 +18,7 @@
       <arg column="technology_test_complexity" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
-  <sql id="Example_Where_Clause" >
+  <sql id="Example_Where_Clause"  >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
         <if test="criteria.valid" >
@@ -81,7 +81,7 @@
     choose_much_score, choose_jurge, total_score, user_answer, user_id, exam_question_id, 
     technology_type_id, technology_test_complexity
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.loginandregister.pojo.ExamRecordExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.examanalysis.pojo.ExamRecordExample" >
     select
     <if test="distinct" >
       distinct
@@ -105,13 +105,13 @@
     delete from exam_record
     where exam_record_id = #{examRecordId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.loginandregister.pojo.ExamRecordExample" >
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.examanalysis.pojo.ExamRecordExample" >
     delete from exam_record
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dhcc.ict.manage.loginandregister.pojo.ExamRecord" >
+  <insert id="insert" parameterType="com.dhcc.ict.manage.examanalysis.pojo.ExamRecord" >
     insert into exam_record (exam_record_id, exam_starttime, exam_endtime, 
       exam_reality_time, choose_one_score, choose_much_score, 
       choose_jurge, total_score, user_answer, 
@@ -123,7 +123,7 @@
       #{userId,jdbcType=INTEGER}, #{examQuestionId,jdbcType=INTEGER}, #{technologyTypeId,jdbcType=INTEGER}, 
       #{technologyTestComplexity,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.loginandregister.pojo.ExamRecord" >
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.examanalysis.pojo.ExamRecord" >
     insert into exam_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="examRecordId != null" >
@@ -208,7 +208,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.dhcc.ict.manage.loginandregister.pojo.ExamRecordExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.examanalysis.pojo.ExamRecordExample" resultType="java.lang.Integer" >
     select count(*) from exam_record
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -280,7 +280,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.loginandregister.pojo.ExamRecord" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.examanalysis.pojo.ExamRecord" >
     update exam_record
     <set >
       <if test="examStarttime != null" >
@@ -322,7 +322,7 @@
     </set>
     where exam_record_id = #{examRecordId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.loginandregister.pojo.ExamRecord" >
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.examanalysis.pojo.ExamRecord" >
     update exam_record
     set exam_starttime = #{examStarttime,jdbcType=TIMESTAMP},
       exam_endtime = #{examEndtime,jdbcType=TIMESTAMP},
@@ -339,18 +339,17 @@
     where exam_record_id = #{examRecordId,jdbcType=INTEGER}
   </update>
 <!-- 管理员添加 -->
-<resultMap type="com.dhcc.ict.manage.loginandregister.pojo.UserDetail" id="Score">
+<resultMap type="com.dhcc.ict.manage.examanalysis.pojo.ExamRecord" id="Score">
 <id property="examRecordId" column="exam_record_id" />
+<result property="examStarttime" column="exam_starttime" />
+<result property="examEndtime" column="exam_endtime" />
 <result property="chooseOneScore" column="choose_one_score" />
 <result property="chooseMuchScore" column="choose_much_score" />
 <result property="chooseJurge" column="choose_jurge" />
 <result property="totalScore" column="total_score" />
-<result property="userId" column="user_id" />
-<result property="examQuestionId" column="examQuestion_id" />
-<result property="technologyTypeId" column="technology_type_id" />
 <result property="technologyTestComplexity" column="technology_test_Complexity" />
 </resultMap>
-<select id="searchScore" resultMap="Score">
-select * from exam_record 
+<select id="analysisScore" resultMap="Score">
+select * from exam_record as e where e.technology_type_id = #{technologyTypeId}
 </select>
 </mapper>
