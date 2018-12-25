@@ -139,7 +139,6 @@ public class TechnologyService {
 		String judge = submitObject.getString("judgeSubmit");
 		List<ExamSubmitDetail> submitJudge = JSON.parseObject(judge, new TypeReference<List<ExamSubmitDetail>>() {
 		});
-		System.out.println(chooseone);
 		List<List<ExamSubmitDetail>> listArr = new ArrayList<List<ExamSubmitDetail>>();
 		listArr.add(submitChooseOne);
 		listArr.add(submitChooseMuch);
@@ -178,6 +177,7 @@ public class TechnologyService {
 		List<ExamSubmitDetail> userChooseMuch = list.get(1);
 
 		for (int i = 0, listSize = questionChooseMuch.size(); i < listSize - 1; i++) {
+			System.out.println(userChooseMuch.get(i).getUserAnswer());
 			if (questionChooseMuch.get(i).getChooseMuchId() == userChooseMuch.get(i).getQuestionId()) {
 				String[] trueAnswer = questionChooseMuch.get(i).getChooseMuchTrueAnswer().split(",");
 				String[] userAnswer = userChooseMuch.get(i).getUserAnswer().split(",");
