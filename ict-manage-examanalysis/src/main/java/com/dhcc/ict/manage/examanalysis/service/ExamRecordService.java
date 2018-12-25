@@ -1,5 +1,7 @@
 package com.dhcc.ict.manage.examanalysis.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,15 @@ public class ExamRecordService {
 
 	@Autowired
 	ExamRecordMapper examRecordMapper;
-	public int analysisScore(Integer examReordid) {
-		return examRecordMapper.analysisScore(examReordid);
+	public List<ExamRecord> count(Integer userId) {
+		return examRecordMapper.count(userId);
 			
 	}
+
+	public List<ExamRecord> avageScore(Integer totalScore) {
+		return examRecordMapper.avageScore(totalScore);
+			
+	}
+
 
 }
