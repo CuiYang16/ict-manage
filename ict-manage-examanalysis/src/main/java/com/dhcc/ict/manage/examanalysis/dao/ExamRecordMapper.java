@@ -30,5 +30,8 @@ public interface ExamRecordMapper {
 
     int updateByPrimaryKey(ExamRecord record);
 
-	int analysisScore(Integer examReordid);
+	List<ExamRecord> count(Integer userId);
+
+	List<ExamRecord> avageScore(Integer totalScore);
+
 }
