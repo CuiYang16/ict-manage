@@ -177,7 +177,6 @@ public class TechnologyService {
 		List<ExamSubmitDetail> userChooseMuch = list.get(1);
 
 		for (int i = 0, listSize = questionChooseMuch.size(); i < listSize - 1; i++) {
-			System.out.println(userChooseMuch.get(i).getUserAnswer());
 			if (questionChooseMuch.get(i).getChooseMuchId() == userChooseMuch.get(i).getQuestionId()) {
 				String[] trueAnswer = questionChooseMuch.get(i).getChooseMuchTrueAnswer().split(",");
 				String[] userAnswer = userChooseMuch.get(i).getUserAnswer().split(",");
@@ -193,7 +192,7 @@ public class TechnologyService {
 							}
 						}
 					}
-					if (count == trueAnswer.length) {
+					if (count == userAnswer.length) {
 						chooseMuchGrade += 1;
 						count = 0;
 					}
@@ -209,8 +208,9 @@ public class TechnologyService {
 		List<ExamSubmitDetail> userJudge = list.get(2);
 
 		for (int i = 0, listSize = questionjudge.size(); i < listSize - 1; i++) {
+			System.out.println(userJudge.get(i).getUserAnswer());
 			if (questionjudge.get(i).getTechnologyJudgeId() == userJudge.get(i).getQuestionId()) {
-				if (questionjudge.get(i).getTechnologyJudgeTrueAnswer().equals(userChooseOne.get(i).getUserAnswer())) {
+				if (questionjudge.get(i).getTechnologyJudgeTrueAnswer().equals(userJudge.get(i).getUserAnswer())) {
 					judgeGrade += 1;
 				}
 			} else {

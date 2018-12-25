@@ -68,7 +68,7 @@ $(document).ready(function() {
 	//提交试卷
 	var oneSubmit = [];
 	var muchSubmit = [];
-	var checkedVal = [];
+	var checkedVal = '';
 	var judgeSubmit = [];
 	
 	$('.submit-question').click(function() {
@@ -80,13 +80,21 @@ $(document).ready(function() {
 		for (i = 0; i < $('.much-answer').children('input[type="hidden"]').length; i++) {
 			$('.much-answer').eq(i).children('input[type="checkbox"]:checked').each(function(j) {
 				console.log($(this).val());
-			checkedVal.push($(this).val().replace(/\"/g, ""));
+				if(j == 0){
+					checkedVal += $(this).val();
+				}else{
+					checkedVal+=(','+$(this).val());
+				}
+				
+
 			});
 			muchSubmit.push(new ExamSubmitDetail($('.much-answer').children('input[type="hidden"]').eq(i).val(),checkedVal));
-			checkedVal = [];
+			checkedVal = '';
 		}
 	
 		for(i=0;i<$('.judge-answer').children('input[type="hidden"]').length;i++){
+			console.log($(
+			'.judge-answer').eq(i).children('input[type="radio"]:checked').val());
 			judgeSubmit.push(new ExamSubmitDetail($('.judge-answer').children('input[type="hidden"]').eq(i).val(), $(
 			'.judge-answer').eq(i).children('input[type="radio"]:checked').val()));
 		}
