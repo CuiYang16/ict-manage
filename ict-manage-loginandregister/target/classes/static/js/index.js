@@ -81,6 +81,7 @@ function register() {
 		success:function(result){
 			if(result.data!='1'){
 				alert("用户名已存在");
+				 
 			}
 		}	
 	})		
@@ -96,6 +97,7 @@ function check() {
 		success:function(result){
 			if(result=='1'){
 				alert("用户名已存在");
+				
 			}
 		}	
 	})		
@@ -110,6 +112,7 @@ $("#userName").click(function(){
 $("#userName").blur(function() {
 	if(firstClick){
 		check();
+		
 	}
 	
 });

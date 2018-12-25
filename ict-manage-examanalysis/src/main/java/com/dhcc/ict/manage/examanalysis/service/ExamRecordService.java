@@ -5,14 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dhcc.ict.manage.examanalysis.dao.ExamRecordMapper;
-import com.dhcc.ict.manage.examanalysis.pojo.ExamRecord;
+import com.dhcc.ict.manage.examanalysis.dao.*;
+import com.dhcc.ict.manage.examanalysis.pojo.*;
+
+
 
 @Service
-public class ExamRecordService {
+public class ExamRecordService { 
 
 	@Autowired
-	ExamRecordMapper examRecordMapper;
+	private ExamRecordMapper examRecordMapper ;
+	
 	public List<ExamRecord> count(Integer userId) {
 		return examRecordMapper.count(userId);
 			
