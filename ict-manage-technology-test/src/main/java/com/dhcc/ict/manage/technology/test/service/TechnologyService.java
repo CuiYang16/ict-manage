@@ -128,18 +128,17 @@ public class TechnologyService {
 
 		JSONObject submitObject = JSONObject.parseObject(userSubmitDetail);
 		// 分别获取不同题型的信息
-		String chooseone = submitObject.getString("chooseone");
+		String chooseone = submitObject.getString("oneSubmit");
 		List<ExamSubmitDetail> submitChooseOne = JSON.parseObject(chooseone,
 				new TypeReference<List<ExamSubmitDetail>>() {
 				});
-		String choosemuch = submitObject.getString("choosemuch");
+		String choosemuch = submitObject.getString("muchSubmit");
 		List<ExamSubmitDetail> submitChooseMuch = JSON.parseObject(choosemuch,
 				new TypeReference<List<ExamSubmitDetail>>() {
 				});
-		String judge = submitObject.getString("judge");
+		String judge = submitObject.getString("judgeSubmit");
 		List<ExamSubmitDetail> submitJudge = JSON.parseObject(judge, new TypeReference<List<ExamSubmitDetail>>() {
 		});
-
 		List<List<ExamSubmitDetail>> listArr = new ArrayList<List<ExamSubmitDetail>>();
 		listArr.add(submitChooseOne);
 		listArr.add(submitChooseMuch);
@@ -193,7 +192,7 @@ public class TechnologyService {
 							}
 						}
 					}
-					if (count == trueAnswer.length) {
+					if (count == userAnswer.length) {
 						chooseMuchGrade += 1;
 						count = 0;
 					}
@@ -209,8 +208,9 @@ public class TechnologyService {
 		List<ExamSubmitDetail> userJudge = list.get(2);
 
 		for (int i = 0, listSize = questionjudge.size(); i < listSize - 1; i++) {
+			System.out.println(userJudge.get(i).getUserAnswer());
 			if (questionjudge.get(i).getTechnologyJudgeId() == userJudge.get(i).getQuestionId()) {
-				if (questionjudge.get(i).getTechnologyJudgeTrueAnswer().equals(userChooseOne.get(i).getUserAnswer())) {
+				if (questionjudge.get(i).getTechnologyJudgeTrueAnswer().equals(userJudge.get(i).getUserAnswer())) {
 					judgeGrade += 1;
 				}
 			} else {

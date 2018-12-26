@@ -66,11 +66,11 @@ $(document).ready(function() {
 
 
 	//提交试卷
-	var oneSubmit = new Array();
-	var muchSubmit = new Array();
-	var checkedVal = [];
-
-	var judgeSubmit = new Array();
+	var oneSubmit = [];
+	var muchSubmit = [];
+	var checkedVal = '';
+	var judgeSubmit = [];
+	
 	$('.submit-question').click(function() {
 
 		for (var i = 0; i < $('.one-answer').children('input[type="hidden"]').length; i++) {
@@ -78,23 +78,47 @@ $(document).ready(function() {
 				'.one-answer').eq(i).children('input[type="radio"]:checked').val()));
 		}
 		for (i = 0; i < $('.much-answer').children('input[type="hidden"]').length; i++) {
-			muchSubmit.push(new ExamSubmitDetail($('.much-answer').children('input[type="hidden"]').eq(i).val(), $(
-				'.much-answer').eq(i).children('input[type="checkbox"]:checked').each(function(j) {
-				checkedVal[j] = $(this).val()
-			})));
+			$('.much-answer').eq(i).children('input[type="checkbox"]:checked').each(function(j) {
+				console.log($(this).val());
+				if(j == 0){
+					checkedVal += $(this).val();
+				}else{
+					checkedVal+=(','+$(this).val());
+				}
+				
+
+			});
+			muchSubmit.push(new ExamSubmitDetail($('.much-answer').children('input[type="hidden"]').eq(i).val(),checkedVal));
+			checkedVal = '';
 		}
-		
+	
 		for(i=0;i<$('.judge-answer').children('input[type="hidden"]').length;i++){
+			console.log($(
+			'.judge-answer').eq(i).children('input[type="radio"]:checked').val());
 			judgeSubmit.push(new ExamSubmitDetail($('.judge-answer').children('input[type="hidden"]').eq(i).val(), $(
 			'.judge-answer').eq(i).children('input[type="radio"]:checked').val()));
 		}
-		console.log(judgeSubmit);
+		
+		/*userSubmitDetail.push(muchSubmit);
+		userSubmitDetail.push(judgeSubmit);*/
+		//console.log(examSubmit(new userSubmitDetail(oneSubmit,muchSubmit,judgeSubmit)));
+		$.ajax({
+			url:'/ictmanagetechnologytest/tectest/getGrade',
+			type:'post',
+			data:{"userSubmitDetail":JSON.stringify(new userSubmitDetail(oneSubmit,muchSubmit,judgeSubmit))},
+			dataType:'json',
+			async: false,
+			success:function(result){
+				console.log(result);
+			},
+			error:function(){
+			
+		}
+		});
+		//examSubmit(new userSubmitDetail(oneSubmit,muchSubmit,judgeSubmit));
 	});
 });
 
-function nextTopic(obj) {
-
-}
 
 //toggle事件
 $.fn.toggle = function(fn, fn2) {
@@ -114,7 +138,31 @@ $.fn.toggle = function(fn, fn2) {
 	return this.click(toggle);
 };
 
+
+//考试信息对象
 var ExamSubmitDetail = function(questionId, userAnswer) {
 	this.questionId = questionId;
 	this.userAnswer = userAnswer;
+}
+
+//用户提交信息对象
+var userSubmitDetail = function(oneSubmit,muchSubmit,judgeSubmit){
+	this.oneSubmit=oneSubmit;
+	this.muchSubmit=muchSubmit;
+	this.judgeSubmit=judgeSubmit
+	}
+
+function examSubmit(detail){
+	$.ajax({
+		url:'/ictmanagetechnologytest/tectest/getGrade',
+		type:'post',
+		data:{userSubmitDetail:detail},
+		dataType:'json',
+		success:function(result){
+			return result;
+		},
+		error:function(){
+		
+	}
+	});
 }

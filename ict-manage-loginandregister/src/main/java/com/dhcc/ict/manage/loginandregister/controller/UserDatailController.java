@@ -133,14 +133,8 @@ public class UserDatailController {
 		return "exam";
 
 	}
-	
-	@RequestMapping("/score")
-	public String analysisScore(ExamRecord examRecord) {
-	
-		return null;
-		
-		
-	}
+	 
+
 
 	@RequestMapping("/gotest")
 	public String goTest(int testType) {

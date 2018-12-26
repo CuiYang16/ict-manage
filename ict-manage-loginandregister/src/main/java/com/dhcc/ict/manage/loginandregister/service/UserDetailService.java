@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dhcc.ict.manage.loginandregister.dao.UserDetailMapper;
+import com.dhcc.ict.manage.loginandregister.pojo.ExamRecord;
 import com.dhcc.ict.manage.loginandregister.pojo.UserDetail;
 
 @Service
@@ -26,5 +27,7 @@ public class UserDetailService {
 	public int addUser(UserDetail UserDetail) {
 		return userDetailMapper.addUser(UserDetail);
 	}
+
+
 
 }
