@@ -440,7 +440,7 @@
 		from
 		technology_choose_one o, technology_type t
 		where
-		o.technology_type_id = t.technology_type_id
+		o.technology_type_id = t.technology_type_id ORDER BY o.choose_one_id DESC
 	</select>
 	
 	<!-- 批量或全选删除单选表数据 -->

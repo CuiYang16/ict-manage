@@ -308,7 +308,7 @@
 		from
 		technology_choose_much o, technology_type t
 		where
-		o.technology_type_id = t.technology_type_id
+		o.technology_type_id = t.technology_type_id ORDER BY o.choose_much_id DESC
 	</select>
 	<resultMap id="ResultMap"
 		type="com.dhcc.ict.manage.questionbank.pojo.QuestionBankMuch">

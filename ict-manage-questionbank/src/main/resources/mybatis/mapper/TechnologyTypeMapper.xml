@@ -178,4 +178,11 @@
     	select * from technology_type 
   </select> 
   
+  <insert id="insertTypeName" parameterType="java.lang.String" >
+     insert into technology_type (technology_type_name
+      )
+    values ( #{technologyTypeName,jdbcType=VARCHAR}
+      )
+  </insert>
+  
 </mapper>

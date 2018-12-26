@@ -10,6 +10,8 @@ import com.dhcc.ict.manage.questionbank.dao.TechnologyChooseOneMapper;
 import com.dhcc.ict.manage.questionbank.dao.TechnologyJudgeMapper;
 import com.dhcc.ict.manage.questionbank.dao.TechnologyTypeMapper;
 import com.dhcc.ict.manage.questionbank.pojo.TechnologyType;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.dhcc.ict.manage.questionbank.pojo.QuestionBankJudge;
 import com.dhcc.ict.manage.questionbank.pojo.QuestionBankMuch;
 import com.dhcc.ict.manage.questionbank.pojo.QuestionBankOne;
@@ -151,6 +153,18 @@ public class ShowListService {
 	// 查询判断题库id按类别查找
 	public List<QuestionBankJudge> judgeSelectType(Integer technologyTypeId) {
 		return technologyJudgeMapper.selectJudgeTypeTechnology(technologyTypeId);
+	}
+	//添加类别名称
+	public void addtype(String technologyTypeName) {
+		technologyTypeMapper.insertTypeName(technologyTypeName);
+		
+	}
+
+	public Object findAllUser(int pageNum, int pageSize) {
+		PageHelper.startPage(pageNum, pageSize);
+        List<QuestionBankOne> users = technologyChooseOneMapper.selectOneTechnology();
+        PageInfo result = new PageInfo(users);
+        return result;
 	}
 
 	

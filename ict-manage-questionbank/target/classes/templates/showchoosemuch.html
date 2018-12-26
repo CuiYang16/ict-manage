@@ -16,8 +16,8 @@ var onamemuch = document.getElementsByName("muchlen");
 			type : "post",//请求方式
 			//async : true,//是否异步请求
 			success : function(muchdata) { //如何发送成功
-				showmuch(muchdata);
-			console.log(muchdata);
+				showmuch(muchdata.muchlist);
+			console.log(muchdata.muchlist);
 			}
 
 		});  

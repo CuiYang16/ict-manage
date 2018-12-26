@@ -1,11 +1,13 @@
 package com.dhcc.ict.manage.questionbank.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dhcc.ict.manage.questionbank.pojo.TechnologyType;
@@ -16,6 +18,8 @@ import com.dhcc.ict.manage.questionbank.pojo.TechnologyChooseMuch;
 import com.dhcc.ict.manage.questionbank.pojo.TechnologyChooseOne;
 import com.dhcc.ict.manage.questionbank.pojo.TechnologyJudge;
 import com.dhcc.ict.manage.questionbank.service.ShowListService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Controller
 @RequestMapping("/show")
@@ -55,35 +59,101 @@ public class ShowListController {
 	 */
 
 	// 查询单选题库
+	/*@ResponseBody
+	@RequestMapping("/one")
+	public List<QuestionBankOne> qusetionOnelist() {	
+		List<QuestionBankOne> list = showListService.questionOnelist();
+		return list;
+	}*/
+	/**
+	 * 查询单选题库
+	 * @param pageNum 当前页数
+	 * @return  数据库的数据集合
+	 */
 	@ResponseBody
 	@RequestMapping("/one")
-	public List<QuestionBankOne> qusetionOnelist() {
-
+	public Map<String,Object> qusetionOnelist(@RequestParam(defaultValue="1",required=true,value="pageNum") Integer pageNum) {
+		Map<String,Object> map = new HashMap<>();
+		System.out.println("ddddddddddddd");
+		Integer pageSize=5;  //当前页数显示的数据条数
+		PageHelper.startPage(pageNum, pageSize);
 		List<QuestionBankOne> list = showListService.questionOnelist();
-
-		return list;
+		PageInfo<QuestionBankOne> page=new PageInfo<QuestionBankOne>(list);
+		map.put("onelist",list);
+		map.put("onepage",page);
+		//map.put(key, value)
+		return map;
 	}
-
+	/*@ResponseBody
+	@RequestMapping("/one")
+		public Object findAllUser(
+	            @RequestParam(name = "pageNum", required = false, defaultValue = "1")
+	                    int pageNum,
+	            @RequestParam(name = "pageSize", required = false, defaultValue = "5")
+	                    int pageSize
+	    ){
+	        return showListService.findAllUser(pageNum,pageSize);
+	    }
+	*/
+	
+	/*@ResponseBody
+	@RequestMapping("/one")
+				public PageInfo<QuestionBankOne> ajaxBlog(){
+			        PageHelper.startPage(2,3);
+			        List<QuestionBankOne> blogList = showListService.questionOnelist();
+			        PageInfo<QuestionBankOne> pageInfo = new PageInfo<QuestionBankOne>(blogList);
+			        return pageInfo;
+			    }
+*/
+	
 	// 查询多选题库
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping("/much")
 	public List<QuestionBankMuch> qusetionMuchlist() {
-
 		List<QuestionBankMuch> listmuch = showListService.qusetionMuchlist();
-
 		return listmuch;
+	}*/
+	/**查询多选题库
+	* @param pageNo 当前页数
+	 * @return  数据库的数据集合
+	 */
+	@ResponseBody
+	@RequestMapping("/much")
+	public  Map<String,Object> qusetionMuchlist(@RequestParam(defaultValue="1",required=true,value="pageNo") Integer pageNo) {
+		Map<String,Object> map = new HashMap<>();
+		Integer pageSize=4;
+		PageHelper.startPage(pageNo, pageSize);
+		List<QuestionBankMuch> listmuch = showListService.qusetionMuchlist();
+		PageInfo<QuestionBankMuch> page=new PageInfo<QuestionBankMuch>(listmuch);
+		map.put("muchlist",listmuch);
+		map.put("muchpage",page);
+		return map;
 	}
 
 	// 查询判断题库
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping("/judge")
 	public List<QuestionBankJudge> qusetionJudgelist() {
-
 		List<QuestionBankJudge> listjudge = showListService.qusetionJudgelist();
-
 		return listjudge;
+	}*/
+	
+	/**查询判断题库
+	* @param pageNo 当前页数
+	 * @return  数据库的数据集合
+	 */
+	@ResponseBody
+	@RequestMapping("/judge")
+	public Map<String, Object> qusetionJudgelist(@RequestParam(defaultValue="1",required=true,value="pageNo") Integer pageNo) {
+		Map<String, Object> map = new HashMap<>();
+		Integer pageSize = 4;
+		PageHelper.startPage(pageNo,pageSize);
+		List<QuestionBankJudge> listjudge = showListService.qusetionJudgelist();
+		PageInfo<QuestionBankJudge> page = new PageInfo<QuestionBankJudge>(listjudge);
+		map.put("judgelist", listjudge);
+		map.put("judgepage", page);
+		return map;
 	}
-
 	/**
 	 * 
 	 * @param chooseOneId 删除单个选择题的id
@@ -311,5 +381,19 @@ public class ShowListController {
 			List<QuestionBankJudge> list = showListService.judgeSelectType(technologyTypeId);
 			return list;
 		}
+		
+		//添加类别名称
+		@RequestMapping("addtype")
+		@ResponseBody
+		public String addType(String technologyTypeName) {
+			if (technologyTypeName.equals(" ") || technologyTypeName==null) {
+				return "error";
+			}else {
+				showListService.addtype(technologyTypeName);
+				return "ok";
+			}
+		}
+		
+		
 
 }

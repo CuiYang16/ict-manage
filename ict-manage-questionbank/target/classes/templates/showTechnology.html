@@ -18,9 +18,9 @@ var oid = document.getElementsByName("id");
 			type : "post",//请求方式
 			//async : true,//是否异步请求
 			success : function(onedata) { //如何发送成功
-				showone(onedata);
+				showone(onedata.onelist);
 				//showoneselect(onedata);
-			console.log(onedata);
+			console.log(onedata.onelist);
 			}
 
 		});
@@ -273,8 +273,7 @@ var oid = document.getElementsByName("id");
 		<span class="l"><a href="javascript:;" onclick="del()"
 			class="btn btn-danger radius" id="plid"> 批量删除</a>
 			 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#oneaddmyModal">添加单选题</button></span>
-			  <span class="r">共有数据：<strong id="onets">0</strong> 条
-		</span>
+			  <span class="r">共有数据：<strong id="onets">0</strong> 条</span>
 		
 		题型类别:<select onchange="oneselectop()" id="oneselectop" >
 			  <option value="">题型类别</option>

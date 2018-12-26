@@ -28,4 +28,6 @@ public interface TechnologyTypeMapper {
     //查询类别表
 	List<TechnologyType> selectType();
 
+	void insertTypeName(String technologyTypeName);
+
 }
