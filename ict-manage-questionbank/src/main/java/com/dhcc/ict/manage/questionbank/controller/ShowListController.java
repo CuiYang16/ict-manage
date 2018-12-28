@@ -75,7 +75,7 @@ public class ShowListController {
 	public Map<String,Object> qusetionOnelist(@RequestParam(defaultValue="1",required=true,value="pageNum") Integer pageNum) {
 		Map<String,Object> map = new HashMap<>();
 		System.out.println("ddddddddddddd");
-		Integer pageSize=5;  //当前页数显示的数据条数
+		Integer pageSize=3;  //当前页数显示的数据条数
 		PageHelper.startPage(pageNum, pageSize);
 		List<QuestionBankOne> list = showListService.questionOnelist();
 		PageInfo<QuestionBankOne> page=new PageInfo<QuestionBankOne>(list);
@@ -84,27 +84,6 @@ public class ShowListController {
 		//map.put(key, value)
 		return map;
 	}
-	/*@ResponseBody
-	@RequestMapping("/one")
-		public Object findAllUser(
-	            @RequestParam(name = "pageNum", required = false, defaultValue = "1")
-	                    int pageNum,
-	            @RequestParam(name = "pageSize", required = false, defaultValue = "5")
-	                    int pageSize
-	    ){
-	        return showListService.findAllUser(pageNum,pageSize);
-	    }
-	*/
-	
-	/*@ResponseBody
-	@RequestMapping("/one")
-				public PageInfo<QuestionBankOne> ajaxBlog(){
-			        PageHelper.startPage(2,3);
-			        List<QuestionBankOne> blogList = showListService.questionOnelist();
-			        PageInfo<QuestionBankOne> pageInfo = new PageInfo<QuestionBankOne>(blogList);
-			        return pageInfo;
-			    }
-*/
 	
 	// 查询多选题库
 	/*@ResponseBody
@@ -119,10 +98,10 @@ public class ShowListController {
 	 */
 	@ResponseBody
 	@RequestMapping("/much")
-	public  Map<String,Object> qusetionMuchlist(@RequestParam(defaultValue="1",required=true,value="pageNo") Integer pageNo) {
+	public  Map<String,Object> qusetionMuchlist(@RequestParam(defaultValue="1",required=true,value="muchpageNum") Integer muchpageNum) {
 		Map<String,Object> map = new HashMap<>();
-		Integer pageSize=4;
-		PageHelper.startPage(pageNo, pageSize);
+		Integer pageSize=3;
+		PageHelper.startPage(muchpageNum, pageSize);
 		List<QuestionBankMuch> listmuch = showListService.qusetionMuchlist();
 		PageInfo<QuestionBankMuch> page=new PageInfo<QuestionBankMuch>(listmuch);
 		map.put("muchlist",listmuch);
@@ -144,10 +123,10 @@ public class ShowListController {
 	 */
 	@ResponseBody
 	@RequestMapping("/judge")
-	public Map<String, Object> qusetionJudgelist(@RequestParam(defaultValue="1",required=true,value="pageNo") Integer pageNo) {
+	public Map<String, Object> qusetionJudgelist(@RequestParam(defaultValue="1",required=true,value="judgepageNum") Integer judgepageNum) {
 		Map<String, Object> map = new HashMap<>();
-		Integer pageSize = 4;
-		PageHelper.startPage(pageNo,pageSize);
+		Integer pageSize = 3;
+		PageHelper.startPage(judgepageNum,pageSize);
 		List<QuestionBankJudge> listjudge = showListService.qusetionJudgelist();
 		PageInfo<QuestionBankJudge> page = new PageInfo<QuestionBankJudge>(listjudge);
 		map.put("judgelist", listjudge);
@@ -356,31 +335,76 @@ public class ShowListController {
 	}
 
 	// 查询单选题库按类别查找
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping("/oneselecttype")
 	public List<QuestionBankOne> oneSelectType(Integer technologyTypeId) {
 		System.out.println(technologyTypeId);
 		List<QuestionBankOne> list = showListService.oneSelectType(technologyTypeId);
 		return list;
-	}
+	}*/
 	
+	// 查询单选题库按类别查找
+	@ResponseBody
+	@RequestMapping("/oneselecttype")
+	public Map<String,Object> oneSelectType(Integer technologyTypeId,@RequestParam(defaultValue="1",required=true,value="pageNum") Integer pageNum) {
+		Map<String,Object> map = new HashMap<>();
+		System.out.println("onelllllllllbbbbbbbb");
+		System.out.println(technologyTypeId);
+		Integer pageSize=3;  //当前页数显示的数据条数
+		PageHelper.startPage(pageNum, pageSize);
+		List<QuestionBankOne> list = showListService.oneSelectType(technologyTypeId);
+		PageInfo<QuestionBankOne> page=new PageInfo<QuestionBankOne>(list);
+		map.put("onelist",list);
+		map.put("onepage",page);
+		return map;
+	}
 	// 查询多选题库按类别查找
-		@ResponseBody
+		/*@ResponseBody
 		@RequestMapping("/muchselecttype")
 		public List<QuestionBankMuch> muchSelectType(Integer technologyTypeId) {
 			System.out.println(technologyTypeId);
 			List<QuestionBankMuch> list = showListService.muchSelectType(technologyTypeId);
 			return list;
-		}
+		}*/
+	// 查询多选题库按类别查找
+	@ResponseBody
+	@RequestMapping("/muchselecttype")
+	public Map<String,Object> muchSelectType(Integer technologyTypeId,@RequestParam(defaultValue="1",required=true,value="muchpageNum") Integer muchpageNum) {
+		Map<String,Object> map = new HashMap<>();
+		System.out.println("muchlllllllllbbbbbbbb");
+		System.out.println(technologyTypeId);
+		Integer pageSize=3;  //当前页数显示的数据条数
+		PageHelper.startPage(muchpageNum, pageSize);
+		List<QuestionBankMuch> list = showListService.muchSelectType(technologyTypeId);
+		PageInfo<QuestionBankMuch> page=new PageInfo<QuestionBankMuch>(list);
+		map.put("muchlist",list);
+		map.put("muchpage",page);
+		return map;
+	}
 		
 		// 查询判断题库按类别查找
-		@ResponseBody
+		/*@ResponseBody
 		@RequestMapping("/judgeselecttype")
 		public List<QuestionBankJudge> judgeSelectType(Integer technologyTypeId) {
 			System.out.println(technologyTypeId);
 			List<QuestionBankJudge> list = showListService.judgeSelectType(technologyTypeId);
 			return list;
-		}
+		}*/
+	// 查询判断题库按类别查找
+	@ResponseBody
+	@RequestMapping("/judgeselecttype")
+	public Map<String,Object> judgeSelectType(Integer technologyTypeId,@RequestParam(defaultValue="1",required=true,value="judgepageNum") Integer judgepageNum) {
+		Map<String,Object> map = new HashMap<>();
+		System.out.println(technologyTypeId);
+		System.out.println("muchlllllllllbbbbbbbb");
+		Integer pageSize=3;  //当前页数显示的数据条数
+		PageHelper.startPage(judgepageNum, pageSize);
+		List<QuestionBankJudge> list = showListService.judgeSelectType(technologyTypeId);
+		PageInfo<QuestionBankJudge> page=new PageInfo<QuestionBankJudge>(list);
+		map.put("judgelist",list);
+		map.put("judgepage",page);
+		return map;
+	}
 		
 		//添加类别名称
 		@RequestMapping("addtype")

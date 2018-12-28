@@ -338,7 +338,7 @@
 		where
 		o.technology_type_id = t.technology_type_id
 		and 
-		t.technology_type_id =#{technologyTypeId}
+		t.technology_type_id =#{technologyTypeId} ORDER BY o.choose_much_id DESC
 	</select>
 	
 </mapper>

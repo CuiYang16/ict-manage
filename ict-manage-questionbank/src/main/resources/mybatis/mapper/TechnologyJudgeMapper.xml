@@ -259,7 +259,7 @@
 		where
 		o.technology_type_id = t.technology_type_id
 		and 
-		t.technology_type_id =#{technologyTypeId}
+		t.technology_type_id =#{technologyTypeId} order by o.technology_judge_id desc
 	</select>
  
 </mapper>
