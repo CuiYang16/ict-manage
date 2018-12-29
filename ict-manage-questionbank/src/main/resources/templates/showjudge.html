@@ -16,8 +16,8 @@ var onamejudge = document.getElementsByName("judgelen");
 			type : "post",//请求方式
 			//async : true,//是否异步请求
 			success : function(judgedata) { //如何发送成功
-				showjudge(judgedata);
-			console.log(judgedata);
+				showjudge(judgedata.judgelist);
+			console.log(judgedata.judgelist);
 			}
 
 		});  

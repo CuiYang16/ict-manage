@@ -1,7 +1,5 @@
 package com.dhcc.ict.manage.questionbank.pojo;
 
-import java.util.List;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
