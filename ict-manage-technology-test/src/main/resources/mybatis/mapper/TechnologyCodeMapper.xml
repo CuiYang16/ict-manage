@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.ict.manage.technology.test.dao.TechnologyCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.technology.test.pojo.TechnologyCode" >
+    <constructor >
+      <idArg column="technology_code_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="technology_code_detail" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="technology_code_complexity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="technology_type_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    technology_code_id, technology_code_detail, technology_code_complexity, technology_type_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyCodeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from technology_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from technology_code
+    where technology_code_id = #{technologyCodeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from technology_code
+    where technology_code_id = #{technologyCodeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyCodeExample" >
+    delete from technology_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyCode" >
+    insert into technology_code (technology_code_id, technology_code_detail, 
+      technology_code_complexity, technology_type_id
+      )
+    values (#{technologyCodeId,jdbcType=INTEGER}, #{technologyCodeDetail,jdbcType=VARCHAR}, 
+      #{technologyCodeComplexity,jdbcType=VARCHAR}, #{technologyTypeId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyCode" >
+    insert into technology_code
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="technologyCodeId != null" >
+        technology_code_id,
+      </if>
+      <if test="technologyCodeDetail != null" >
+        technology_code_detail,
+      </if>
+      <if test="technologyCodeComplexity != null" >
+        technology_code_complexity,
+      </if>
+      <if test="technologyTypeId != null" >
+        technology_type_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="technologyCodeId != null" >
+        #{technologyCodeId,jdbcType=INTEGER},
+      </if>
+      <if test="technologyCodeDetail != null" >
+        #{technologyCodeDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyCodeComplexity != null" >
+        #{technologyCodeComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyTypeId != null" >
+        #{technologyTypeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyCodeExample" resultType="java.lang.Integer" >
+    select count(*) from technology_code
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update technology_code
+    <set >
+      <if test="record.technologyCodeId != null" >
+        technology_code_id = #{record.technologyCodeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.technologyCodeDetail != null" >
+        technology_code_detail = #{record.technologyCodeDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technologyCodeComplexity != null" >
+        technology_code_complexity = #{record.technologyCodeComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technologyTypeId != null" >
+        technology_type_id = #{record.technologyTypeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update technology_code
+    set technology_code_id = #{record.technologyCodeId,jdbcType=INTEGER},
+      technology_code_detail = #{record.technologyCodeDetail,jdbcType=VARCHAR},
+      technology_code_complexity = #{record.technologyCodeComplexity,jdbcType=VARCHAR},
+      technology_type_id = #{record.technologyTypeId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyCode" >
+    update technology_code
+    <set >
+      <if test="technologyCodeDetail != null" >
+        technology_code_detail = #{technologyCodeDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyCodeComplexity != null" >
+        technology_code_complexity = #{technologyCodeComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyTypeId != null" >
+        technology_type_id = #{technologyTypeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where technology_code_id = #{technologyCodeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.technology.test.pojo.TechnologyCode" >
+    update technology_code
+    set technology_code_detail = #{technologyCodeDetail,jdbcType=VARCHAR},
+      technology_code_complexity = #{technologyCodeComplexity,jdbcType=VARCHAR},
+      technology_type_id = #{technologyTypeId,jdbcType=INTEGER}
+    where technology_code_id = #{technologyCodeId,jdbcType=INTEGER}
+  </update>
+       <!-- 管理员添加 --> 
+  <select id="selectByLimitCode" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List"/>
+    from technology_code
+     where technology_type_id = #{technologyTypeId,jdbcType=INTEGER} and technology_code_complexity = #{examComplexity,jdbcType=VARCHAR} limit #{startValue,jdbcType=INTEGER},#{countValue,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 根据试卷抽题 -->
+  <select id="selectByPaper" resultType="com.dhcc.ict.manage.technology.test.pojo.TechnologyCode">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from technology_code where technology_type_id in 
+  	(select question_id from exam_paper where paper_flag=#{paperFlag,jdbcType=VARCHAR} and question_type=#{questionType,jdbcType=VARCHAR})
+  </select>
+</mapper>

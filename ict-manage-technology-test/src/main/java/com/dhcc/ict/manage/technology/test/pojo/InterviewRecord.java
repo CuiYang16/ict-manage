@@ -12,6 +12,11 @@ public class InterviewRecord {
 	/**
 	 * 
 	 */
+	private String interviewerName;
+
+	/**
+	 * 
+	 */
 	private String interviewResults;
 
 	/**
@@ -39,28 +44,11 @@ public class InterviewRecord {
 	 */
 	private Integer examRecordId;
 
-	/**
-	 * 
-	 */
-	private byte[] interviewerName;
-
-	public InterviewRecord(Integer interviewRecordId, String interviewResults, String interviewerComments,
-			String interviewerRemarks, Integer userId, Integer interviewerId, Integer examRecordId,
-			byte[] interviewerName) {
+	public InterviewRecord(Integer interviewRecordId, String interviewerName, String interviewResults,
+			String interviewerComments, String interviewerRemarks, Integer userId, Integer interviewerId,
+			Integer examRecordId) {
 		this.interviewRecordId = interviewRecordId;
-		this.interviewResults = interviewResults;
-		this.interviewerComments = interviewerComments;
-		this.interviewerRemarks = interviewerRemarks;
-		this.userId = userId;
-		this.interviewerId = interviewerId;
-		this.examRecordId = examRecordId;
 		this.interviewerName = interviewerName;
-	}
-
-	public InterviewRecord(Integer interviewRecordId, String interviewResults, String interviewerComments,
-			String interviewerRemarks, Integer userId, Integer interviewerId, Integer examRecordId) {
-		super();
-		this.interviewRecordId = interviewRecordId;
 		this.interviewResults = interviewResults;
 		this.interviewerComments = interviewerComments;
 		this.interviewerRemarks = interviewerRemarks;
@@ -79,6 +67,14 @@ public class InterviewRecord {
 
 	public void setInterviewRecordId(Integer interviewRecordId) {
 		this.interviewRecordId = interviewRecordId;
+	}
+
+	public String getInterviewerName() {
+		return interviewerName;
+	}
+
+	public void setInterviewerName(String interviewerName) {
+		this.interviewerName = interviewerName == null ? null : interviewerName.trim();
 	}
 
 	public String getInterviewResults() {
@@ -127,14 +123,6 @@ public class InterviewRecord {
 
 	public void setExamRecordId(Integer examRecordId) {
 		this.examRecordId = examRecordId;
-	}
-
-	public byte[] getInterviewerName() {
-		return interviewerName;
-	}
-
-	public void setInterviewerName(byte[] interviewerName) {
-		this.interviewerName = interviewerName;
 	}
 
 	@Override

@@ -585,76 +585,6 @@ public class ExamRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserAnswerIsNull() {
-            addCriterion("user_answer is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerIsNotNull() {
-            addCriterion("user_answer is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerEqualTo(String value) {
-            addCriterion("user_answer =", value, "userAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerNotEqualTo(String value) {
-            addCriterion("user_answer <>", value, "userAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerGreaterThan(String value) {
-            addCriterion("user_answer >", value, "userAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerGreaterThanOrEqualTo(String value) {
-            addCriterion("user_answer >=", value, "userAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerLessThan(String value) {
-            addCriterion("user_answer <", value, "userAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerLessThanOrEqualTo(String value) {
-            addCriterion("user_answer <=", value, "userAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerLike(String value) {
-            addCriterion("user_answer like", value, "userAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerNotLike(String value) {
-            addCriterion("user_answer not like", value, "userAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerIn(List<String> values) {
-            addCriterion("user_answer in", values, "userAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerNotIn(List<String> values) {
-            addCriterion("user_answer not in", values, "userAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerBetween(String value1, String value2) {
-            addCriterion("user_answer between", value1, value2, "userAnswer");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserAnswerNotBetween(String value1, String value2) {
-            addCriterion("user_answer not between", value1, value2, "userAnswer");
-            return (Criteria) this;
-        }
-
         public Criteria andUserIdIsNull() {
             addCriterion("user_id is null");
             return (Criteria) this;
@@ -715,63 +645,73 @@ public class ExamRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdIsNull() {
-            addCriterion("exam_question_id is null");
+        public Criteria andPaperFlagIsNull() {
+            addCriterion("paper_flag is null");
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdIsNotNull() {
-            addCriterion("exam_question_id is not null");
+        public Criteria andPaperFlagIsNotNull() {
+            addCriterion("paper_flag is not null");
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdEqualTo(Integer value) {
-            addCriterion("exam_question_id =", value, "examQuestionId");
+        public Criteria andPaperFlagEqualTo(String value) {
+            addCriterion("paper_flag =", value, "paperFlag");
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdNotEqualTo(Integer value) {
-            addCriterion("exam_question_id <>", value, "examQuestionId");
+        public Criteria andPaperFlagNotEqualTo(String value) {
+            addCriterion("paper_flag <>", value, "paperFlag");
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdGreaterThan(Integer value) {
-            addCriterion("exam_question_id >", value, "examQuestionId");
+        public Criteria andPaperFlagGreaterThan(String value) {
+            addCriterion("paper_flag >", value, "paperFlag");
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("exam_question_id >=", value, "examQuestionId");
+        public Criteria andPaperFlagGreaterThanOrEqualTo(String value) {
+            addCriterion("paper_flag >=", value, "paperFlag");
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdLessThan(Integer value) {
-            addCriterion("exam_question_id <", value, "examQuestionId");
+        public Criteria andPaperFlagLessThan(String value) {
+            addCriterion("paper_flag <", value, "paperFlag");
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdLessThanOrEqualTo(Integer value) {
-            addCriterion("exam_question_id <=", value, "examQuestionId");
+        public Criteria andPaperFlagLessThanOrEqualTo(String value) {
+            addCriterion("paper_flag <=", value, "paperFlag");
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdIn(List<Integer> values) {
-            addCriterion("exam_question_id in", values, "examQuestionId");
+        public Criteria andPaperFlagLike(String value) {
+            addCriterion("paper_flag like", value, "paperFlag");
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdNotIn(List<Integer> values) {
-            addCriterion("exam_question_id not in", values, "examQuestionId");
+        public Criteria andPaperFlagNotLike(String value) {
+            addCriterion("paper_flag not like", value, "paperFlag");
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdBetween(Integer value1, Integer value2) {
-            addCriterion("exam_question_id between", value1, value2, "examQuestionId");
+        public Criteria andPaperFlagIn(List<String> values) {
+            addCriterion("paper_flag in", values, "paperFlag");
             return (Criteria) this;
         }
 
-        public Criteria andExamQuestionIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("exam_question_id not between", value1, value2, "examQuestionId");
+        public Criteria andPaperFlagNotIn(List<String> values) {
+            addCriterion("paper_flag not in", values, "paperFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaperFlagBetween(String value1, String value2) {
+            addCriterion("paper_flag between", value1, value2, "paperFlag");
+            return (Criteria) this;
+        }
+
+        public Criteria andPaperFlagNotBetween(String value1, String value2) {
+            addCriterion("paper_flag not between", value1, value2, "paperFlag");
             return (Criteria) this;
         }
 

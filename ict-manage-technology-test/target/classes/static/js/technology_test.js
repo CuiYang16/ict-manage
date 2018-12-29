@@ -35,6 +35,16 @@ $(document).ready(function() {
 			$(this).next().attr("disabled", false);
 		}
 	});
+	
+	$('input:radio,input:checkbox').click(function(){
+		$(this).parent().parent().attr('id');
+		$('span.'+$(this).parent().parent().attr('id')+'').addClass('span-click-sign');
+		console.log($(this).parent().parent().attr('id'));
+	});
+	$('textarea').change(function(){
+		$(this).parent().parent().attr('id');
+		$('span.'+$(this).parent().parent().attr('id')+'').addClass('span-click-sign');
+	});
 	//答题卡点击
 	$('.topic-span').click(function() {
 		$(".topic-detail:visible").hide();
@@ -43,14 +53,18 @@ $(document).ready(function() {
 			$('.next-topic').eq(-1).addClass('submit-question');
 		}
 		if ($(this).is('.one')) {
-			$('#technologyone' + ($(this).index())).show();
+			$('#technologyone' + ($(this).index()-1)).show();
 		}
 		if ($(this).is('.much')) {
-			$('#technologymuch' + ($(this).index() - $('.one').length - 1)).show();
+			$('#technologymuch' + ($(this).index() - 1)).show();
 		}
 		if ($(this).is('.judge')) {
-			$('#technologyjudge' + ($(this).index() - $('.one').length - $('.judge').length - 2)).show();
+			$('#technologyjudge' + ($(this).index() - 1)).show();
 
+		}
+		
+		if ($(this).is('.code')) {
+			$('#technologycode' + ($(this).index() - 1)).show();
 		}
 	});
 	//标记
@@ -98,7 +112,7 @@ $(document).ready(function() {
 			judgeSubmit.push(new ExamSubmitDetail($('.judge-answer').children('input[type="hidden"]').eq(i).val(), $(
 			'.judge-answer').eq(i).children('input[type="radio"]:checked').val()));
 		}
-		
+
 		/*userSubmitDetail.push(muchSubmit);
 		userSubmitDetail.push(judgeSubmit);*/
 		//console.log(examSubmit(new userSubmitDetail(oneSubmit,muchSubmit,judgeSubmit)));

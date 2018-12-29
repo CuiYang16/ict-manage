@@ -1,6 +1,7 @@
 package com.dhcc.ict.manage.technology.test.pojo;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ExamRuleExample {
@@ -474,6 +475,66 @@ public class ExamRuleExample {
             return (Criteria) this;
         }
 
+        public Criteria andCodeCountIsNull() {
+            addCriterion("code_count is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCodeCountIsNotNull() {
+            addCriterion("code_count is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCodeCountEqualTo(Integer value) {
+            addCriterion("code_count =", value, "codeCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCodeCountNotEqualTo(Integer value) {
+            addCriterion("code_count <>", value, "codeCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCodeCountGreaterThan(Integer value) {
+            addCriterion("code_count >", value, "codeCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCodeCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("code_count >=", value, "codeCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCodeCountLessThan(Integer value) {
+            addCriterion("code_count <", value, "codeCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCodeCountLessThanOrEqualTo(Integer value) {
+            addCriterion("code_count <=", value, "codeCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCodeCountIn(List<Integer> values) {
+            addCriterion("code_count in", values, "codeCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCodeCountNotIn(List<Integer> values) {
+            addCriterion("code_count not in", values, "codeCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCodeCountBetween(Integer value1, Integer value2) {
+            addCriterion("code_count between", value1, value2, "codeCount");
+            return (Criteria) this;
+        }
+
+        public Criteria andCodeCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("code_count not between", value1, value2, "codeCount");
+            return (Criteria) this;
+        }
+
         public Criteria andExamTimeIsNull() {
             addCriterion("exam_time is null");
             return (Criteria) this;
@@ -531,6 +592,266 @@ public class ExamRuleExample {
 
         public Criteria andExamTimeNotBetween(Integer value1, Integer value2) {
             addCriterion("exam_time not between", value1, value2, "examTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityIsNull() {
+            addCriterion("exam_complexity is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityIsNotNull() {
+            addCriterion("exam_complexity is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityEqualTo(String value) {
+            addCriterion("exam_complexity =", value, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityNotEqualTo(String value) {
+            addCriterion("exam_complexity <>", value, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityGreaterThan(String value) {
+            addCriterion("exam_complexity >", value, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityGreaterThanOrEqualTo(String value) {
+            addCriterion("exam_complexity >=", value, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityLessThan(String value) {
+            addCriterion("exam_complexity <", value, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityLessThanOrEqualTo(String value) {
+            addCriterion("exam_complexity <=", value, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityLike(String value) {
+            addCriterion("exam_complexity like", value, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityNotLike(String value) {
+            addCriterion("exam_complexity not like", value, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityIn(List<String> values) {
+            addCriterion("exam_complexity in", values, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityNotIn(List<String> values) {
+            addCriterion("exam_complexity not in", values, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityBetween(String value1, String value2) {
+            addCriterion("exam_complexity between", value1, value2, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andExamComplexityNotBetween(String value1, String value2) {
+            addCriterion("exam_complexity not between", value1, value2, "examComplexity");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeIsNull() {
+            addCriterion("valid_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeIsNotNull() {
+            addCriterion("valid_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeEqualTo(Date value) {
+            addCriterion("valid_time =", value, "validTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeNotEqualTo(Date value) {
+            addCriterion("valid_time <>", value, "validTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeGreaterThan(Date value) {
+            addCriterion("valid_time >", value, "validTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("valid_time >=", value, "validTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeLessThan(Date value) {
+            addCriterion("valid_time <", value, "validTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeLessThanOrEqualTo(Date value) {
+            addCriterion("valid_time <=", value, "validTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeIn(List<Date> values) {
+            addCriterion("valid_time in", values, "validTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeNotIn(List<Date> values) {
+            addCriterion("valid_time not in", values, "validTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeBetween(Date value1, Date value2) {
+            addCriterion("valid_time between", value1, value2, "validTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andValidTimeNotBetween(Date value1, Date value2) {
+            addCriterion("valid_time not between", value1, value2, "validTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionIsNull() {
+            addCriterion("unify_question is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionIsNotNull() {
+            addCriterion("unify_question is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionEqualTo(String value) {
+            addCriterion("unify_question =", value, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionNotEqualTo(String value) {
+            addCriterion("unify_question <>", value, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionGreaterThan(String value) {
+            addCriterion("unify_question >", value, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionGreaterThanOrEqualTo(String value) {
+            addCriterion("unify_question >=", value, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionLessThan(String value) {
+            addCriterion("unify_question <", value, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionLessThanOrEqualTo(String value) {
+            addCriterion("unify_question <=", value, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionLike(String value) {
+            addCriterion("unify_question like", value, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionNotLike(String value) {
+            addCriterion("unify_question not like", value, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionIn(List<String> values) {
+            addCriterion("unify_question in", values, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionNotIn(List<String> values) {
+            addCriterion("unify_question not in", values, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionBetween(String value1, String value2) {
+            addCriterion("unify_question between", value1, value2, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andUnifyQuestionNotBetween(String value1, String value2) {
+            addCriterion("unify_question not between", value1, value2, "unifyQuestion");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdIsNull() {
+            addCriterion("technology_type_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdIsNotNull() {
+            addCriterion("technology_type_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdEqualTo(Integer value) {
+            addCriterion("technology_type_id =", value, "technologyTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdNotEqualTo(Integer value) {
+            addCriterion("technology_type_id <>", value, "technologyTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdGreaterThan(Integer value) {
+            addCriterion("technology_type_id >", value, "technologyTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("technology_type_id >=", value, "technologyTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdLessThan(Integer value) {
+            addCriterion("technology_type_id <", value, "technologyTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdLessThanOrEqualTo(Integer value) {
+            addCriterion("technology_type_id <=", value, "technologyTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdIn(List<Integer> values) {
+            addCriterion("technology_type_id in", values, "technologyTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdNotIn(List<Integer> values) {
+            addCriterion("technology_type_id not in", values, "technologyTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdBetween(Integer value1, Integer value2) {
+            addCriterion("technology_type_id between", value1, value2, "technologyTypeId");
+            return (Criteria) this;
+        }
+
+        public Criteria andTechnologyTypeIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("technology_type_id not between", value1, value2, "technologyTypeId");
             return (Criteria) this;
         }
 

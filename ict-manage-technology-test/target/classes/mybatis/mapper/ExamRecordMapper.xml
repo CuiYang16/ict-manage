@@ -11,9 +11,8 @@
       <arg column="choose_much_score" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="choose_jurge" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="total_score" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="user_answer" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="exam_question_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="paper_flag" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="technology_type_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="technology_test_complexity" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
@@ -78,8 +77,8 @@
   </sql>
   <sql id="Base_Column_List" >
     exam_record_id, exam_starttime, exam_endtime, exam_reality_time, choose_one_score, 
-    choose_much_score, choose_jurge, total_score, user_answer, user_id, exam_question_id, 
-    technology_type_id, technology_test_complexity
+    choose_much_score, choose_jurge, total_score, user_id, paper_flag, technology_type_id, 
+    technology_test_complexity
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRecordExample" >
     select
@@ -111,17 +110,17 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRecord"  useGeneratedKeys="true" keyProperty="examRecordId" keyColumn="exam_record_id">
+  <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRecord" useGeneratedKeys="true" keyProperty="examRecordId" keyColumn="exam_record_id">
     insert into exam_record (exam_record_id, exam_starttime, exam_endtime, 
       exam_reality_time, choose_one_score, choose_much_score, 
-      choose_jurge, total_score, user_answer, 
-      user_id, exam_question_id, technology_type_id, 
-      technology_test_complexity)
+      choose_jurge, total_score, user_id, 
+      paper_flag, technology_type_id, technology_test_complexity
+      )
     values (#{examRecordId,jdbcType=INTEGER}, #{examStarttime,jdbcType=TIMESTAMP}, #{examEndtime,jdbcType=TIMESTAMP}, 
       #{examRealityTime,jdbcType=INTEGER}, #{chooseOneScore,jdbcType=INTEGER}, #{chooseMuchScore,jdbcType=INTEGER}, 
-      #{chooseJurge,jdbcType=INTEGER}, #{totalScore,jdbcType=INTEGER}, #{userAnswer,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=INTEGER}, #{examQuestionId,jdbcType=INTEGER}, #{technologyTypeId,jdbcType=INTEGER}, 
-      #{technologyTestComplexity,jdbcType=VARCHAR})
+      #{chooseJurge,jdbcType=INTEGER}, #{totalScore,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{paperFlag,jdbcType=VARCHAR}, #{technologyTypeId,jdbcType=INTEGER}, #{technologyTestComplexity,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRecord" >
     insert into exam_record
@@ -150,14 +149,11 @@
       <if test="totalScore != null" >
         total_score,
       </if>
-      <if test="userAnswer != null" >
-        user_answer,
-      </if>
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="examQuestionId != null" >
-        exam_question_id,
+      <if test="paperFlag != null" >
+        paper_flag,
       </if>
       <if test="technologyTypeId != null" >
         technology_type_id,
@@ -191,14 +187,11 @@
       <if test="totalScore != null" >
         #{totalScore,jdbcType=INTEGER},
       </if>
-      <if test="userAnswer != null" >
-        #{userAnswer,jdbcType=VARCHAR},
-      </if>
       <if test="userId != null" >
         #{userId,jdbcType=INTEGER},
       </if>
-      <if test="examQuestionId != null" >
-        #{examQuestionId,jdbcType=INTEGER},
+      <if test="paperFlag != null" >
+        #{paperFlag,jdbcType=VARCHAR},
       </if>
       <if test="technologyTypeId != null" >
         #{technologyTypeId,jdbcType=INTEGER},
@@ -241,14 +234,11 @@
       <if test="record.totalScore != null" >
         total_score = #{record.totalScore,jdbcType=INTEGER},
       </if>
-      <if test="record.userAnswer != null" >
-        user_answer = #{record.userAnswer,jdbcType=VARCHAR},
-      </if>
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=INTEGER},
       </if>
-      <if test="record.examQuestionId != null" >
-        exam_question_id = #{record.examQuestionId,jdbcType=INTEGER},
+      <if test="record.paperFlag != null" >
+        paper_flag = #{record.paperFlag,jdbcType=VARCHAR},
       </if>
       <if test="record.technologyTypeId != null" >
         technology_type_id = #{record.technologyTypeId,jdbcType=INTEGER},
@@ -271,9 +261,8 @@
       choose_much_score = #{record.chooseMuchScore,jdbcType=INTEGER},
       choose_jurge = #{record.chooseJurge,jdbcType=INTEGER},
       total_score = #{record.totalScore,jdbcType=INTEGER},
-      user_answer = #{record.userAnswer,jdbcType=VARCHAR},
       user_id = #{record.userId,jdbcType=INTEGER},
-      exam_question_id = #{record.examQuestionId,jdbcType=INTEGER},
+      paper_flag = #{record.paperFlag,jdbcType=VARCHAR},
       technology_type_id = #{record.technologyTypeId,jdbcType=INTEGER},
       technology_test_complexity = #{record.technologyTestComplexity,jdbcType=VARCHAR}
     <if test="_parameter != null" >
@@ -304,14 +293,11 @@
       <if test="totalScore != null" >
         total_score = #{totalScore,jdbcType=INTEGER},
       </if>
-      <if test="userAnswer != null" >
-        user_answer = #{userAnswer,jdbcType=VARCHAR},
-      </if>
       <if test="userId != null" >
         user_id = #{userId,jdbcType=INTEGER},
       </if>
-      <if test="examQuestionId != null" >
-        exam_question_id = #{examQuestionId,jdbcType=INTEGER},
+      <if test="paperFlag != null" >
+        paper_flag = #{paperFlag,jdbcType=VARCHAR},
       </if>
       <if test="technologyTypeId != null" >
         technology_type_id = #{technologyTypeId,jdbcType=INTEGER},
@@ -331,9 +317,8 @@
       choose_much_score = #{chooseMuchScore,jdbcType=INTEGER},
       choose_jurge = #{chooseJurge,jdbcType=INTEGER},
       total_score = #{totalScore,jdbcType=INTEGER},
-      user_answer = #{userAnswer,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
-      exam_question_id = #{examQuestionId,jdbcType=INTEGER},
+      paper_flag = #{paperFlag,jdbcType=VARCHAR},
       technology_type_id = #{technologyTypeId,jdbcType=INTEGER},
       technology_test_complexity = #{technologyTestComplexity,jdbcType=VARCHAR}
     where exam_record_id = #{examRecordId,jdbcType=INTEGER}

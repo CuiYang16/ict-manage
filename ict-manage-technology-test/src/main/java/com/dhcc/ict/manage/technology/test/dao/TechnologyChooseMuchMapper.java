@@ -34,5 +34,10 @@ public interface TechnologyChooseMuchMapper {
 
 	// 管理员添加
 	List<TechnologyChooseMuch> selectByLimitMuch(@Param("startValue") int startValue,
-			@Param("countValue") int countValue, @Param("testType") int testType);
+			@Param("countValue") int countValue, @Param("technologyTypeId") int technologyTypeId,
+			@Param("examComplexity") String examComplexity);
+
+	// 根据试卷抽题
+	List<TechnologyChooseMuch> selectByPaper(@Param("paperFlag") String paperFlag,
+			@Param("questionType") String questionType);
 }

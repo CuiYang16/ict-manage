@@ -13,17 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSONObject;
-import com.dhcc.ict.manage.technology.test.pojo.ExamQuestion;
 import com.dhcc.ict.manage.technology.test.pojo.ExamRecord;
 import com.dhcc.ict.manage.technology.test.pojo.ExamRule;
 import com.dhcc.ict.manage.technology.test.pojo.ExamSubmitDetail;
-import com.dhcc.ict.manage.technology.test.pojo.InterviewRecord;
-import com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseMuch;
-import com.dhcc.ict.manage.technology.test.pojo.TechnologyChooseOne;
-import com.dhcc.ict.manage.technology.test.pojo.TechnologyJudge;
+import com.dhcc.ict.manage.technology.test.pojo.ExamTotalQuestion;
 import com.dhcc.ict.manage.technology.test.pojo.TechnologyType;
 import com.dhcc.ict.manage.technology.test.pojo.UserDetail;
+import com.dhcc.ict.manage.technology.test.pojo.UserExamRule;
 import com.dhcc.ict.manage.technology.test.service.TechnologyService;
 import com.dhcc.ict.manage.technology.test.util.DateUtil;
 
@@ -44,66 +40,40 @@ public class TechnologyController {
 	// 开始考试,获取试卷信息
 	@ResponseBody
 	@RequestMapping("/gettestpaper")
-	public ModelAndView getExamQuestion(HttpSession session, int testType, ModelAndView modelAndView) {
-		/* session = request.getSession(); */
+	public ModelAndView getExamQuestion(HttpSession session, int testType, ModelAndView modelAndView)
+			throws ParseException {
+		ExamTotalQuestion examTotalQuestion = null;
+		ExamRule examRule = null;
 		// 获取当前用户信息
 		UserDetail userDetail = (UserDetail) session.getAttribute("localUser");
 		// 获取用户对应面试记录
-		InterviewRecord interviewRecord = technologyService.getInterviewRecord(1);// userDetail.getUserId();
-		if (interviewRecord != null) {
-			ExamRule examRule = technologyService.getExamRule(interviewRecord.getInterviewerId());
-			ExamQuestion examQuestion = technologyService.getTestList(examRule, testType);
-			session.setAttribute("userExamQuestion", examQuestion);
-			// 插入考试记录(考试类别，用户id)
-			ExamRecord examRecord = new ExamRecord();
-			examRecord.setTechnologyTypeId(testType);
-			examRecord.setUserId(1);// userDetail.getUserId();
-			try {
-				examRecord.setExamStarttime(dateFormat.parse(dateFormat.format(new Date())));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			session.setAttribute("userExamRecord", examRecord);
+		UserExamRule userExamRule = technologyService.getUserExamRule(1);// userDetail.getUserId();
 
-			modelAndView.addObject("sessionid", session.getId());
-			modelAndView.addObject("technologyOne",
-					JSONObject.parseArray(examQuestion.getTechnologyOne(), TechnologyChooseOne.class));
-			modelAndView.addObject("technologyMuch",
-					JSONObject.parseArray(examQuestion.getTechnologyMuch(), TechnologyChooseMuch.class));
-			modelAndView.addObject("technologyJudge",
-					JSONObject.parseArray(examQuestion.getTechnologyJuage(), TechnologyJudge.class));
-			modelAndView.addObject("examQuestion", examQuestion);
-			modelAndView.setViewName("technology_test.html");
-			return modelAndView;
+		// 判断出卷方式
+		if (userExamRule.getPaperFlag() != null && !userExamRule.getPaperFlag().equals("")) {
+			examTotalQuestion = technologyService.getUnifyTest(userExamRule.getPaperFlag());
+		} else {
+
+			examRule = technologyService.getExamRule(userExamRule);
+			examTotalQuestion = technologyService.getTestList(examRule);
+
 		}
-		return null;
+		session.setAttribute("userExamQuestion", examTotalQuestion);
+		// 插入考试记录(考试类别，用户id)
+		ExamRecord examRecord = new ExamRecord();
+		examRecord.setTechnologyTypeId(examRule.getTechnologyTypeId());
+		examRecord.setUserId(1);// userDetail.getUserId();
+		examRecord.setExamStarttime(dateFormat.parse(dateFormat.format(new Date())));
+
+		session.setAttribute("userExamRecord", examRecord);
+
+		modelAndView.addObject("examPaper", examTotalQuestion);
+		modelAndView.setViewName("exam-paper.html");
+		return modelAndView;
+
 	}
 
-	// 保存试卷
-	@RequestMapping("/insert")
-	public void insertExamQuestion(HttpSession session) {
-		// session = request.getSession();
-		// 保存试卷
-		Integer examQuestionId = technologyService
-				.insertExamQuestion((ExamQuestion) session.getAttribute("userExamQuestion"));
-		// 更新考试记录信息(试卷id，开始时间)
-		if (examQuestionId != null) {
-
-			ExamRecord examRecord = (ExamRecord) session.getAttribute("userExamRecord");
-
-			try {
-				examRecord.setExamQuestionId(examQuestionId);
-				examRecord.setExamStarttime(dateFormat.parse(dateFormat.format(new Date())));
-			} catch (ParseException e) {
-				System.out.println("technoloyController.java（保存试卷）");
-				e.printStackTrace();
-			}
-			session.setAttribute("userExamRecord", examRecord);
-		}
-	}
-
-	// 判卷（JSON.parseObject(JSON_OBJ_STR, new TypeReference<Student>() {});）
+	// 保存试卷，判卷
 	@ResponseBody
 	@RequestMapping("/getGrade")
 	public ExamRecord giveGrade(HttpSession session, String userSubmitDetail) {
@@ -112,26 +82,25 @@ public class TechnologyController {
 		System.out.println(session.getId());
 
 		// 保存试卷
-		ExamQuestion examQuestion = (ExamQuestion) session.getAttribute("userExamQuestion");
-		Integer examQuestionId = technologyService.insertExamQuestion(examQuestion);
+		ExamTotalQuestion examTotalQuestion = (ExamTotalQuestion) session.getAttribute("userExamQuestion");
+		String paperFlag = technologyService.insertExamPaper(examTotalQuestion);
 		// 更新考试记录信息(试卷id，开始时间)
-		if (examQuestionId != null) {
+		if (paperFlag != null) {
 
 			ExamRecord examRecord = (ExamRecord) session.getAttribute("userExamRecord");
 
 			try {
-				examRecord.setExamQuestionId(examQuestionId);
+				examRecord.setPaperFlag(paperFlag);
 
 				List<List<ExamSubmitDetail>> examList = technologyService.getExamRecord(userSubmitDetail);
 
 				// 保存考试记录（结束时间，考试实际时间，考生答案）
-				ExamRecord examRecord2 = technologyService.getGrade(examList, examQuestion);
+				ExamRecord examRecord2 = technologyService.getGrade(examList, examTotalQuestion, paperFlag);
 				examRecord.setChooseOneScore(examRecord2.getChooseOneScore());
 				examRecord.setChooseMuchScore(examRecord2.getChooseMuchScore());
 				examRecord.setChooseJurge(examRecord2.getChooseJurge());
 				examRecord.setTotalScore(examRecord2.getTotalScore());
 				examRecord.setExamEndtime(dateFormat.parse(dateFormat.format(new Date())));
-				examRecord.setUserAnswer(userSubmitDetail);
 				Integer diff = DateUtil.diff(examRecord.getExamStarttime(), examRecord.getExamEndtime(), "minute");
 				examRecord.setExamRealityTime(diff);
 			} catch (ParseException e) {
@@ -146,8 +115,4 @@ public class TechnologyController {
 		return null;
 	}
 
-	@RequestMapping("/tttt")
-	public String tt() {
-		return "forward:ictmanagetechnologytest/tectest/tttt";
-	}
 }

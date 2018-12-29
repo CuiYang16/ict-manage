@@ -213,12 +213,18 @@
       technology_type_id = #{technologyTypeId,jdbcType=INTEGER}
     where technology_judge_id = #{technologyJudgeId,jdbcType=INTEGER}
   </update>
-  
-  <!-- 管理员添加 -->
+    <!-- 管理员添加 -->
   <select id="selectByLimitJudge" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List"/>
     from technology_judge
-     where technology_type_id = #{testType,jdbcType=INTEGER} limit #{startValue,jdbcType=INTEGER},#{countValue,jdbcType=INTEGER}
+     where technology_type_id = #{technologyTypeId,jdbcType=INTEGER} and technology_judge_complexity = #{examComplexity,jdbcType=VARCHAR} limit #{startValue,jdbcType=INTEGER},#{countValue,jdbcType=INTEGER}
+  </select>
+  <!-- 根据试卷抽题 -->
+  <select id="selectByPaper" resultType="com.dhcc.ict.manage.technology.test.pojo.TechnologyJudge">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from technology_judge where technology_type_id in 
+  	(select question_id from exam_paper where paper_flag=#{paperFlag,jdbcType=VARCHAR} and question_type=#{questionType,jdbcType=VARCHAR})
   </select>
 </mapper>

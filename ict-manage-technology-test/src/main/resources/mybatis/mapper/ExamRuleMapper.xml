@@ -9,7 +9,12 @@
       <arg column="choose_one_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="choose_much_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="jurge_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="code_count" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="exam_time" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="exam_complexity" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="valid_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="unify_question" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="technology_type_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="interviewer_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
@@ -73,7 +78,8 @@
   </sql>
   <sql id="Base_Column_List" >
     exam_rule_id, exam_rule_name, total_count, choose_one_count, choose_much_count, jurge_count, 
-    exam_time, interviewer_id
+    code_count, exam_time, exam_complexity, valid_time, unify_question, technology_type_id, 
+    interviewer_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRuleExample" >
     select
@@ -108,10 +114,14 @@
   <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRule" >
     insert into exam_rule (exam_rule_id, exam_rule_name, total_count, 
       choose_one_count, choose_much_count, jurge_count, 
-      exam_time, interviewer_id)
+      code_count, exam_time, exam_complexity, 
+      valid_time, unify_question, technology_type_id, 
+      interviewer_id)
     values (#{examRuleId,jdbcType=INTEGER}, #{examRuleName,jdbcType=VARCHAR}, #{totalCount,jdbcType=INTEGER}, 
       #{chooseOneCount,jdbcType=INTEGER}, #{chooseMuchCount,jdbcType=INTEGER}, #{jurgeCount,jdbcType=INTEGER}, 
-      #{examTime,jdbcType=INTEGER}, #{interviewerId,jdbcType=INTEGER})
+      #{codeCount,jdbcType=INTEGER}, #{examTime,jdbcType=INTEGER}, #{examComplexity,jdbcType=VARCHAR}, 
+      #{validTime,jdbcType=TIMESTAMP}, #{unifyQuestion,jdbcType=VARCHAR}, #{technologyTypeId,jdbcType=INTEGER}, 
+      #{interviewerId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamRule" >
     insert into exam_rule
@@ -134,8 +144,23 @@
       <if test="jurgeCount != null" >
         jurge_count,
       </if>
+      <if test="codeCount != null" >
+        code_count,
+      </if>
       <if test="examTime != null" >
         exam_time,
+      </if>
+      <if test="examComplexity != null" >
+        exam_complexity,
+      </if>
+      <if test="validTime != null" >
+        valid_time,
+      </if>
+      <if test="unifyQuestion != null" >
+        unify_question,
+      </if>
+      <if test="technologyTypeId != null" >
+        technology_type_id,
       </if>
       <if test="interviewerId != null" >
         interviewer_id,
@@ -160,8 +185,23 @@
       <if test="jurgeCount != null" >
         #{jurgeCount,jdbcType=INTEGER},
       </if>
+      <if test="codeCount != null" >
+        #{codeCount,jdbcType=INTEGER},
+      </if>
       <if test="examTime != null" >
         #{examTime,jdbcType=INTEGER},
+      </if>
+      <if test="examComplexity != null" >
+        #{examComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="validTime != null" >
+        #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unifyQuestion != null" >
+        #{unifyQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyTypeId != null" >
+        #{technologyTypeId,jdbcType=INTEGER},
       </if>
       <if test="interviewerId != null" >
         #{interviewerId,jdbcType=INTEGER},
@@ -195,8 +235,23 @@
       <if test="record.jurgeCount != null" >
         jurge_count = #{record.jurgeCount,jdbcType=INTEGER},
       </if>
+      <if test="record.codeCount != null" >
+        code_count = #{record.codeCount,jdbcType=INTEGER},
+      </if>
       <if test="record.examTime != null" >
         exam_time = #{record.examTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.examComplexity != null" >
+        exam_complexity = #{record.examComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.validTime != null" >
+        valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.unifyQuestion != null" >
+        unify_question = #{record.unifyQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.technologyTypeId != null" >
+        technology_type_id = #{record.technologyTypeId,jdbcType=INTEGER},
       </if>
       <if test="record.interviewerId != null" >
         interviewer_id = #{record.interviewerId,jdbcType=INTEGER},
@@ -214,7 +269,12 @@
       choose_one_count = #{record.chooseOneCount,jdbcType=INTEGER},
       choose_much_count = #{record.chooseMuchCount,jdbcType=INTEGER},
       jurge_count = #{record.jurgeCount,jdbcType=INTEGER},
+      code_count = #{record.codeCount,jdbcType=INTEGER},
       exam_time = #{record.examTime,jdbcType=INTEGER},
+      exam_complexity = #{record.examComplexity,jdbcType=VARCHAR},
+      valid_time = #{record.validTime,jdbcType=TIMESTAMP},
+      unify_question = #{record.unifyQuestion,jdbcType=VARCHAR},
+      technology_type_id = #{record.technologyTypeId,jdbcType=INTEGER},
       interviewer_id = #{record.interviewerId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -238,8 +298,23 @@
       <if test="jurgeCount != null" >
         jurge_count = #{jurgeCount,jdbcType=INTEGER},
       </if>
+      <if test="codeCount != null" >
+        code_count = #{codeCount,jdbcType=INTEGER},
+      </if>
       <if test="examTime != null" >
         exam_time = #{examTime,jdbcType=INTEGER},
+      </if>
+      <if test="examComplexity != null" >
+        exam_complexity = #{examComplexity,jdbcType=VARCHAR},
+      </if>
+      <if test="validTime != null" >
+        valid_time = #{validTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="unifyQuestion != null" >
+        unify_question = #{unifyQuestion,jdbcType=VARCHAR},
+      </if>
+      <if test="technologyTypeId != null" >
+        technology_type_id = #{technologyTypeId,jdbcType=INTEGER},
       </if>
       <if test="interviewerId != null" >
         interviewer_id = #{interviewerId,jdbcType=INTEGER},
@@ -254,7 +329,12 @@
       choose_one_count = #{chooseOneCount,jdbcType=INTEGER},
       choose_much_count = #{chooseMuchCount,jdbcType=INTEGER},
       jurge_count = #{jurgeCount,jdbcType=INTEGER},
+      code_count = #{codeCount,jdbcType=INTEGER},
       exam_time = #{examTime,jdbcType=INTEGER},
+      exam_complexity = #{examComplexity,jdbcType=VARCHAR},
+      valid_time = #{validTime,jdbcType=TIMESTAMP},
+      unify_question = #{unifyQuestion,jdbcType=VARCHAR},
+      technology_type_id = #{technologyTypeId,jdbcType=INTEGER},
       interviewer_id = #{interviewerId,jdbcType=INTEGER}
     where exam_rule_id = #{examRuleId,jdbcType=INTEGER}
   </update>
