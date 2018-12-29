@@ -14,6 +14,13 @@
 	var muchall = "多选题全部";
 	var judgeall = "判断题全部";
 	$(document).ready(function() {
+		    $("#excel1").hide();
+			$("#excel2").hide();
+			$("#excel3").hide(); 
+			//$('#excel1').css('display','none');
+			//$('#form1').css('display','none');
+			//$('#excel2').css('display','none');
+			//$('#form2').css('display','none');
 						//单选
 						oneautoload();//调用自加载ajax函数传参数显示分页效果
 						// 多选查询  调用自加载ajax函数传参数显示分页效果
@@ -1019,8 +1026,7 @@ function onecsh(){
 				'technologyJudgeTrueAnswer' : $("#judgean").val(),
 				'technologyJudgeComplexity' : $("#judgeny option:selected").val(),
 				/* 'technologyTypeId' : $("#judgety").val(), */
-				'technologyTypeId' : $(".updatejudgeselectop  option:selected")
-						.val(),
+				'technologyTypeId' : $(".updatejudgeselectop  option:selected").val(),
 			},
 			success : function(judgesavedata) {
 				if (judgesavedata == "ok") {
@@ -1109,6 +1115,42 @@ function onecsh(){
 			});
 		}
 	}
+	
+  	function exceclick(){
+		var exceltype = $("#excelupload  option:selected").val();
+	    //alert(exceltype);
+	   if("oneexcel" == exceltype){
+	   	$("#excel1").show();
+		$("#excel2").hide();
+		$("#excel3").hide(); 
+	   }else if("muchexcel" == exceltype){
+	   	$("#excel2").show();
+	    $("#excel1").hide();
+		$("#excel3").hide(); 
+	   }else if("judgeexcel" == exceltype){
+	   	$("#excel3").show();
+	    $("#excel1").hide();
+		$("#excel2").hide();
+	   } 
+	}  
+  	
+	function checkData(){
+		
+		var fileDir = $("#upfile").val();  
+        var suffix = fileDir.substr(fileDir.lastIndexOf("."));  
+        if("" == fileDir){  
+            alert("选择需要导入的Excel文件！");  
+            return false;  
+        }  
+        if(".xls" != suffix && ".xlsx" != suffix ){  
+            alert("选择Excel格式的文件导入！");  
+            return false;  
+        }  
+        return true;   	
+	}
+	
+	
+	
 </script>
 </head>
 
@@ -1130,6 +1172,69 @@ function onecsh(){
 
 		<div class="tab-pane active fade in" id="n1">
 			<!--     第一个页面开始 -->
+			<!-- Button trigger modal -->
+			<button  type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#excelUploadModal">
+  点击选择文件上传
+</button>
+
+			<!-- 上传excelModal -->
+			<div class="modal fade" id="excelUploadModal" tabindex="-1" role="dialog"
+				aria-labelledby="onemyModalLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="excelUploadModal">上传excel</h4>
+						</div>
+						<div class="modal-body">
+					
+							<p>
+								<select id="excelupload" onchange="sss()" >
+										<option value="">选择试卷类型</option>
+										<option value="oneexcel">单选题</option>
+										<option value="muchexcel">多选题</option>
+										<option value="judgeexcel">判断题</option>
+										<option value="shortexcel">简答题</option>
+										<option value="programmingexcel">编程题</option>
+							   </select>
+							</p>
+							
+							           <!--  上传单选excel -->
+							           <div id="excel1">
+							<form method="POST"  enctype="multipart/form-data" id="form1" action="importOneExcel">  
+						             <label>上传文件: </label>
+						             <input id="upfile" type="file" name="upfile">
+						             <input type="submit" value="单选表单提交" onclick="return checkData()"> <br> <br> 
+   							 </form>
+   							 </div>
+   							   <!--    上传多选excel -->
+   							   <div id="excel2">
+   							 <form method="POST"  enctype="multipart/form-data" id="form2" action="importMuchExcel">  
+						             <label>上传文件: </label>
+						             <input id="upfile" type="file" name="upfile"> 
+						             <input type="submit" value="多选表单提交" onclick="return checkData()"><br> <br>
+    						</form> 
+    						</div>
+    						    <!--  上传判断题excel -->
+    						    <div id="excel3">
+    						 <form method="POST"  enctype="multipart/form-data" id="form3" action="importJudgeExcel">  
+						             <label>上传文件: </label>
+						             <input id="upfile" type="file" name="upfile">
+						             <input type="submit" value="判断题表单提交" onclick="return checkData()"><br> <br> 
+   							 </form> 
+   							 </div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">退出</button>
+							<!-- <button type="button" class="btn btn-primary" onclick="uploadexcel()">上传</button> -->
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<div>
 				<span class="l"><a href="javascript:;" onclick="del()"
