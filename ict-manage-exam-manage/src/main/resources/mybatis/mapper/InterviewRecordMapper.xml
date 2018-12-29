@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.ict.manage.exam.manage.dao.InterviewRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.exam.manage.pojo.InterviewRecord" >
+    <constructor >
+      <idArg column="interview_record_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="interviewer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="interview_results" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="interviewer_comments" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="interviewer_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="interviewer_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="exam_record_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    interview_record_id, interviewer_name, interview_results, interviewer_comments, interviewer_remarks, 
+    user_id, interviewer_id, exam_record_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.exam.manage.pojo.InterviewRecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from interview_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from interview_record
+    where interview_record_id = #{interviewRecordId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from interview_record
+    where interview_record_id = #{interviewRecordId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dhcc.ict.manage.exam.manage.pojo.InterviewRecordExample" >
+    delete from interview_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dhcc.ict.manage.exam.manage.pojo.InterviewRecord" >
+    insert into interview_record (interview_record_id, interviewer_name, 
+      interview_results, interviewer_comments, 
+      interviewer_remarks, user_id, interviewer_id, 
+      exam_record_id)
+    values (#{interviewRecordId,jdbcType=INTEGER}, #{interviewerName,jdbcType=VARCHAR}, 
+      #{interviewResults,jdbcType=VARCHAR}, #{interviewerComments,jdbcType=VARCHAR}, 
+      #{interviewerRemarks,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{interviewerId,jdbcType=INTEGER}, 
+      #{examRecordId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dhcc.ict.manage.exam.manage.pojo.InterviewRecord" >
+    insert into interview_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="interviewRecordId != null" >
+        interview_record_id,
+      </if>
+      <if test="interviewerName != null" >
+        interviewer_name,
+      </if>
+      <if test="interviewResults != null" >
+        interview_results,
+      </if>
+      <if test="interviewerComments != null" >
+        interviewer_comments,
+      </if>
+      <if test="interviewerRemarks != null" >
+        interviewer_remarks,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="interviewerId != null" >
+        interviewer_id,
+      </if>
+      <if test="examRecordId != null" >
+        exam_record_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="interviewRecordId != null" >
+        #{interviewRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="interviewerName != null" >
+        #{interviewerName,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewResults != null" >
+        #{interviewResults,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewerComments != null" >
+        #{interviewerComments,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewerRemarks != null" >
+        #{interviewerRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="interviewerId != null" >
+        #{interviewerId,jdbcType=INTEGER},
+      </if>
+      <if test="examRecordId != null" >
+        #{examRecordId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dhcc.ict.manage.exam.manage.pojo.InterviewRecordExample" resultType="java.lang.Integer" >
+    select count(*) from interview_record
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update interview_record
+    <set >
+      <if test="record.interviewRecordId != null" >
+        interview_record_id = #{record.interviewRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="record.interviewerName != null" >
+        interviewer_name = #{record.interviewerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interviewResults != null" >
+        interview_results = #{record.interviewResults,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interviewerComments != null" >
+        interviewer_comments = #{record.interviewerComments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interviewerRemarks != null" >
+        interviewer_remarks = #{record.interviewerRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.interviewerId != null" >
+        interviewer_id = #{record.interviewerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examRecordId != null" >
+        exam_record_id = #{record.examRecordId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update interview_record
+    set interview_record_id = #{record.interviewRecordId,jdbcType=INTEGER},
+      interviewer_name = #{record.interviewerName,jdbcType=VARCHAR},
+      interview_results = #{record.interviewResults,jdbcType=VARCHAR},
+      interviewer_comments = #{record.interviewerComments,jdbcType=VARCHAR},
+      interviewer_remarks = #{record.interviewerRemarks,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      interviewer_id = #{record.interviewerId,jdbcType=INTEGER},
+      exam_record_id = #{record.examRecordId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.exam.manage.pojo.InterviewRecord" >
+    update interview_record
+    <set >
+      <if test="interviewerName != null" >
+        interviewer_name = #{interviewerName,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewResults != null" >
+        interview_results = #{interviewResults,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewerComments != null" >
+        interviewer_comments = #{interviewerComments,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewerRemarks != null" >
+        interviewer_remarks = #{interviewerRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="interviewerId != null" >
+        interviewer_id = #{interviewerId,jdbcType=INTEGER},
+      </if>
+      <if test="examRecordId != null" >
+        exam_record_id = #{examRecordId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where interview_record_id = #{interviewRecordId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.exam.manage.pojo.InterviewRecord" >
+    update interview_record
+    set interviewer_name = #{interviewerName,jdbcType=VARCHAR},
+      interview_results = #{interviewResults,jdbcType=VARCHAR},
+      interviewer_comments = #{interviewerComments,jdbcType=VARCHAR},
+      interviewer_remarks = #{interviewerRemarks,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      interviewer_id = #{interviewerId,jdbcType=INTEGER},
+      exam_record_id = #{examRecordId,jdbcType=INTEGER}
+    where interview_record_id = #{interviewRecordId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -13,6 +13,7 @@
 		<module>ict-manage-eureka-server</module>
 		<module>ict-manage-questionbank</module>
     <module>ict-manage-examanalysis</module>
+    <module>ict-manage-exam-manage</module>
   </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

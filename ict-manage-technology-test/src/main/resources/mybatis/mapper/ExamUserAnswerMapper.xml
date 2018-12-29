@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.dhcc.ict.manage.technology.test.dao.ExamUserAnswerMapper">
+	<resultMap id="BaseResultMap"
+		type="com.dhcc.ict.manage.technology.test.pojo.ExamUserAnswer">
+		<constructor>
+			<idArg column="user_answer_id" jdbcType="INTEGER"
+				javaType="java.lang.Integer" />
+			<arg column="question_type_id" jdbcType="VARCHAR"
+				javaType="java.lang.String" />
+			<arg column="user_answer" jdbcType="VARCHAR"
+				javaType="java.lang.String" />
+			<arg column="user_answer_right" jdbcType="VARCHAR"
+				javaType="java.lang.String" />
+			<arg column="paper_flag" jdbcType="VARCHAR"
+				javaType="java.lang.String" />
+		</constructor>
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		user_answer_id, question_type_id, user_answer, user_answer_right, paper_flag
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamUserAnswerExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from exam_user_answer
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from exam_user_answer
+		where user_answer_id = #{userAnswerId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from exam_user_answer
+		where user_answer_id = #{userAnswerId,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamUserAnswerExample">
+		delete from exam_user_answer
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert"
+		parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamUserAnswer">
+		insert into exam_user_answer (user_answer_id, question_type_id,
+		user_answer,
+		user_answer_right, paper_flag)
+		values (#{userAnswerId,jdbcType=INTEGER},
+		#{questionTypeId,jdbcType=VARCHAR}, #{userAnswer,jdbcType=VARCHAR},
+		#{userAnswerRight,jdbcType=VARCHAR}, #{paperFlag,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamUserAnswer">
+		insert into exam_user_answer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userAnswerId != null">
+				user_answer_id,
+			</if>
+			<if test="questionTypeId != null">
+				question_type_id,
+			</if>
+			<if test="userAnswer != null">
+				user_answer,
+			</if>
+			<if test="userAnswerRight != null">
+				user_answer_right,
+			</if>
+			<if test="paperFlag != null">
+				paper_flag,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userAnswerId != null">
+				#{userAnswerId,jdbcType=INTEGER},
+			</if>
+			<if test="questionTypeId != null">
+				#{questionTypeId,jdbcType=VARCHAR},
+			</if>
+			<if test="userAnswer != null">
+				#{userAnswer,jdbcType=VARCHAR},
+			</if>
+			<if test="userAnswerRight != null">
+				#{userAnswerRight,jdbcType=VARCHAR},
+			</if>
+			<if test="paperFlag != null">
+				#{paperFlag,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamUserAnswerExample"
+		resultType="java.lang.Integer">
+		select count(*) from exam_user_answer
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update exam_user_answer
+		<set>
+			<if test="record.userAnswerId != null">
+				user_answer_id = #{record.userAnswerId,jdbcType=INTEGER},
+			</if>
+			<if test="record.questionTypeId != null">
+				question_type_id = #{record.questionTypeId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userAnswer != null">
+				user_answer = #{record.userAnswer,jdbcType=VARCHAR},
+			</if>
+			<if test="record.userAnswerRight != null">
+				user_answer_right = #{record.userAnswerRight,jdbcType=VARCHAR},
+			</if>
+			<if test="record.paperFlag != null">
+				paper_flag = #{record.paperFlag,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update exam_user_answer
+		set user_answer_id = #{record.userAnswerId,jdbcType=INTEGER},
+		question_type_id = #{record.questionTypeId,jdbcType=VARCHAR},
+		user_answer = #{record.userAnswer,jdbcType=VARCHAR},
+		user_answer_right = #{record.userAnswerRight,jdbcType=VARCHAR},
+		paper_flag = #{record.paperFlag,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamUserAnswer">
+		update exam_user_answer
+		<set>
+			<if test="questionTypeId != null">
+				question_type_id = #{questionTypeId,jdbcType=VARCHAR},
+			</if>
+			<if test="userAnswer != null">
+				user_answer = #{userAnswer,jdbcType=VARCHAR},
+			</if>
+			<if test="userAnswerRight != null">
+				user_answer_right = #{userAnswerRight,jdbcType=VARCHAR},
+			</if>
+			<if test="paperFlag != null">
+				paper_flag = #{paperFlag,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where user_answer_id = #{userAnswerId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.dhcc.ict.manage.technology.test.pojo.ExamUserAnswer">
+		update exam_user_answer
+		set question_type_id = #{questionTypeId,jdbcType=VARCHAR},
+		user_answer = #{userAnswer,jdbcType=VARCHAR},
+		user_answer_right = #{userAnswerRight,jdbcType=VARCHAR},
+		paper_flag = #{paperFlag,jdbcType=VARCHAR}
+		where user_answer_id = #{userAnswerId,jdbcType=INTEGER}
+	</update>
+
+	<!-- 管理员添加 -->
+	<!--存储用户答案 -->
+	<insert id="insertUserAnswer" parameterType="java.util.List">
+		insert into exam_user_answer (question_type_id, user_answer,
+		user_answer_right, paper_flag)
+		values
+		<foreach collection="answers" item="answers" index="index"
+			separator=",">
+			(#{answers.questionTypeId},#{answers.userAnswer},#{answers.userAnswerRight},#{answers.paperFlag})
+		</foreach>
+	</insert>
+</mapper>

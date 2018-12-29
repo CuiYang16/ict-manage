@@ -1,5 +1,6 @@
 package com.dhcc.ict.manage.technology.test.pojo;
 
+import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -35,23 +36,53 @@ public class ExamRule {
     private Integer jurgeCount;
 
     /**
+     * 编程题
+     */
+    private Integer codeCount;
+
+    /**
      * 考试时间
      */
     private Integer examTime;
+
+    /**
+     * 难易程度
+     */
+    private String examComplexity;
+
+    /**
+     * 试卷有效时间
+     */
+    private Date validTime;
+
+    /**
+     * 是否统一试卷
+     */
+    private String unifyQuestion;
+
+    /**
+     * 试卷类型
+     */
+    private Integer technologyTypeId;
 
     /**
      * 面试官
      */
     private Integer interviewerId;
 
-    public ExamRule(Integer examRuleId, String examRuleName, Integer totalCount, Integer chooseOneCount, Integer chooseMuchCount, Integer jurgeCount, Integer examTime, Integer interviewerId) {
+    public ExamRule(Integer examRuleId, String examRuleName, Integer totalCount, Integer chooseOneCount, Integer chooseMuchCount, Integer jurgeCount, Integer codeCount, Integer examTime, String examComplexity, Date validTime, String unifyQuestion, Integer technologyTypeId, Integer interviewerId) {
         this.examRuleId = examRuleId;
         this.examRuleName = examRuleName;
         this.totalCount = totalCount;
         this.chooseOneCount = chooseOneCount;
         this.chooseMuchCount = chooseMuchCount;
         this.jurgeCount = jurgeCount;
+        this.codeCount = codeCount;
         this.examTime = examTime;
+        this.examComplexity = examComplexity;
+        this.validTime = validTime;
+        this.unifyQuestion = unifyQuestion;
+        this.technologyTypeId = technologyTypeId;
         this.interviewerId = interviewerId;
     }
 
@@ -107,12 +138,52 @@ public class ExamRule {
         this.jurgeCount = jurgeCount;
     }
 
+    public Integer getCodeCount() {
+        return codeCount;
+    }
+
+    public void setCodeCount(Integer codeCount) {
+        this.codeCount = codeCount;
+    }
+
     public Integer getExamTime() {
         return examTime;
     }
 
     public void setExamTime(Integer examTime) {
         this.examTime = examTime;
+    }
+
+    public String getExamComplexity() {
+        return examComplexity;
+    }
+
+    public void setExamComplexity(String examComplexity) {
+        this.examComplexity = examComplexity == null ? null : examComplexity.trim();
+    }
+
+    public Date getValidTime() {
+        return validTime;
+    }
+
+    public void setValidTime(Date validTime) {
+        this.validTime = validTime;
+    }
+
+    public String getUnifyQuestion() {
+        return unifyQuestion;
+    }
+
+    public void setUnifyQuestion(String unifyQuestion) {
+        this.unifyQuestion = unifyQuestion == null ? null : unifyQuestion.trim();
+    }
+
+    public Integer getTechnologyTypeId() {
+        return technologyTypeId;
+    }
+
+    public void setTechnologyTypeId(Integer technologyTypeId) {
+        this.technologyTypeId = technologyTypeId;
     }
 
     public Integer getInterviewerId() {

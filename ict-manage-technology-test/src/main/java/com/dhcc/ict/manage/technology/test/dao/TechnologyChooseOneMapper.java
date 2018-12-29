@@ -33,6 +33,12 @@ public interface TechnologyChooseOneMapper {
 	int updateByPrimaryKey(TechnologyChooseOne record);
 
 	// 管理员添加
+
+	// 随机抽题
 	List<TechnologyChooseOne> selectByLimit(@Param("startValue") int startValue, @Param("countValue") int countValue,
-			@Param("testType") int testType);
+			@Param("technologyTypeId") int technologyTypeId, @Param("examComplexity") String examComplexity);
+
+	// 根据试卷抽题
+	List<TechnologyChooseOne> selectByPaper(@Param("paperFlag") String paperFlag,
+			@Param("questionType") String questionType);
 }

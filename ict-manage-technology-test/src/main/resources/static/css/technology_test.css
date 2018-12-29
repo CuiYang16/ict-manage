@@ -11,16 +11,6 @@
 .topic-detail{
 	width: 60%;
 	height: 100%;
-	border: 1px solid green;
-	float: left;
-}
-
-.topic-sheet{
-	width: 33%;
-	height: 100%;
-	margin-left: 2%;
-	border: 1px solid green;
-	float: right;
 }
 
 .topic-content{
@@ -45,6 +35,11 @@
 	margin: 1%;
 }
 
+/* 标记样式 */
 .span-sign{
-	background-color: #000;
+	color:red;
+}
+
+.span-click-sign{
+	background-color: green;
 }

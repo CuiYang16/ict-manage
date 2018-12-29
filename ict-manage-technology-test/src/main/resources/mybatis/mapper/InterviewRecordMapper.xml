@@ -4,24 +4,13 @@
   <resultMap id="BaseResultMap" type="com.dhcc.ict.manage.technology.test.pojo.InterviewRecord" >
     <constructor >
       <idArg column="interview_record_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="interviewer_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="interview_results" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="interviewer_comments" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="interviewer_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="interviewer_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="exam_record_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.dhcc.ict.manage.technology.test.pojo.InterviewRecord" >
-    <constructor >
-      <idArg column="interview_record_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="interview_results" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="interviewer_comments" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="interviewer_remarks" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="interviewer_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="exam_record_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="interviewer_name" jdbcType="VARBINARY" javaType="_byte[]" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -83,28 +72,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    interview_record_id, interview_results, interviewer_comments, interviewer_remarks, 
+    interview_record_id, interviewer_name, interview_results, interviewer_comments, interviewer_remarks, 
     user_id, interviewer_id, exam_record_id
   </sql>
-  <sql id="Blob_Column_List" >
-    interviewer_name
-  </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.dhcc.ict.manage.technology.test.pojo.InterviewRecordExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from interview_record
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dhcc.ict.manage.technology.test.pojo.InterviewRecordExample" >
     select
     <if test="distinct" >
@@ -119,11 +89,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from interview_record
     where interview_record_id = #{interviewRecordId,jdbcType=INTEGER}
   </select>
@@ -138,20 +106,23 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.dhcc.ict.manage.technology.test.pojo.InterviewRecord" >
-    insert into interview_record (interview_record_id, interview_results, 
-      interviewer_comments, interviewer_remarks, 
-      user_id, interviewer_id, exam_record_id, 
-      interviewer_name)
-    values (#{interviewRecordId,jdbcType=INTEGER}, #{interviewResults,jdbcType=VARCHAR}, 
-      #{interviewerComments,jdbcType=VARCHAR}, #{interviewerRemarks,jdbcType=VARCHAR}, 
-      #{userId,jdbcType=INTEGER}, #{interviewerId,jdbcType=INTEGER}, #{examRecordId,jdbcType=INTEGER}, 
-      #{interviewerName,jdbcType=VARBINARY})
+    insert into interview_record (interview_record_id, interviewer_name, 
+      interview_results, interviewer_comments, 
+      interviewer_remarks, user_id, interviewer_id, 
+      exam_record_id)
+    values (#{interviewRecordId,jdbcType=INTEGER}, #{interviewerName,jdbcType=VARCHAR}, 
+      #{interviewResults,jdbcType=VARCHAR}, #{interviewerComments,jdbcType=VARCHAR}, 
+      #{interviewerRemarks,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{interviewerId,jdbcType=INTEGER}, 
+      #{examRecordId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.InterviewRecord" >
     insert into interview_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="interviewRecordId != null" >
         interview_record_id,
+      </if>
+      <if test="interviewerName != null" >
+        interviewer_name,
       </if>
       <if test="interviewResults != null" >
         interview_results,
@@ -171,13 +142,13 @@
       <if test="examRecordId != null" >
         exam_record_id,
       </if>
-      <if test="interviewerName != null" >
-        interviewer_name,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="interviewRecordId != null" >
         #{interviewRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="interviewerName != null" >
+        #{interviewerName,jdbcType=VARCHAR},
       </if>
       <if test="interviewResults != null" >
         #{interviewResults,jdbcType=VARCHAR},
@@ -197,9 +168,6 @@
       <if test="examRecordId != null" >
         #{examRecordId,jdbcType=INTEGER},
       </if>
-      <if test="interviewerName != null" >
-        #{interviewerName,jdbcType=VARBINARY},
-      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.dhcc.ict.manage.technology.test.pojo.InterviewRecordExample" resultType="java.lang.Integer" >
@@ -213,6 +181,9 @@
     <set >
       <if test="record.interviewRecordId != null" >
         interview_record_id = #{record.interviewRecordId,jdbcType=INTEGER},
+      </if>
+      <if test="record.interviewerName != null" >
+        interviewer_name = #{record.interviewerName,jdbcType=VARCHAR},
       </if>
       <if test="record.interviewResults != null" >
         interview_results = #{record.interviewResults,jdbcType=VARCHAR},
@@ -232,24 +203,7 @@
       <if test="record.examRecordId != null" >
         exam_record_id = #{record.examRecordId,jdbcType=INTEGER},
       </if>
-      <if test="record.interviewerName != null" >
-        interviewer_name = #{record.interviewerName,jdbcType=VARBINARY},
-      </if>
     </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update interview_record
-    set interview_record_id = #{record.interviewRecordId,jdbcType=INTEGER},
-      interview_results = #{record.interviewResults,jdbcType=VARCHAR},
-      interviewer_comments = #{record.interviewerComments,jdbcType=VARCHAR},
-      interviewer_remarks = #{record.interviewerRemarks,jdbcType=VARCHAR},
-      user_id = #{record.userId,jdbcType=INTEGER},
-      interviewer_id = #{record.interviewerId,jdbcType=INTEGER},
-      exam_record_id = #{record.examRecordId,jdbcType=INTEGER},
-      interviewer_name = #{record.interviewerName,jdbcType=VARBINARY}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,6 +211,7 @@
   <update id="updateByExample" parameterType="map" >
     update interview_record
     set interview_record_id = #{record.interviewRecordId,jdbcType=INTEGER},
+      interviewer_name = #{record.interviewerName,jdbcType=VARCHAR},
       interview_results = #{record.interviewResults,jdbcType=VARCHAR},
       interviewer_comments = #{record.interviewerComments,jdbcType=VARCHAR},
       interviewer_remarks = #{record.interviewerRemarks,jdbcType=VARCHAR},
@@ -270,6 +225,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.dhcc.ict.manage.technology.test.pojo.InterviewRecord" >
     update interview_record
     <set >
+      <if test="interviewerName != null" >
+        interviewer_name = #{interviewerName,jdbcType=VARCHAR},
+      </if>
       <if test="interviewResults != null" >
         interview_results = #{interviewResults,jdbcType=VARCHAR},
       </if>
@@ -288,26 +246,13 @@
       <if test="examRecordId != null" >
         exam_record_id = #{examRecordId,jdbcType=INTEGER},
       </if>
-      <if test="interviewerName != null" >
-        interviewer_name = #{interviewerName,jdbcType=VARBINARY},
-      </if>
     </set>
-    where interview_record_id = #{interviewRecordId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dhcc.ict.manage.technology.test.pojo.InterviewRecord" >
-    update interview_record
-    set interview_results = #{interviewResults,jdbcType=VARCHAR},
-      interviewer_comments = #{interviewerComments,jdbcType=VARCHAR},
-      interviewer_remarks = #{interviewerRemarks,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=INTEGER},
-      interviewer_id = #{interviewerId,jdbcType=INTEGER},
-      exam_record_id = #{examRecordId,jdbcType=INTEGER},
-      interviewer_name = #{interviewerName,jdbcType=VARBINARY}
     where interview_record_id = #{interviewRecordId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.dhcc.ict.manage.technology.test.pojo.InterviewRecord" >
     update interview_record
-    set interview_results = #{interviewResults,jdbcType=VARCHAR},
+    set interviewer_name = #{interviewerName,jdbcType=VARCHAR},
+      interview_results = #{interviewResults,jdbcType=VARCHAR},
       interviewer_comments = #{interviewerComments,jdbcType=VARCHAR},
       interviewer_remarks = #{interviewerRemarks,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},

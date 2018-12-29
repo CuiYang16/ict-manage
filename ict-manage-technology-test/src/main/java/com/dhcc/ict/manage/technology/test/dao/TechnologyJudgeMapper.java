@@ -33,5 +33,9 @@ public interface TechnologyJudgeMapper {
 
 	// 管理员添加
 	List<TechnologyJudge> selectByLimitJudge(@Param("startValue") int startValue, @Param("countValue") int countValue,
-			@Param("testType") int testType);
+			@Param("technologyTypeId") int technologyTypeId, @Param("examComplexity") String examComplexity);
+
+	// 根据试卷抽题
+	List<TechnologyJudge> selectByPaper(@Param("paperFlag") String paperFlag,
+			@Param("questionType") String questionType);
 }

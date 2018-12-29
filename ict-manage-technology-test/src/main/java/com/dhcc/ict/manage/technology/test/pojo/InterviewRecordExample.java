@@ -164,6 +164,76 @@ public class InterviewRecordExample {
             return (Criteria) this;
         }
 
+        public Criteria andInterviewerNameIsNull() {
+            addCriterion("interviewer_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameIsNotNull() {
+            addCriterion("interviewer_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameEqualTo(String value) {
+            addCriterion("interviewer_name =", value, "interviewerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameNotEqualTo(String value) {
+            addCriterion("interviewer_name <>", value, "interviewerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameGreaterThan(String value) {
+            addCriterion("interviewer_name >", value, "interviewerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameGreaterThanOrEqualTo(String value) {
+            addCriterion("interviewer_name >=", value, "interviewerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameLessThan(String value) {
+            addCriterion("interviewer_name <", value, "interviewerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameLessThanOrEqualTo(String value) {
+            addCriterion("interviewer_name <=", value, "interviewerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameLike(String value) {
+            addCriterion("interviewer_name like", value, "interviewerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameNotLike(String value) {
+            addCriterion("interviewer_name not like", value, "interviewerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameIn(List<String> values) {
+            addCriterion("interviewer_name in", values, "interviewerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameNotIn(List<String> values) {
+            addCriterion("interviewer_name not in", values, "interviewerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameBetween(String value1, String value2) {
+            addCriterion("interviewer_name between", value1, value2, "interviewerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterviewerNameNotBetween(String value1, String value2) {
+            addCriterion("interviewer_name not between", value1, value2, "interviewerName");
+            return (Criteria) this;
+        }
+
         public Criteria andInterviewResultsIsNull() {
             addCriterion("interview_results is null");
             return (Criteria) this;

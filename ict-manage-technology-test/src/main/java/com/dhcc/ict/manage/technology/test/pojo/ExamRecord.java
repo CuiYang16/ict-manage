@@ -46,19 +46,14 @@ public class ExamRecord {
     private Integer totalScore;
 
     /**
-     * 考试答案（存字符串）
-     */
-    private String userAnswer;
-
-    /**
      * 用户id
      */
     private Integer userId;
 
     /**
-     * 试卷id
+     * 试卷标识
      */
-    private Integer examQuestionId;
+    private String paperFlag;
 
     /**
      * 试卷类别
@@ -70,7 +65,7 @@ public class ExamRecord {
      */
     private String technologyTestComplexity;
 
-    public ExamRecord(Integer examRecordId, Date examStarttime, Date examEndtime, Integer examRealityTime, Integer chooseOneScore, Integer chooseMuchScore, Integer chooseJurge, Integer totalScore, String userAnswer, Integer userId, Integer examQuestionId, Integer technologyTypeId, String technologyTestComplexity) {
+    public ExamRecord(Integer examRecordId, Date examStarttime, Date examEndtime, Integer examRealityTime, Integer chooseOneScore, Integer chooseMuchScore, Integer chooseJurge, Integer totalScore, Integer userId, String paperFlag, Integer technologyTypeId, String technologyTestComplexity) {
         this.examRecordId = examRecordId;
         this.examStarttime = examStarttime;
         this.examEndtime = examEndtime;
@@ -79,9 +74,8 @@ public class ExamRecord {
         this.chooseMuchScore = chooseMuchScore;
         this.chooseJurge = chooseJurge;
         this.totalScore = totalScore;
-        this.userAnswer = userAnswer;
         this.userId = userId;
-        this.examQuestionId = examQuestionId;
+        this.paperFlag = paperFlag;
         this.technologyTypeId = technologyTypeId;
         this.technologyTestComplexity = technologyTestComplexity;
     }
@@ -154,14 +148,6 @@ public class ExamRecord {
         this.totalScore = totalScore;
     }
 
-    public String getUserAnswer() {
-        return userAnswer;
-    }
-
-    public void setUserAnswer(String userAnswer) {
-        this.userAnswer = userAnswer == null ? null : userAnswer.trim();
-    }
-
     public Integer getUserId() {
         return userId;
     }
@@ -170,12 +156,12 @@ public class ExamRecord {
         this.userId = userId;
     }
 
-    public Integer getExamQuestionId() {
-        return examQuestionId;
+    public String getPaperFlag() {
+        return paperFlag;
     }
 
-    public void setExamQuestionId(Integer examQuestionId) {
-        this.examQuestionId = examQuestionId;
+    public void setPaperFlag(String paperFlag) {
+        this.paperFlag = paperFlag == null ? null : paperFlag.trim();
     }
 
     public Integer getTechnologyTypeId() {

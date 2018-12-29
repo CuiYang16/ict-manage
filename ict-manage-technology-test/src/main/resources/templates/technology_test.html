@@ -11,7 +11,7 @@
 		<div class="topic-area">
 			
 			<!--单选 -->
-			<div class="topic-detail" th:each="technologyone,iterStat : ${technologyOne}" th:classappend="technologyone+${iterStat.count}"
+			<div class="topic-detail" th:each="technologyone,iterStat : ${examPaper.chooseOnes}" th:classappend="technologyone+${iterStat.count}"
 			 th:id="technologyone+${iterStat.count}">
 
 				<div class="topic-content">
@@ -35,7 +35,7 @@
 
 
 			<!--多选  -->
-			<div class="topic-detail" th:each="technologymuch,iterStat : ${technologyMuch}" th:classappend="technologymuch+${iterStat.count}"
+			<div class="topic-detail" th:each="technologymuch,iterStat : ${examPaper.chooseMuchs}" th:classappend="technologymuch+${iterStat.count}"
 			 th:id="technologymuch+${iterStat.count}">
 
 				<div class="topic-content">
@@ -58,7 +58,7 @@
 			</div>
 
 			<!--判断 -->
-			<div class="topic-detail" th:each="technologyjudge,iterStat : ${technologyJudge}" th:classappend="technologyjudge+${iterStat.count}"
+			<div class="topic-detail" th:each="technologyjudge,iterStat : ${examPaper.judges}" th:classappend="technologyjudge+${iterStat.count}"
 			 th:id="technologyjudge+${iterStat.count}">
 
 				<div class="topic-content">
@@ -75,18 +75,38 @@
 					<button type="button" class="sign" th:id="technologyjudge+${iterStat.count}">标记</button>
 				</div>
 			</div>
+			
+			<!--编程-->
+			<div class="topic-detail" th:each="technologycode,iterStat : ${examPaper.codes}" th:classappend="technologycode+${iterStat.count}"
+			 th:id="technologycode+${iterStat.count}">
+
+				<div class="topic-content">
+					<label>编程题</label> <label th:text="${iterStat.count}+'.'+${technologycode.technologyCodeDetail}"></label>
+				</div>
+				<div class="topic-answer judge-answer">
+				<<textarea rows="10" cols="10"></textarea>
+				</div>
+				<div class="topic-choose">
+					<button type="button" class="previous-topic">上一题</button>
+					<button type="button" class="next-topic">下一题</button>
+					<button type="button" class="sign" th:id="technologycode+${iterStat.count}">标记</button>
+				</div>
+			</div>
 
 
 			<!--答题卡  -->
 			<div class="topic-sheet">
-				<label>单选</label> <span class="topic-span one" th:each="technologyone,iterStat : ${technologyOne}" th:classappend="technologyone+${iterStat.count}"
+				<label>单选</label> <span class="topic-span one" th:each="technologyone,iterStat : ${examPaper.chooseOnes}" th:classappend="technologyone+${iterStat.count}"
 				 th:text="${iterStat.count}"></span>
 				<label>多选</label>
-				<span class="topic-span much" th:each="technologymuch,iterStat : ${technologyMuch}" th:classappend="technologymuch+${iterStat.count}"
+				<span class="topic-span much" th:each="technologymuch,iterStat : ${examPaper.chooseMuchs}" th:classappend="technologymuch+${iterStat.count}"
 				 th:text="${iterStat.count}"></span>
 
 				<label>判断</label>
-				<span class="topic-span judge" th:each="technologyjudge,iterStat : ${technologyJudge}" th:classappend="technologyjudge+${iterStat.count}"
+				<span class="topic-span judge" th:each="technologyjudge,iterStat : ${examPaper.judges}" th:classappend="technologyjudge+${iterStat.count}"
+				 th:text="${iterStat.count}"></span>
+				 <label>编程</label>
+				<span class="topic-span code" th:each="technologycode,iterStat : ${examPaper.codes}" th:classappend="technologycode+${iterStat.count}"
 				 th:text="${iterStat.count}"></span>
 			</div>
 		</div>
