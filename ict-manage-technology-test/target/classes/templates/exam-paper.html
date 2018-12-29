@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>考试页面</title>
+		<script src="/ictmanagetechnologytest/js/jquery-1.9.1.js"></script>
+		<script src="/ictmanagetechnologytest/js/bootstrap.js"></script>
+		<script src="/ictmanagetechnologytest/js/iconfont.js"></script>
+		<script type="text/javascript" src="/ictmanagetechnologytest/js/technology_test.js"></script>
+		<link rel="stylesheet" href="/ictmanagetechnologytest/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/ictmanagetechnologytest/css/animate.css">
+		<link rel="stylesheet" href="/ictmanagetechnologytest/css/exam-paper.css">
+
+		<link rel="stylesheet" href="/ictmanagetechnologytest/css/technology_test.css">
+
+	</head>
+	<body>
+		<header class="clearfix">
+			<h3 class="head-title h2">东华软件在线测评</h3>
+			<p class="exam-time">
+
+				<svg class="icon time-icon" aria-hidden="true">
+					<use xlink:href="#icon-linedesign-04"></use>
+				</svg>
+				<span>00:59：59</span>
+			</p>
+		</header>
+
+		<!-- 中间内容 -->
+		<div class="clearfix exam-paper-con">
+			<aside class="exam-paper-left">
+				<div class="examinee-info">
+					<h2>考生信息</h2>
+					<p>
+						姓名：<span>xxx</span>
+					</p>
+					<p>
+						手机号：<span>xxx</span>
+					</p>
+				</div>
+				<div class="scantron">
+					<h2>答题卡</h2>
+					<div class="dart">
+						<!--答题卡  -->
+						<div class="topic-sheet">
+							<div><label>单选</label><br/> 
+							<span class="topic-span one" th:each="technologyone,iterStat : ${examPaper.chooseOnes}"
+							 th:classappend="technologyone+${iterStat.count}" th:text="${iterStat.count}" th:id="'one'+${iterStat.count}"></span> </div>
+							<div>
+								 <label>多选</label><br/> 
+								 <span class="topic-span much" th:each="technologymuch,iterStat : ${examPaper.chooseMuchs}" th:classappend="technologymuch+${iterStat.count}"
+								 th:text="${iterStat.count}" th:id="'much'+${iterStat.count}"></span> 
+							 </div>
+							 <div>
+							  <label>判断</label><br/> 
+							  <span class="topic-span judge" th:each="technologyjudge,iterStat : ${examPaper.judges}"
+							 th:classappend="technologyjudge+${iterStat.count}" th:text="${iterStat.count}" th:id="'judge'+${iterStat.count}"></span> 
+							 </div>
+							 <div>
+							 <label>编程</label><br/>  <span class="topic-span code" th:each="technologycode,iterStat : ${examPaper.codes}" th:classappend="technologycode+${iterStat.count}"
+							 th:text="${iterStat.count}" th:id="'code'+${iterStat.count}"></span>
+							 </div>
+						</div>
+
+					</div>
+				</div>
+			</aside>
+			<section class="container exam-question">
+				<div class="topic-area">
+
+					<!--单选 -->
+					<div class="topic-detail" th:each="technologyone,iterStat : ${examPaper.chooseOnes}" th:classappend="technologyone+${iterStat.count}"
+					 th:id="technologyone+${iterStat.count}">
+
+						<div class="topic-content">
+							<label>单选题</label><br/> <label th:text="${iterStat.count}+'.'+${technologyone.chooseOneDetail}"></label>
+						</div>
+						<div class="topic-answer one-answer">
+							<input type="hidden" th:value="${technologyone.chooseOneId}" th:id="'one'+${technologyone.chooseOneId}">
+							
+							
+							<input type="radio" th:name="'one-answer'+${iterStat.count}" th:value="${technologyone.chooseOneAnswer1}" 
+							th:id="'one-answer'+${iterStat.count}+'-1'">
+							<lable th:for="'one-answer'+${iterStat.count}+'-1'" th:text="'A:'+${technologyone.chooseOneAnswer1}" ></lable><br />
+							
+							
+							<input type="radio" th:name="'one-answer'+${iterStat.count}" th:value="${technologyone.chooseOneAnswer2}" 
+							th:id="'one-answer'+${iterStat.count}+'-2'">
+							<lable th:for="'one-answer'+${iterStat.count}+'-2'" th:text="'B:'+${technologyone.chooseOneAnswer2}" ></lable><br />
+							
+							<input type="radio" th:name="'one-answer'+${iterStat.count}" th:value="${technologyone.chooseOneAnswer3}"  
+							th:id="'one-answer'+${iterStat.count}+'-3'">
+							<lable th:for="'one-answer'+${iterStat.count}+'-3'" th:text="'C:'+${technologyone.chooseOneAnswer3}" ></lable><br />
+							
+						 <input type="radio" th:name="'one-answer'+${iterStat.count}"  th:value="${technologyone.chooseOneAnswer4}" 
+						 th:id="'one-answer'+${iterStat.count}+'-4'">
+						 <lable th:for="'one-answer'+${iterStat.count}+'-4'" th:text="'D:'+${technologyone.chooseOneAnswer4}" ></lable>
+						</div>
+						<div class="topic-choose">
+							<button type="button" class="previous-topic">上一题</button>
+							<button type="button" class="next-topic">下一题</button>
+							<button type="button" class="sign" th:id="technologyone+${iterStat.count}">标记</button>
+						</div>
+					</div>
+
+
+
+					<!--多选  -->
+					<div class="topic-detail" th:each="technologymuch,iterStat : ${examPaper.chooseMuchs}" th:classappend="technologymuch+${iterStat.count}"
+					 th:id="technologymuch+${iterStat.count}">
+
+						<div class="topic-content">
+							<label>多选题</label><br/>  <label th:text="${iterStat.count}+'.'+${technologymuch.chooseMuchDetail}"></label>
+						</div>
+						<div class="topic-answer much-answer">
+							<input type="hidden" th:value="${technologymuch.chooseMuchId}" th:id="'much'+${technologymuch.chooseMuchId}">
+							<input type="checkbox" th:name="'much-answer'+${iterStat.count}" th:text="'A:'+${technologymuch.chooseMuchAnswer1}"
+							 th:value="'A'"><br />
+							<input type="checkbox" th:name="'much-answer'+${iterStat.count}" th:text="'B:'+${technologymuch.chooseMuchAnswer2}"
+							 th:value="'B'"><br />
+							<input type="checkbox" th:name="'much--answer'+${iterStat.count}" th:text="'C:'+${technologymuch.chooseMuchAnswer3}"
+							 th:value="'C'"><br />
+							<input type="checkbox" th:name="'muchanswer'+${iterStat.count}" th:text="'D:'+${technologymuch.chooseMuchAnswer4}"
+							 th:value="'D'">
+							<br /> <input type="checkbox" th:name="'much-answer'+${iterStat.count}" th:text="'E:'+${technologymuch.chooseMuchAnswer5}"
+							 th:value="'E'">
+						</div>
+						<div class="topic-choose">
+							<button type="button" class="previous-topic">上一题</button>
+							<button type="button" class="next-topic">下一题</button>
+							<button type="button" class="sign" th:id="technologymuch+${iterStat.count}">标记</button>
+						</div>
+					</div>
+
+					<!--判断 -->
+					<div class="topic-detail" th:each="technologyjudge,iterStat : ${examPaper.judges}" th:classappend="technologyjudge+${iterStat.count}"
+					 th:id="technologyjudge+${iterStat.count}">
+
+						<div class="topic-content">
+							<label>判断题</label><br/>  <label th:text="${iterStat.count}+'.'+${technologyjudge.technologyJudgeDetail}"></label>
+						</div>
+						<div class="topic-answer judge-answer">
+							<input type="hidden" th:value="${technologyjudge.technologyJudgeId}" th:id="'judge'+${technologyjudge.technologyJudgeId}">
+							<input type="radio" th:name="'much-answer'+${iterStat.count}" th:text="'对'" th:value="'对'"><br /> <input type="radio"
+							 th:name="'much-answer'+${iterStat.count}" th:text="'错'" th:value="'错'">
+						</div>
+						<div class="topic-choose">
+							<button type="button" class="previous-topic">上一题</button>
+							<button type="button" class="next-topic">下一题</button>
+							<button type="button" class="sign" th:id="technologyjudge+${iterStat.count}">标记</button>
+						</div>
+					</div>
+
+					<!--编程-->
+					<div class="topic-detail" th:each="technologycode,iterStat : ${examPaper.codes}" th:classappend="technologycode+${iterStat.count}"
+					 th:id="technologycode+${iterStat.count}">
+
+						<div class="topic-content">
+							<label>编程题</label> <br/> <label th:text="${iterStat.count}+'.'+${technologycode.technologyCodeDetail}"></label>
+						</div>
+						<div class="topic-answer judge-answer">
+							<textarea rows="10" cols="100"></textarea>
+						</div>
+						<div class="topic-choose">
+							<button type="button" class="previous-topic">上一题</button>
+							<button type="button" class="next-topic">下一题</button>
+							<button type="button" class="sign" th:id="technologycode+${iterStat.count}">标记</button>
+						</div>
+					</div>
+			</section>
+
+		</div>
+
+
+		<script src="../js/exam.js"></script>
+	</body>
+</html>
